@@ -1,0 +1,8 @@
+use Test;
+use IRC::Log::Textual;
+
+pass "replace me";
+
+done-testing;
+
+# vim: expandtab shiftwidth=4

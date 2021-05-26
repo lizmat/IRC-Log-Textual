@@ -1,0 +1,579 @@
+[2021-04-25T00:01:55+0200] aborazmeh (~aborazmeh@88.254.3.6) left IRC (Ping timeout: 248 seconds)
+[2021-04-25T00:08:54+0200] pecastro (~pecastro@95.151.147.236) left IRC (Ping timeout: 260 seconds)
+[2021-04-25T00:10:33+0200] webstrand (~webstrand@23.94.99.90) left IRC (Ping timeout: 265 seconds)
+[2021-04-25T00:14:43+0200] <raydiak> I have a couple questions about the current state of META files. The first is version. I've seen different places say version is optional, it's required but '*' is okay, or it's required and must be an actual version number. which is correct? where do I find authoratative information on this (couldn't find it in roast the last time I tried)? What do I do if a module is in a nascent state and incrementing a
+[2021-04-25T00:14:45+0200] <raydiak> version number for every breaking change is a burden? if an actual number is required, can I just leave it at e.g. "0" or "0.0.1" and keep making changes or will that cause something to misbehave in some external tool or ecosystem or package manager or whatever? kinda wonder if I shouldn't just somehow use the git commit hash, or "major.minor." prepended to an incrementing number for every commit like an index
+[2021-04-25T00:14:47+0200] <raydiak> into the commit history since the last major/minor tag or along those lines...
+[2021-04-25T00:15:41+0200] <raydiak> or are we just really trying hard to strong-arm people into doing versioning correctly even at the earliest alpha stages of development?
+[2021-04-25T00:18:40+0200] <raydiak> also, what if people explicitly ask for an older version from their use statement? it can be available in the git repo and tagged and everything, but the META only declares the latest version
+[2021-04-25T00:24:05+0200] MitarashiDango[m (mdangomatr@gateway/shell/matrix.org/x-czklxlmmmrwwyyiy) joined the channel
+[2021-04-25T00:24:05+0200] Tirifto[m] (tiriftoted@gateway/shell/matrix.org/x-eacufezzwmlzoswx) joined the channel
+[2021-04-25T00:24:05+0200] juanfra__ (juanframat@gateway/shell/matrix.org/x-gujscivzygmltxim) joined the channel
+[2021-04-25T00:24:05+0200] ThaEwat (thaewraptm@gateway/shell/matrix.org/x-zrjvdaqjldoozbwe) joined the channel
+[2021-04-25T00:24:05+0200] kiti_nomad[m] (hellonomad@gateway/shell/matrix.org/x-yczpnualihwgewvq) joined the channel
+[2021-04-25T00:24:05+0200] uzl[m] (uzluisfmat@gateway/shell/matrix.org/x-qlpoydckuyjuytsj) joined the channel
+[2021-04-25T00:24:05+0200] tusooa (tusooatuso@gateway/shell/matrix.org/x-dypbvuvybqvlrrvf) joined the channel
+[2021-04-25T00:24:05+0200] patrickbkr[m] (patrickbkr@gateway/shell/matrix.org/x-miakrxecjsvmvnnt) joined the channel
+[2021-04-25T00:24:05+0200] AlexDaniel` (alexdaniel@gateway/shell/matrix.org/x-zqulrorpfneivxry) joined the channel
+[2021-04-25T00:24:05+0200] pwr22 (pwr22short@gateway/shell/matrix.org/x-icilgqwkijbmyday) joined the channel
+[2021-04-25T00:24:05+0200] Nasrudin (davematr1@gateway/shell/matrix.org/x-eitdwnsqbpgyhhvv) joined the channel
+[2021-04-25T00:24:11+0200] CIAvash (ciavashmat@gateway/shell/matrix.org/x-czqwamjcakkhspgt) joined the channel
+[2021-04-25T00:24:11+0200] Garland_g[m] (garlandgma@gateway/shell/matrix.org/x-hybjoygnxawxwbbq) joined the channel
+[2021-04-25T00:24:12+0200] draco100[m] (draco100ma@gateway/shell/matrix.org/x-jirqcnwvzxugatfc) joined the channel
+[2021-04-25T00:27:46+0200] <raydiak> my other question atm is about "auth". is github: or zef: or cpan: or whatever really necessary? does it get functionally used for anything? what if I migrate from one to another, won't that break people's existing use statements if they're explicit about auth? or have a same-named account on multiple and don't personally consider any particular one "more authoratative"? wouldn't it just be better to use my
+[2021-04-25T00:27:48+0200] <raydiak> handle without tying it to one specific service, which seems like a potential failure point out of my own control? also what if I want the authority to be something tied to my own domain/server? just write whatever I want in there? then what's the point of the service: prefix at all?
+[2021-04-25T00:28:48+0200] dogbert17 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-25T00:29:03+0200] juanfra__ is now known as Guest6079
+[2021-04-25T00:29:12+0200] xelxebar (~xelxebar@gateway/tor-sasl/xelxebar) joined the channel
+[2021-04-25T00:30:50+0200] <japhb> raydiak: In reverse order, the ones that I can answer:
+[2021-04-25T00:31:21+0200] DiffieHellman (~Username@gateway/tor-sasl/diffiehellman) joined the channel
+[2021-04-25T00:31:44+0200] aluaces (~aluaces@144.178.129.125) left IRC (Excess Flood)
+[2021-04-25T00:31:51+0200] • lizmat: is glad that japhb is around to answer questions while she hits the sack
+[2021-04-25T00:31:59+0200] <japhb> The name needs to be unique within some naming authority, and that naming authority has to be the one that controls access to that data store.  We just have some recognized naming authorities already, but there's no reason you couldn't define/enforce some other one.
+[2021-04-25T00:32:08+0200] <japhb> Have a good night, lizmat!  :-)
+[2021-04-25T00:32:17+0200] finstern1s is now known as finsternis
+[2021-04-25T00:32:47+0200] <raydiak> g'night lizmat! it was nice chatting with you
+[2021-04-25T00:32:57+0200] <japhb> raydiak: When you upload packages to zef or cpan, you are uploading a snapshot tarball of a particular version.  So they can keep all the versions they want.
+[2021-04-25T00:33:10+0200] dogbert11 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Ping timeout: 276 seconds)
+[2021-04-25T00:33:37+0200] <japhb> :api<0> is explicitly saying "I've thought about it, and I can tell you right now the API is still liquid."
+[2021-04-25T00:34:21+0200] <japhb> Version '*' turns out to be a problem; its interpretation causes issues, so don't use it.  fez won't even let you.
+[2021-04-25T00:34:53+0200] <japhb> Yeah, I can add the benchmark script; I was planning to at some point, but kept forgetting.  :-)
+[2021-04-25T00:36:10+0200] jmcgnh (~jmcgnh@wikipedia/jmcgnh) joined the channel
+[2021-04-25T00:36:19+0200] wamba (~wamba@193-194.moravanet.cz) left IRC (Quit: Leaving.)
+[2021-04-25T00:36:45+0200] aborazmeh (~aborazmeh@88.246.194.45) joined the channel
+[2021-04-25T00:36:56+0200] <japhb> MasterDuke: Iterable also includes Associative and Seq, and those both need some care to get right.  Associative is already handled, Seq I'm not sure if I'll .cache in order to enforce writing only definite lists, or if I'll consider that a clue that the user wants indefinite-length array output.
+[2021-04-25T00:37:06+0200] <japhb> Did I miss anything?
+[2021-04-25T00:37:52+0200] <MasterDuke> i suspected something like that, makes sense
+[2021-04-25T00:39:07+0200] epony (epony@unaffiliated/epony) joined the channel
+[2021-04-25T00:41:42+0200] <raydiak> afaik, Iterable means you can loop over it. e.g. Associative (actually, Map) does Iterable. doesn't mean all Iterables have to implement Map. e.g. Lists are also Iterable
+[2021-04-25T00:42:50+0200] <japhb> Hmmm, should the benchmark script go in tools/ or examples/?
+[2021-04-25T00:43:38+0200] <japhb> raydiak: Yes, I know, I meant that Associative has to be handled separately in CBOR than other types of Iterables, since it has a special encoding and special rules about key order and such.
+[2021-04-25T00:43:45+0200] Ekho (~Ekho@unaffiliated/ekho) joined the channel
+[2021-04-25T00:44:17+0200] <japhb> Which is to say an Associative and an Iterable containing Pairs is NOT the same in CBOR.
+[2021-04-25T00:44:52+0200] <japhb> I guess benchmarking is more of a tool thing than an example ...
+[2021-04-25T00:45:32+0200] <raydiak> hmmm...I could see a good justification for either. if it has facilities for repetition and timing and outputting that kind of data, put that part in a script in tools, and the actual data and usage in examples?
+[2021-04-25T00:47:25+0200] <raydiak> I could also see an argument for refactoring the part I suggested go in examples into tests in t, and have the benchmark tool run certain specific test files in loops with timing
+[2021-04-25T00:50:30+0200] webstrand (~webstrand@23.94.99.90) joined the channel
+[2021-04-25T00:50:35+0200] <japhb> raydiak: Interesting idea.  I don't think I'd want t/ scripts to be slow enough to actually give good performance measurements (though that might be useful for xt/), because it would slow down the edit/run/debug loop
+[2021-04-25T00:50:45+0200] <japhb> Anyway, I just pushed it.
+[2021-04-25T00:51:31+0200] <japhb> As the comment at the top says, you'll need a medium-large JSON file to test with (to compare against JSON::Fast on its "home turf"), and I just used the zef ecosystem data for that.
+[2021-04-25T00:51:44+0200] <raydiak> good point
+[2021-04-25T00:51:46+0200] <raydiak> thanks!
+[2021-04-25T00:52:16+0200] dogbert11 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-25T00:52:56+0200] dogbert12 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-25T00:55:06+0200] dogbert17 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T00:56:38+0200] <raydiak> wonder if there'd be much difference using a different dataset, especially one more deeply nested, or more numbers instead of strings, etc. if you were wanting to use this for MUGS, I'd expect many games to use a lot more numbers
+[2021-04-25T00:56:44+0200] dogbert11 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Ping timeout: 246 seconds)
+[2021-04-25T01:01:04+0200] dogbert17 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-25T01:02:53+0200] dogbert12 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T01:03:17+0200] abraxxa (~abraxxa@2a01:100:2000:2500::22) left IRC (Remote host closed the connection)
+[2021-04-25T01:05:38+0200] <raydiak> japhb: also, I was just curious for my own education, what factors made you choose CBOR over e.g. BSON or UBJSON or whatever else (whether JSON-inspired/related or not)?
+[2021-04-25T01:10:38+0200] <japhb> raydiak: The fact that it was self-describing and self clocking, the number of IETF specs that refer to it, the fact that it was explicitly designed to have a relatively simple codec in most languages, the (actively used) extensibility, the richer data model, the fact that it didn't require extra encoding for utf8 or blob (both just slot right in with a leading bytecount), ...
+[2021-04-25T01:11:55+0200] <japhb> raydiak: I'm still working on filling out more different scenarios in the perf-test, especially once I start doing packed structures more complex than 8-bit uints.  But I spent yesterday more working on the unnecessarily slow bits that I'd already found.  :-)
+[2021-04-25T01:13:17+0200] <japhb> I've got an idea for a restructuring of the decoder that I *think* will be an across-the-board improvement (faster for decoding any non-trivial structure), but I have no idea whether it will be a few % or a speed doubling.
+[2021-04-25T01:13:29+0200] <japhb> We shall see.  :-)
+[2021-04-25T01:14:15+0200] <raydiak> sounds like it's off to a great start! have you tried it under the moar profiler yet?
+[2021-04-25T01:15:45+0200] dogbert11 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-25T01:16:19+0200] <japhb> Nope, haven't done that yet.  I wish we had a good per-line profiler, like NYTProf is for perl5, because the routines here are HUGE with big branching structures, so per-call statistics are too rough.  :-/
+[2021-04-25T01:16:57+0200] <japhb> OTOH, the Moar profiler does per-block, doesn't it?  That might work out.
+[2021-04-25T01:17:39+0200] <raydiak> I don't recall, haven't tried it in many years, I mostly just remember that it exists
+[2021-04-25T01:17:50+0200] <japhb> nodnod
+[2021-04-25T01:18:47+0200] <raydiak> that was one of my optimization thoughts: I was under the impression that these days, multis are often faster than long sets of conditionals
+[2021-04-25T01:19:52+0200] dogbert17 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Ping timeout: 268 seconds)
+[2021-04-25T01:20:42+0200] gordonfish (~gordonfis@unaffiliated/gordonfish) joined the channel
+[2021-04-25T01:21:41+0200] <kawaii> which operator would I use to do three-way string comparison of three different variables?
+[2021-04-25T01:23:22+0200] <raydiak> leg for strings specifically
+[2021-04-25T01:24:48+0200] <kawaii> oh I didn't know about leg!
+[2021-04-25T01:24:50+0200] <kawaii> lemme try!
+[2021-04-25T01:29:27+0200] <raydiak> or coll/unicmp may be more correct depending on your intention. and sort/collate may be easier and/or faster if you're sorting a list of strings
+[2021-04-25T01:31:30+0200] <raydiak> I don't actually know much about these things, just look at https://docs.raku.org/language/operators and search the page for "three-way"
+[2021-04-25T01:41:28+0200] <raydiak> so in retrospect, it would have been more accurate to say for strings specifically: leg by codepoint, unicmp by default lexographic order, or coll by lexographic order customizable via $*COLLATION
+[2021-04-25T01:44:12+0200] <japhb> m: given 5 { when * % 2 { say "Odd"; &?BLOCK(6) }; when * %% 2 { say "Even" }}
+[2021-04-25T01:44:12+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «Odd␤Even␤»
+[2021-04-25T01:44:35+0200] <japhb> ^^ Why does that even work?  Why does &?BLOCK go to the given and not to the when?
+[2021-04-25T01:44:49+0200] <raydiak> heh, even that isn't right. leg is also lexographic; cmp (not string-specific) is by codepoint, and coll is something I don't fully understand yet
+[2021-04-25T01:46:11+0200] aborazmeh (~aborazmeh@88.246.194.45) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T02:00:01+0200] Black_Ribbon (~sono@107-209-210-210.lightspeed.sntcca.sbcglobal.net) joined the channel
+[2021-04-25T02:04:55+0200] <raydiak> japhb: I don't see anything in the docs to explain it, would take some deeper digging. --target=parse shows some possibly relevant things, but I don't know enough about internals to tell you the difference between an xblock and a pblock and a blockoid, or even if that's relevant
+[2021-04-25T02:09:00+0200] <japhb> Fair enough.  :-)
+[2021-04-25T02:09:11+0200] <raydiak> looks like maybe something to do with spesh, possibly a bug. it blows up with --optimize=0
+[2021-04-25T02:10:31+0200] <raydiak> it probably optimizes the when block away somehow, turns it into something faster and simpler than a block
+[2021-04-25T02:11:57+0200] neshpion (~neshpion@gateway/tor-sasl/neshpion) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T02:15:23+0200] neshpion (~neshpion@gateway/tor-sasl/neshpion) joined the channel
+[2021-04-25T02:22:16+0200] <japhb> Interesting.
+[2021-04-25T02:22:36+0200] <japhb> I was wondering if it was intentional in order to make succeed and proceed magically work or something
+[2021-04-25T02:24:14+0200] <raydiak> seems not, --optimize=0 gives "Too many positionals passed; expected 0 arguments but got 1"
+[2021-04-25T02:24:29+0200] <raydiak> (after "Odd", of course)
+[2021-04-25T02:49:55+0200] <japhb> Interesting!
+[2021-04-25T02:54:50+0200] kurahaupo_ (~kurahaupo@unaffiliated/kurahaupo) joined the channel
+[2021-04-25T02:56:06+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T03:02:44+0200] kvw_5 (~alarm@ppp-88-217-117-11.dynamic.mnet-online.de) joined the channel
+[2021-04-25T03:05:41+0200] kvw_5_ (~alarm@ppp-88-217-122-84.dynamic.mnet-online.de) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T03:22:23+0200] stoned75 (~seb@pop.92-184-102-67.mobile.abo.orange.fr) joined the channel
+[2021-04-25T03:34:14+0200] stoned75 (~seb@pop.92-184-102-67.mobile.abo.orange.fr) left IRC (Read error: Connection reset by peer)
+[2021-04-25T03:35:41+0200] <kawaii> I made a little slot machine script thingy, maybe someone has some optimizations or improvements but it's cute. :) https://www.irccloud.com/pastebin/BFWwVwP0/slots.raku
+[2021-04-25T03:36:03+0200] <kawaii> I feel like the multipliers hash and wheel array can be merged somehow, maybe a hash of pairs?
+[2021-04-25T03:43:30+0200] aborazmeh (~aborazmeh@88.246.194.45) joined the channel
+[2021-04-25T03:53:23+0200] <raydiak> heh, cool
+[2021-04-25T03:59:28+0200] kvw_5_ (~alarm@ppp-88-217-122-220.dynamic.mnet-online.de) joined the channel
+[2021-04-25T04:02:41+0200] kvw_5 (~alarm@ppp-88-217-117-11.dynamic.mnet-online.de) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T04:25:46+0200] <raydiak> kawaii: here are some simplifications: https://gist.github.com/raydiak/59350a91715982755e8ffe4a76d6667b
+[2021-04-25T04:32:22+0200] <raydiak> updated it, arguably a bit easier to read this way
+[2021-04-25T04:51:55+0200] aborazmeh (~aborazmeh@88.246.194.45) left IRC (Ping timeout: 252 seconds)
+[2021-04-25T04:54:57+0200] MasterDuke (5e00bdd3@raku/developer/masterduke) left IRC (Quit: Connection closed)
+[2021-04-25T05:11:33+0200] neshpion (~neshpion@gateway/tor-sasl/neshpion) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T05:13:42+0200] neshpion (~neshpion@gateway/tor-sasl/neshpion) joined the channel
+[2021-04-25T05:18:02+0200] neshpion (~neshpion@gateway/tor-sasl/neshpion) left IRC (Client Quit)
+[2021-04-25T06:18:03+0200] shareable6 (~sha-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:03+0200] bloatable6 (~blo-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:03+0200] notable6 (~not-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:03+0200] unicodable6 (~uni-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:03+0200] quotable6 (~quo-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:03+0200] committable6 (~com-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:03+0200] bisectable6 (~bis-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:03+0200] linkable6 (~lin-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:03+0200] nativecallable6 (~nat-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:03+0200] benchable6 (~ben-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:03+0200] releasable6 (~rel-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:03+0200] statisfiable6 (~sta-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:03+0200] tellable6 (~tel-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:03+0200] greppable6 (~gre-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-25T06:18:38+0200] unicodable6 (~uni-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-25T06:19:01+0200] committable6 (~com-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-25T06:19:04+0200] statisfiable6 (~sta-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-25T06:19:49+0200] greppable6 (~gre-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-25T06:20:35+0200] shareable6 (~sha-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-25T06:20:35+0200] benchable6 (~ben-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-25T06:20:37+0200] quotable6 (~quo-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-25T06:21:01+0200] releasable6 (~rel-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-25T06:25:05+0200] xinming_ (~xinming@115.219.37.47) joined the channel
+[2021-04-25T06:28:11+0200] xinming (~xinming@115.219.39.247) left IRC (Ping timeout: 260 seconds)
+[2021-04-25T07:02:49+0200] coverable6 (~cov-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-25T07:31:54+0200] sno (~sno@p4fe9393f.dip0.t-ipconnect.de) joined the channel
+[2021-04-25T07:47:55+0200] parabolize (~paraboliz@c-76-25-97-149.hsd1.co.comcast.net) left IRC (Quit: leaving)
+[2021-04-25T07:57:31+0200] stoned75 (~seb@pop.92-184-112-184.mobile.abo.orange.fr) joined the channel
+[2021-04-25T08:16:44+0200] japhb (~geoff@mugs/japhb) left IRC (Quit: leaving)
+[2021-04-25T08:18:06+0200] Sgeo (~Sgeo@ool-18b9875e.dyn.optonline.net) left IRC (Read error: Connection reset by peer)
+[2021-04-25T08:18:22+0200] Sgeo (~Sgeo@ool-18b9875e.dyn.optonline.net) joined the channel
+[2021-04-25T08:19:39+0200] japhb (~geoff@mugs/japhb) joined the channel
+[2021-04-25T08:31:50+0200] Sgeo (~Sgeo@ool-18b9875e.dyn.optonline.net) left IRC (Read error: Connection reset by peer)
+[2021-04-25T08:32:01+0200] Sgeo (~Sgeo@ool-18b9875e.dyn.optonline.net) joined the channel
+[2021-04-25T08:55:30+0200] aluaces (~aluaces@144.178.129.125) joined the channel
+[2021-04-25T08:55:33+0200] kurahaupo_ (~kurahaupo@unaffiliated/kurahaupo) left IRC (Ping timeout: 252 seconds)
+[2021-04-25T09:31:18+0200] stoned75 (~seb@pop.92-184-112-184.mobile.abo.orange.fr) left IRC (Read error: Connection reset by peer)
+[2021-04-25T09:46:14+0200] dotdotdot (~dotdotdot@85-171-78-203.rev.numericable.fr) left IRC (Ping timeout: 245 seconds)
+[2021-04-25T09:50:00+0200] dotdotdot (~dotdotdot@85-171-78-203.rev.numericable.fr) joined the channel
+[2021-04-25T09:54:00+0200] MasterDuke (5e00bdd3@raku/developer/masterduke) joined the channel
+[2021-04-25T09:57:21+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) joined the channel
+[2021-04-25T10:05:58+0200] Manifest0 (~Manifest0@1-nat1-1.centrio.cz) joined the channel
+[2021-04-25T10:10:23+0200] pecastro (~pecastro@95.151.147.236) joined the channel
+[2021-04-25T10:18:23+0200] Xliff (~Cliff@pool-71-255-227-73.washdc.east.verizon.net) joined the channel
+[2021-04-25T10:18:36+0200] <Xliff> jj?
+[2021-04-25T10:38:55+0200] Sgeo (~Sgeo@ool-18b9875e.dyn.optonline.net) left IRC (Read error: Connection reset by peer)
+[2021-04-25T10:54:06+0200] natrys (~natrys@116.206.252.68) joined the channel
+[2021-04-25T11:00:09+0200] Guest6079 (juanframat@gateway/shell/matrix.org/x-gujscivzygmltxim) left IRC (Quit: Idle for 30+ days)
+[2021-04-25T11:06:35+0200] wamba (~wamba@193-194.moravanet.cz) joined the channel
+[2021-04-25T11:18:16+0200] andinus` (~andinus@49.36.96.18) joined the channel
+[2021-04-25T11:18:37+0200] andinus` (~andinus@49.36.96.18) left IRC (Remote host closed the connection)
+[2021-04-25T11:35:15+0200] rindolf (~rindolf@inkscape/contributor/rindolf) joined the channel
+[2021-04-25T11:57:23+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) left IRC (Read error: Connection reset by peer)
+[2021-04-25T11:57:34+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) joined the channel
+[2021-04-25T12:01:09+0200] crose (~weechat@2001:41d0:fe1d:5300:3512:16d2:5d96:3072) joined the channel
+[2021-04-25T12:03:00+0200] crose (~weechat@2001:41d0:fe1d:5300:3512:16d2:5d96:3072) left the channel ("WeeChat 3.2-dev")
+[2021-04-25T12:06:32+0200] spacekookie (~kookie@qaul.net/dev/spacekookie) left IRC (Quit: No Ping reply in 60 seconds.)
+[2021-04-25T12:07:11+0200] spacekookie (~kookie@qaul.net/dev/spacekookie) joined the channel
+[2021-04-25T12:15:35+0200] shlomif (~rindolf@inkscape/contributor/rindolf) joined the channel
+[2021-04-25T12:16:27+0200] rindolf (~rindolf@inkscape/contributor/rindolf) left IRC (Ping timeout: 265 seconds)
+[2021-04-25T12:18:35+0200] shlomif is now known as rindolf
+[2021-04-25T12:21:24+0200] stoned75 (~seb@pop.92-184-112-184.mobile.abo.orange.fr) joined the channel
+[2021-04-25T12:22:24+0200] aborazmeh (~aborazmeh@88.246.194.45) joined the channel
+[2021-04-25T12:44:36+0200] <demostanis[m]> Does Raku have a quoting constructs for junctions? Something like `qj[a b]` that would make a Junction.
+[2021-04-25T12:46:31+0200] <lizmat> any(<a b>)
+[2021-04-25T12:47:43+0200] <demostanis[m]> Thanks
+[2021-04-25T12:48:26+0200] <Xliff> What is the .Int operator in Raku? Like + is for .Num
+[2021-04-25T12:48:33+0200] <lizmat> note that this is just a combination of existing expressiveness  -)
+[2021-04-25T12:48:49+0200] <lizmat> Xliff: there is none, .Int it is
+[2021-04-25T12:48:51+0200] <Xliff> I prever <a b>.any, myself
+[2021-04-25T12:49:05+0200] <Xliff> Aww... why didn't .Int get any love, lizmat?
+[2021-04-25T12:49:20+0200] <Xliff> ( Prolly run out of symbols? ;-> )
+[2021-04-25T12:49:22+0200] <lizmat> lack of suitable characters to use as prefix?
+[2021-04-25T12:49:24+0200] <lizmat> yup
+[2021-04-25T12:49:39+0200] <Xliff> Should find one in Unicode.
+[2021-04-25T12:49:50+0200] <Xliff> I have .XCompose and WinCompose. I yam not afraid!
+[2021-04-25T12:51:35+0200] <Xliff> 𝕚, maybe?
+[2021-04-25T12:52:03+0200] <Xliff> method prefix:<𝕚> (\v) { v.Int }
+[2021-04-25T12:52:31+0200] <Xliff> m: multi sub prefix:<𝕚> (\v) { v.Int }; say 𝕚3.14169
+[2021-04-25T12:52:32+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «===SORRY!=== Error while compiling <tmp>␤Malformed postfix call␤at <tmp>:1␤------> i sub prefix:<𝕚> (\v) { v.Int }; say 𝕚3.⏏14169␤»
+[2021-04-25T12:52:57+0200] <Xliff> m: multi sub prefix:<𝕚> (\v) { v.Int }; say 𝕚(3.14169)
+[2021-04-25T12:52:58+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «===SORRY!=== Error while compiling <tmp>␤Undeclared routine:␤    𝕚 used at line 1␤␤»
+[2021-04-25T12:53:14+0200] <Xliff> Huh. Thought that would work.
+[2021-04-25T12:55:10+0200] <Xliff> m: multi sub prefix:<𝕚> (\v) is equiv(&prefix:<+>) { v.Int }; say 𝕚(3.14169)
+[2021-04-25T12:55:11+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «===SORRY!=== Error while compiling <tmp>␤Undeclared routine:␤    𝕚 used at line 1␤␤»
+[2021-04-25T12:55:48+0200] <Xliff> raku say 𝕚
+[2021-04-25T12:55:52+0200] <Xliff> m: raku say 𝕚
+[2021-04-25T12:55:53+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «===SORRY!=== Error while compiling <tmp>␤Undeclared routines:␤    raku used at line 1␤    𝕚 used at line 1␤␤»
+[2021-04-25T12:56:17+0200] <Xliff> Huh! The one symbol I pick and it's usable as an op!
+[2021-04-25T12:57:01+0200] <Xliff> Ah, well. To bed I am. Good night, #raku.
+[2021-04-25T13:01:57+0200] <lizmat> Xliff: nighty night!
+[2021-04-25T13:16:48+0200] <kawaii> raydiak: sorry for late reply, just woke up, but I agree! thank you!
+[2021-04-25T13:22:35+0200] [Sno] (~sno@p4fe9393f.dip0.t-ipconnect.de) joined the channel
+[2021-04-25T13:25:11+0200] sno (~sno@p4fe9393f.dip0.t-ipconnect.de) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T13:25:13+0200] aborazmeh (~aborazmeh@88.246.194.45) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T13:26:46+0200] [Sno] (~sno@p4fe9393f.dip0.t-ipconnect.de) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T13:36:30+0200] <Xliff> Lizmat: are there any documentation pages for attribute traits?
+[2021-04-25T13:36:48+0200] <Xliff> I know you introduced some new ones a while back that I haven't had a chance to familiarize myself with.
+[2021-04-25T13:37:25+0200] <lizmat> https://docs.raku.org/type/Attribute ?
+[2021-04-25T13:37:44+0200] <Xliff> Ah! Thanks!
+[2021-04-25T13:38:45+0200] <Xliff> lizmat: Is there any way to have rakudo generate positional new from traits?
+[2021-04-25T13:38:58+0200] <Xliff> I was thinking "is built".
+[2021-04-25T13:39:25+0200] <lizmat> is built indicates that it will be accepted as a *named* param with .new
+[2021-04-25T13:39:54+0200] <Xliff> Right.
+[2021-04-25T13:40:00+0200] <lizmat> so you'd want something like "is built(Positional)" ?
+[2021-04-25T13:40:07+0200] <Xliff> Was hoping to save keystrokes. 
+[2021-04-25T13:40:31+0200] <lizmat> well, that would be a major overhaul of default handling of classes / objects
+[2021-04-25T13:40:48+0200] <Xliff> m: class A { has $!b; has $!c; submethod BUILD (:$!b, :$!c) { }; method new ($b, $c) { self.bless( :$b, :$c ) }; };
+[2021-04-25T13:40:48+0200] <camelia> rakudo-moar 94f966d18: ( no output )
+[2021-04-25T13:40:55+0200] <lizmat> but it *is* an interesting idea
+[2021-04-25T13:41:27+0200] <lizmat> why the BULD in that case ?
+[2021-04-25T13:41:33+0200] <Xliff> Would LOVE to drop the BUILD and new with a trait.
+[2021-04-25T13:41:42+0200] <Xliff> Can BUILD be dropped?
+[2021-04-25T13:42:03+0200] <Xliff> m: class A { has $!b; has $!c; method new ($b, $c) { self.bless( :$b, :$c ) }; }; A.new(1, 2);
+[2021-04-25T13:42:04+0200] <camelia> rakudo-moar 94f966d18: ( no output )
+[2021-04-25T13:42:07+0200] <lizmat> m: class A { has $!b is built; has $!c is built; method new ($b, $c) { self.bless( :$b, :$c ) }; };
+[2021-04-25T13:42:07+0200] <camelia> rakudo-moar 94f966d18: ( no output )
+[2021-04-25T13:42:19+0200] <lizmat> that should work ?
+[2021-04-25T13:43:26+0200] <Xliff> m: class A { has $!b; has $!c; submethod BUILD (:$!b, :$!c) { }; method new ($b, $c) { self.bless( :$b, :$c ) }; method Str { $!b ~ '/' ~ $!c  }; }; ~A.new(1, 2_
+[2021-04-25T13:43:27+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «===SORRY!=== Error while compiling <tmp>␤Unable to parse expression in argument list; couldn't find final ')' (corresponding starter was at line 1)␤at <tmp>:1␤------> Str { $!b ~ '/' ~ $!c  }; }; ~A.new(1, 2⏏_␤    expecting any …»
+[2021-04-25T13:43:29+0200] <Xliff> m: class A { has $!b; has $!c; submethod BUILD (:$!b, :$!c) { }; method new ($b, $c) { self.bless( :$b, :$c ) }; method Str { $!b ~ '/' ~ $!c  }; }; ~A.new(1, 2)
+[2021-04-25T13:43:30+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «WARNINGS for <tmp>:␤Useless use of "~" in expression "~A.new(1, 2)" in sink context (line 1)␤»
+[2021-04-25T13:43:36+0200] <Xliff> m: class A { has $!b; has $!c; submethod BUILD (:$!b, :$!c) { }; method new ($b, $c) { self.bless( :$b, :$c ) }; method Str { $!b ~ '/' ~ $!c  }; }; say ~A.new(1, 2)
+[2021-04-25T13:43:37+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «1/2␤»
+[2021-04-25T13:43:57+0200] <Xliff> m: class A { has $!b; has $!c;  method new ($b, $c) { self.bless( :$b, :$c ) }; method Str { $!b ~ '/' ~ $!c  }; }; say ~A.new(1, 2)
+[2021-04-25T13:43:57+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «Use of uninitialized value element of type Any in string context.␤Methods .^name, .raku, .gist, or .say can be used to stringify it to something meaningful.␤/␤  in method Str at <tmp> line 1␤Use of uninitialized value element of type Any in st…»
+[2021-04-25T13:44:09+0200] <Xliff> m: class A { has $!b is built; has $!c is built;  method new ($b, $c) { self.bless( :$b, :$c ) }; method Str { $!b ~ '/' ~ $!c  }; }; say ~A.new(1, 2)
+[2021-04-25T13:44:10+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «1/2␤»
+[2021-04-25T13:44:15+0200] <Xliff> \o/
+[2021-04-25T13:44:26+0200] <Xliff> Now just have to get rid of new!
+[2021-04-25T13:44:43+0200] <lizmat> PRs will be considered  :-)
+[2021-04-25T13:44:54+0200] <Xliff> RakuAST would make short work of it.
+[2021-04-25T13:45:35+0200] <lizmat> not so sure: this would affect all of the BUILDPLAN logix
+[2021-04-25T13:45:38+0200] <lizmat> *logic
+[2021-04-25T13:45:56+0200] <lizmat> and that's carefully optimized for fun and profit
+[2021-04-25T13:45:59+0200] <Xliff> Would have to override CLASSHOW.^compose so that I could .^add_method at the last minute.
+[2021-04-25T13:46:10+0200] <lizmat> and nudging that runs the risk of slowdowns across the board
+[2021-04-25T13:46:29+0200] <lizmat> ok, if you're thinking like that... hmmm
+[2021-04-25T13:46:37+0200] <lizmat> that would leave the BUILDPLAN logic untouched
+[2021-04-25T13:46:42+0200] <Xliff> No, I would be punning all attributes with a Role. new() would be created from .^attribute order with all attributes having that trait.
+[2021-04-25T13:46:57+0200] <Xliff> And yes, that would be the hope.
+[2021-04-25T13:47:26+0200] <lizmat> still wonder if that would be a net performance gain
+[2021-04-25T13:47:38+0200] <lizmat> but then you're interested in fewer keystrokes, right ?
+[2021-04-25T13:47:45+0200] <Xliff> Was more concerned with O(fun) than gain.
+[2021-04-25T13:47:56+0200] <Xliff> I have strange ideas of Fun, these days.
+[2021-04-25T13:48:01+0200] <lizmat> yeah, sure...  :-)
+[2021-04-25T13:48:08+0200] <lizmat> could be done in a module then :-)
+[2021-04-25T13:48:20+0200] <Xliff> https://github.com/Xliff/p6-EDS
+[2021-04-25T13:48:26+0200] <Xliff> lizmat: True. Could be done in a module.
+[2021-04-25T13:48:49+0200] <Xliff> Above link is the start of bindings for EvolutionDataServer
+[2021-04-25T13:48:56+0200] <lizmat> Xliff: perhaps rename the repo?
+[2021-04-25T13:48:58+0200] <lizmat> :-)
+[2021-04-25T13:49:05+0200] <lizmat> looks cool!
+[2021-04-25T13:49:08+0200] <Xliff> https://developer.gnome.org/eds/stable/
+[2021-04-25T13:49:32+0200] <Xliff> lizmat: Hrm. Maybe. I think EvolutionDataServer is too long, though.
+[2021-04-25T13:49:47+0200] <Xliff> You think that's bad?
+[2021-04-25T13:49:52+0200] <lizmat> I was more thinking "raku-EDS"  :-)
+[2021-04-25T13:50:13+0200] <lizmat> instead of "p6-EDS"  :-)
+[2021-04-25T13:50:17+0200] <Xliff> https://github.com/Xliff/p6-GOA (GNOME Online Accounts)
+[2021-04-25T13:50:27+0200] <Xliff> lizmat: Yes. Prior to release there will be a prefix change.
+[2021-04-25T13:50:34+0200] <lizmat> ++Xliff  :-)
+[2021-04-25T13:50:57+0200] <Xliff> BTW - 530,000 lines and climbing.
+[2021-04-25T13:52:30+0200] <lizmat> wow
+[2021-04-25T13:54:11+0200] Black_Ribbon (~sono@107-209-210-210.lightspeed.sntcca.sbcglobal.net) left IRC (Quit: When You're Taught Through Feelings~♪)
+[2021-04-25T13:54:32+0200] <Xliff> Huh! Constants can support dashes, but enums can't?
+[2021-04-25T13:55:12+0200] <lizmat> example?
+[2021-04-25T13:55:53+0200] <Xliff> One second. Trying to get a clean parse before commit.
+[2021-04-25T13:56:39+0200] <Xliff> Oh... and this isn't valid, either!
+[2021-04-25T13:56:49+0200] <Xliff> m: sub test-vcard-qp-2-1-parsing { }
+[2021-04-25T13:56:49+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «===SORRY!=== Error while compiling <tmp>␤Missing block␤at <tmp>:1␤------> sub test-vcard-qp⏏-2-1-parsing { }␤    expecting any of:␤        new name to be defined␤»
+[2021-04-25T13:57:20+0200] <Xliff> m: our enum VCardVersion is export ('ver2-1', 'ver2_1' => 0, 'ver3', 'ver4'); ver2-1.say
+[2021-04-25T13:57:20+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «===SORRY!=== Error while compiling <tmp>␤Undeclared routine:␤    ver2 used at line 1␤␤»
+[2021-04-25T13:57:39+0200] <Xliff> Numerics-following-dashes gets interpreted as subtraction
+[2021-04-25T13:57:46+0200] <lizmat> ah, yes
+[2021-04-25T13:57:47+0200] <Xliff> Grr...
+[2021-04-25T13:58:01+0200] <lizmat> kebabcase needs an alpha *after* the dash
+[2021-04-25T13:58:11+0200] <lizmat> that's been documented that way
+[2021-04-25T13:58:28+0200] <lizmat> because of ambiguity otherwise
+[2021-04-25T14:00:27+0200] <Xliff> Ohh! Significant improvement of compile times!
+[2021-04-25T14:00:48+0200] <Xliff> All p6-Projects compile in 93% of the time it took last-week
+[2021-04-25T14:01:23+0200] <Xliff> 20201-4-11 was slower.
+[2021-04-25T14:01:52+0200] <Xliff> Total time single-instance was 13658 for this week. Last week it was 14579, the weeb before 12760
+[2021-04-25T14:03:00+0200] <Xliff> Oddly enough... parallel times increased from 3640s to 3725s
+[2021-04-25T14:04:32+0200] <lizmat> well, some race condition was fixed in the scheduler, that may have affected taht
+[2021-04-25T14:06:18+0200] <Xliff> Oh. Good.
+[2021-04-25T14:22:09+0200] <raydiak> m: sub term:<a-1> { constant $ = sub ($a=1) { say $a } }; a-1("this works in a small number of very specific cases, but please don't do it. like ever.")
+[2021-04-25T14:22:10+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «this works in a small number of very specific cases, but please don't do it. like ever.␤»
+[2021-04-25T14:22:21+0200] • raydiak: is a bad example
+[2021-04-25T14:22:41+0200] <raydiak> and on that note...g'night all \o
+[2021-04-25T14:22:54+0200] <lizmat> gnight raydiak 
+[2021-04-25T14:24:30+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) joined the channel
+[2021-04-25T14:27:57+0200] <El_Che> so far 2021.04 is building fine
+[2021-04-25T14:28:21+0200] • lizmat: looks forward to be doing "apt-get upgrade" on her Debian box
+[2021-04-25T14:28:41+0200] <El_Che> fedora 32 is the only one still running
+[2021-04-25T14:28:44+0200] <lizmat> the fastest / easiest way to run Raku in production so fae
+[2021-04-25T14:28:46+0200] <lizmat> *far
+[2021-04-25T14:28:51+0200] <El_Che> then tag and release
+[2021-04-25T14:28:54+0200] <lizmat> at least for me  :-)
+[2021-04-25T14:29:05+0200] <El_Che> I always do a round of check before releasing it
+[2021-04-25T14:30:35+0200] <El_Che> I don't expect fedora to fail, so the package soon be up in around 20 minutes or so
+[2021-04-25T14:30:53+0200] <El_Che> (the upload is also automated when tagged)
+[2021-04-25T14:33:02+0200] <tonyo> those changes in master? maybe time i should rebuild 
+[2021-04-25T14:35:53+0200] epony (epony@unaffiliated/epony) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T14:41:48+0200] frost-lab (3b47f04a@gateway/web/cgi-irc/kiwiirc.com/ip.59.71.240.74) joined the channel
+[2021-04-25T14:44:55+0200] <El_Che> lizmat: packages now being build https://github.com/nxadm/rakudo-pkg/runs/2431595098
+[2021-04-25T14:45:18+0200] <lizmat> El_Che++
+[2021-04-25T14:54:30+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) left IRC (Ping timeout: 265 seconds)
+[2021-04-25T14:56:13+0200] ctilmes (~ctilmes@pool-100-16-6-40.bltmmd.fios.verizon.net) joined the channel
+[2021-04-25T14:56:34+0200] <ctilmes> rakudo 2021.04 is ready on alpine edge
+[2021-04-25T14:56:51+0200] ctilmes (~ctilmes@pool-100-16-6-40.bltmmd.fios.verizon.net) left IRC (Remote host closed the connection)
+[2021-04-25T15:00:27+0200] domidumont (~dodu@2a01:e0a:3d9:ddd0:10d2:aeb3:aadc:31e3) joined the channel
+[2021-04-25T15:01:55+0200] frost-lab (3b47f04a@gateway/web/cgi-irc/kiwiirc.com/ip.59.71.240.74) left IRC (Quit: Connection closed)
+[2021-04-25T15:07:24+0200] mscha (53a33cde@logger.mscha.org) joined the channel
+[2021-04-25T15:08:16+0200] <mscha> I've just (finally) installed the latest Rakudo Star, and doing some benchmarking...
+[2021-04-25T15:09:37+0200] <mscha> my @primes = (^∞).grep(&is-prime); say “@primes[1_000_000] ({ (now - INIT now).fmt(‘%.2f’) }s)”
+[2021-04-25T15:09:53+0200] <mscha> raku-2020.10: 15485867 (6.55s)
+[2021-04-25T15:10:06+0200] <mscha> raku-2021.02.1: 15485867 (9.56s)
+[2021-04-25T15:10:24+0200] <mscha> Significantly slower??
+[2021-04-25T15:11:19+0200] <mscha> (Still quite a bit faster than raku-2020.05, which took about 38 minutes.:-)  )
+[2021-04-25T15:12:42+0200] <mscha> m: my @primes = (^∞).grep(&is-prime); say “@primes[1_000_000] ({ (now - INIT now).fmt(‘%.2f’) }s)”
+[2021-04-25T15:12:51+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «15485867 (8.39s)␤»
+[2021-04-25T15:15:45+0200] <lizmat> m: say (^∞).grep(&is-prime).skip(1_000_000).head; say "({(now - INIT now.fmt(‘%.2f’)}s)”
+[2021-04-25T15:15:46+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «===SORRY!=== Error while compiling <tmp>␤Unable to parse expression in parenthesized expression; couldn't find final ')' (corresponding starter was at line 1)␤at <tmp>:1␤------> head; say "({(now - INIT now.fmt(‘%.2f’)⏏}s)”…»
+[2021-04-25T15:15:59+0200] <lizmat> m: say (^∞).grep(&is-prime).skip(1_000_000).head; say "({(now - INIT now).fmt(‘%.2f’)}s)”
+[2021-04-25T15:15:59+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «===SORRY!=== Error while compiling <tmp>␤Unable to parse expression in double quotes; couldn't find final '"' (corresponding starter was at line 1)␤at <tmp>:1␤------>  say "({(now - INIT now).fmt(‘%.2f’)}s)”⏏<EOL>␤    expe…»
+[2021-04-25T15:16:43+0200] <lizmat> m: say (^∞).grep(&is-prime).skip(1_000_000).head; say "({(now - INIT now).fmt(‘%.2f’)}s)"
+[2021-04-25T15:16:51+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «15485867␤(7.28s)␤»
+[2021-04-25T15:17:08+0200] <lizmat> mscha: it pays not to have to cache
+[2021-04-25T15:19:56+0200] [Sno] (~sno@2001-4dd7-82b5-0-980f-5558-9124-3512.ipv6dyn.netcologne.de) joined the channel
+[2021-04-25T15:21:27+0200] <mscha> lizmat: still a lot faster on 2020.10 (5.43s) than on 2021.02.01 (8.19s)
+[2021-04-25T15:21:42+0200] <lizmat> mscha: can't disagree with that
+[2021-04-25T15:22:16+0200] <lizmat> oddly enough the is-prime handling was supposed to have been made faster in the past 6 months
+[2021-04-25T15:22:40+0200] <lizmat> or was that before 2020.10?   hmmm... can't remember for sure
+[2021-04-25T15:22:58+0200] <mscha> It's certainly many magnitudes faster than in 2020.05 (38 minutes).
+[2021-04-25T15:23:03+0200] <lizmat> mscha: would appreciate if you could find out what made this change
+[2021-04-25T15:25:09+0200] <mscha> lizmat: I don't think I'm able to do that.  I just install Rakudo Star once in a while and don't really follow the development provess.
+[2021-04-25T15:25:16+0200] <mscha> process
+[2021-04-25T15:25:23+0200] <lizmat> mscha: no worries  :-)
+[2021-04-25T15:27:43+0200] [Sno] (~sno@2001-4dd7-82b5-0-980f-5558-9124-3512.ipv6dyn.netcologne.de) left IRC (Ping timeout: 250 seconds)
+[2021-04-25T15:30:19+0200] MasterDuke (5e00bdd3@raku/developer/masterduke) left IRC (Quit: Connection closed)
+[2021-04-25T15:40:46+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) joined the channel
+[2021-04-25T15:42:28+0200] <El_Che> github action is action up, launched a new tagged build :/
+[2021-04-25T15:42:47+0200] <El_Che> (nothing to do with the rakudo release or rakudo-pkg, just github)
+[2021-04-25T15:45:11+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T15:48:55+0200] codesect` (~user@2600:1700:1650:1faf:e8e3:544e:102:f0e4) joined the channel
+[2021-04-25T15:49:06+0200] <demostanis[m]> https://github.com/demostanis/rakudostarplus
+[2021-04-25T15:49:51+0200] <lizmat> afk for a few hours&
+[2021-04-25T15:50:35+0200] codesections (~user@2600:1700:1650:1faf:53de:cb31:6de3:44cf) left IRC (Remote host closed the connection)
+[2021-04-25T15:55:37+0200] <El_Che> demostanis[m]: you should add a plus
+[2021-04-25T15:57:55+0200] [Sno] (~sno@2001-4dd7-82b5-0-980f-5558-9124-3512.ipv6dyn.netcologne.de) joined the channel
+[2021-04-25T15:59:37+0200] MasterDuke (5e00bdd3@raku/developer/masterduke) joined the channel
+[2021-04-25T16:01:10+0200] <MasterDuke> the recent slow down in mscha's example is the new coercion protocol merge (and then some optimizations after the initial merge, but it's still slower than before). i don't think it's related to is-prime
+[2021-04-25T16:02:29+0200] [Sno] (~sno@2001-4dd7-82b5-0-980f-5558-9124-3512.ipv6dyn.netcologne.de) left IRC (Ping timeout: 245 seconds)
+[2021-04-25T16:03:23+0200] <El_Che> weekly: rakudo-pkg for rakudo 2021.01 released, added packaged for newly released *buntu 21.04
+[2021-04-25T16:03:40+0200] <El_Che> lizmat: ==^ 
+[2021-04-25T16:06:03+0200] titsuki (~AdminUser@softbank126051115209.bbtec.net) left IRC (Quit: https://quassel-irc.org - Chat comfortably. Anywhere.)
+[2021-04-25T16:13:16+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) joined the channel
+[2021-04-25T16:14:57+0200] mscha (53a33cde@logger.mscha.org) left IRC (Quit: Connection closed)
+[2021-04-25T16:18:31+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) left IRC (Ping timeout: 260 seconds)
+[2021-04-25T16:18:50+0200] <demostanis[m]> <El_Che "demostanis: you should add a plu"> What do you mean?
+[2021-04-25T16:20:05+0200] <El_Che> https://github.com/demostanis/rakudostarplusplus would be a cooler name
+[2021-04-25T16:24:09+0200] <demostanis[m]> Rakudo Star+ isn't that bad, and ++ sounds like it's written in C++
+[2021-04-25T16:24:29+0200] <demostanis[m]> Also why isn't rakudo.org written in Raku?
+[2021-04-25T16:26:29+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) left the channel ("Leaving")
+[2021-04-25T16:29:28+0200] <El_Che> the ++ is a reference to augementing a variable in many languages
+[2021-04-25T16:29:31+0200] <El_Che> $var++
+[2021-04-25T16:29:41+0200] <masak> "incrementing"
+[2021-04-25T16:29:45+0200] <El_Che> better
+[2021-04-25T16:29:52+0200] <El_Che> damn thesaurus
+[2021-04-25T16:29:56+0200] <El_Che> :)
+[2021-04-25T16:30:12+0200] <masak> language is, what's the word, hard
+[2021-04-25T16:30:39+0200] <El_Che> yet, not rigid
+[2021-04-25T16:31:14+0200] <masak> probably something to be thankful for, though
+[2021-04-25T16:31:16+0200] <demostanis[m]> "Rakudo Star, INCREMENTED"
+[2021-04-25T16:31:48+0200] <masak> if we could only speak in formally correct utterances, then not much would get said
+[2021-04-25T16:34:23+0200] parabolize (~paraboliz@c-76-25-97-149.hsd1.co.comcast.net) joined the channel
+[2021-04-25T16:35:40+0200] [Sno] (~sno@2001-4dd7-82b5-0-980f-5558-9124-3512.ipv6dyn.netcologne.de) joined the channel
+[2021-04-25T16:40:35+0200] [Sno] (~sno@2001-4dd7-82b5-0-980f-5558-9124-3512.ipv6dyn.netcologne.de) left IRC (Ping timeout: 260 seconds)
+[2021-04-25T16:46:20+0200] b2gills (~brad@subscriber-dhcp-cgn-64-191-7-0.wcufiber.net) left IRC (Ping timeout: 252 seconds)
+[2021-04-25T16:55:34+0200] <El_Che> "correct" is a very normaive stance on language
+[2021-04-25T16:56:58+0200] timlegge (~quassel@mctnnbsa70w-142-68-90-86.dhcp-dynamic.fibreop.nb.bellaliant.net) left IRC (Ping timeout: 260 seconds)
+[2021-04-25T16:57:56+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) joined the channel
+[2021-04-25T17:05:48+0200] mscha (53a33cde@logger.mscha.org) joined the channel
+[2021-04-25T17:07:53+0200] mscha (53a33cde@logger.mscha.org) left IRC (Client Quit)
+[2021-04-25T17:08:37+0200] b2gills (~brad@subscriber-dhcp-cgn-64-191-7-0.wcufiber.net) joined the channel
+[2021-04-25T17:10:27+0200] aborazmeh (~aborazmeh@88.246.194.45) joined the channel
+[2021-04-25T17:27:29+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) left the channel ("Leaving")
+[2021-04-25T17:47:24+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) joined the channel
+[2021-04-25T17:52:30+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) left IRC (Ping timeout: 260 seconds)
+[2021-04-25T17:57:31+0200] <lizmat> El_Che: $ raku -v
+[2021-04-25T17:57:31+0200] <lizmat> Welcome to Rakudo(tm) v2021.04.
+[2021-04-25T17:57:36+0200] <lizmat> :-)
+[2021-04-25T18:10:38+0200] [Sno] (~sno@2001-4dd7-82b5-0-980f-5558-9124-3512.ipv6dyn.netcologne.de) joined the channel
+[2021-04-25T18:13:13+0200] aborazmeh (~aborazmeh@88.246.194.45) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T18:13:45+0200] <El_Che> :)
+[2021-04-25T18:15:47+0200] [Sno] (~sno@2001-4dd7-82b5-0-980f-5558-9124-3512.ipv6dyn.netcologne.de) left IRC (Ping timeout: 260 seconds)
+[2021-04-25T18:16:12+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) joined the channel
+[2021-04-25T18:23:26+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T18:26:34+0200] aborazmeh (~aborazmeh@88.246.194.45) joined the channel
+[2021-04-25T18:30:53+0200] aborazmeh (~aborazmeh@88.246.194.45) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T18:36:25+0200] [Sno] (~sno@2001-4dd7-82b5-0-980f-5558-9124-3512.ipv6dyn.netcologne.de) joined the channel
+[2021-04-25T18:38:35+0200] Marcool (~marcool_0@8.225.23.109.rev.sfr.net) joined the channel
+[2021-04-25T18:40:51+0200] timlegge (~quassel@mctnnbsa70w-142-68-90-86.dhcp-dynamic.fibreop.nb.bellaliant.net) joined the channel
+[2021-04-25T18:44:15+0200] [Sno] (~sno@2001-4dd7-82b5-0-980f-5558-9124-3512.ipv6dyn.netcologne.de) left IRC (Ping timeout: 260 seconds)
+[2021-04-25T18:45:25+0200] <Marcool> Hi all, is there a hard limit on the length that a constant list can be?
+[2021-04-25T18:45:43+0200] <Marcool> I'm hitting a compile time error trying to gobble a large wordlist into a constant (to save time on runtime)
+[2021-04-25T18:46:10+0200] <Marcool> Bytecode validation error at offset 4741598, instruction 388958: argument index 63404 not in range 0..63403
+[2021-04-25T18:46:26+0200] <Marcool> the code is something like:
+[2021-04-25T18:46:51+0200] <lizmat> interesting!   nine ^^
+[2021-04-25T18:46:52+0200] <Marcool> unit module Dict; constant @dict is export = (loooooong list of words);
+[2021-04-25T18:47:03+0200] <Marcool> and in the executable:
+[2021-04-25T18:47:25+0200] <Marcool> use Dist; say @dict[25000] #for example; exit;
+[2021-04-25T18:47:34+0200] <Marcool> use Dict* of course
+[2021-04-25T18:48:07+0200] <lizmat> do you actually have to do the @dict[25000] to get the error, or is "use Dict" enough ?
+[2021-04-25T18:49:16+0200] <Marcool> lizmat: I'll give it a try
+[2021-04-25T18:49:17+0200] stoned75 (~seb@pop.92-184-112-184.mobile.abo.orange.fr) left IRC (Read error: Connection reset by peer)
+[2021-04-25T18:50:27+0200] <Marcool> it takes a while, it obviously gets quite far in the precomp, and fails, clearly, on attempting to insert item number 63404 into (something?) (native struct of some kind?)
+[2021-04-25T18:50:49+0200] <lizmat> 63404 is a bit of an odd number
+[2021-04-25T18:51:03+0200] <lizmat> close to 64K but not quite
+[2021-04-25T18:51:12+0200] <Marcool> yeah I was trying to see if there was a power of 2 anywhere there but there isn't that I can see
+[2021-04-25T18:51:26+0200] <Marcool> that's right, 64K is the closest, but not exactly off by one or anything
+[2021-04-25T18:54:54+0200] <Marcool> nope, same error without the say @dict[whatever]
+[2021-04-25T18:55:05+0200] <Marcool> just use Dict; is enough
+[2021-04-25T18:55:45+0200] <Marcool> wc -l Dict.rakumod -> 325552
+[2021-04-25T18:56:00+0200] <Marcool> one array entry per line
+[2021-04-25T18:56:43+0200] <Marcool> incidentally parsing that in a text file a _runtime_ works fine, like a classic my @lines="dict.txt".IO.lines;
+[2021-04-25T19:04:54+0200] <lizmat> interesting
+[2021-04-25T19:05:11+0200] <lizmat> I think this is worth making an issue about
+[2021-04-25T19:06:16+0200] <Marcool> thanks for the interest :)
+[2021-04-25T19:06:31+0200] <Marcool> do you want me to do so or would you rather do it?
+[2021-04-25T19:06:55+0200] <lizmat> Marcool: if you could do it, please !
+[2021-04-25T19:06:57+0200] <Marcool> I have also run it with --ll-exception and have a trace if that's helpful
+[2021-04-25T19:07:01+0200] <Marcool> sure no problem
+[2021-04-25T19:07:12+0200] <lizmat> yes, that would be helpful, thank you!
+[2021-04-25T19:07:16+0200] <Marcool> https://github.com/rakudo/rakudo/issues
+[2021-04-25T19:07:17+0200] <Marcool> ?
+[2021-04-25T19:07:21+0200] <Marcool> or moarvm ?
+[2021-04-25T19:07:30+0200] <lizmat> feels like a Rakudo issue atm to me
+[2021-04-25T19:07:43+0200] <Marcool> ok thanks, I'll do that right away
+[2021-04-25T19:07:52+0200] <lizmat> ++Marcool
+[2021-04-25T19:09:03+0200] domidumont (~dodu@2a01:e0a:3d9:ddd0:10d2:aeb3:aadc:31e3) left IRC (Quit: Leaving.)
+[2021-04-25T19:09:35+0200] [Sno] (~sno@2001-4dd7-82b5-0-980f-5558-9124-3512.ipv6dyn.netcologne.de) joined the channel
+[2021-04-25T19:11:16+0200] epony (epony@unaffiliated/epony) joined the channel
+[2021-04-25T19:26:03+0200] <Marcool> done
+[2021-04-25T19:26:03+0200] <Marcool> https://github.com/rakudo/rakudo/issues/4344
+[2021-04-25T19:26:17+0200] <Marcool> let me know if there's anything else I can do to help
+[2021-04-25T19:36:25+0200] aborazmeh (~aborazmeh@88.246.194.45) joined the channel
+[2021-04-25T19:41:54+0200] <[Coke]> the only place 63403 or 63404 appear in the source is in nqp/MoarVM/src/strings/gb2312_codeindex.h, in an unlikely location.
+[2021-04-25T19:49:01+0200] [Sno] (~sno@2001-4dd7-82b5-0-980f-5558-9124-3512.ipv6dyn.netcologne.de) left IRC (Ping timeout: 250 seconds)
+[2021-04-25T20:01:01+0200] patrickb (~quassel@55d47537.access.ecotel.net) joined the channel
+[2021-04-25T20:04:56+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) joined the channel
+[2021-04-25T20:12:04+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) left IRC (Ping timeout: 252 seconds)
+[2021-04-25T20:24:49+0200] asymptotically (asymptotic@gateway/vpn/mullvad/asymptotically) joined the channel
+[2021-04-25T20:30:52+0200] abraxxa (~abraxxa@2a01:100:2000:2500::22) joined the channel
+[2021-04-25T20:42:20+0200] sena_kun (~sena_kun@94.142.239.45) left IRC (Quit: Leaving)
+[2021-04-25T20:43:55+0200] sena_kun (~sena_kun@94.142.239.45) joined the channel
+[2021-04-25T20:52:04+0200] draco100[m] (draco100ma@gateway/shell/matrix.org/x-jirqcnwvzxugatfc) left IRC (Ping timeout: 245 seconds)
+[2021-04-25T20:52:04+0200] uzl[m] (uzluisfmat@gateway/shell/matrix.org/x-qlpoydckuyjuytsj) left IRC (Ping timeout: 245 seconds)
+[2021-04-25T20:53:25+0200] draco100[m] (draco100ma@gateway/shell/matrix.org/x-eelhbljogvgrpkqa) joined the channel
+[2021-04-25T20:53:44+0200] uzl[m] (uzluisfmat@gateway/shell/matrix.org/x-tumerjozbhdiufzz) joined the channel
+[2021-04-25T20:56:49+0200] stoned75 (~seb@pop.92-184-102-183.mobile.abo.orange.fr) joined the channel
+[2021-04-25T21:01:05+0200] squashable6 (~squ-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-25T21:08:27+0200] domidumont (~dodu@2a01:e0a:3d9:ddd0:10d2:aeb3:aadc:31e3) joined the channel
+[2021-04-25T21:10:10+0200] domidumont (~dodu@2a01:e0a:3d9:ddd0:10d2:aeb3:aadc:31e3) left IRC (Client Quit)
+[2021-04-25T21:17:36+0200] defaultxr (~defaultxr@99-138-110-241.lightspeed.cicril.sbcglobal.net) left IRC (Quit: bye)
+[2021-04-25T21:27:27+0200] aborazmeh (~aborazmeh@88.246.194.45) left IRC (Ping timeout: 265 seconds)
+[2021-04-25T21:32:59+0200] _jrjsmrtn (~jrjsmrtn@ip-83-134-170-127.dsl.scarlet.be) joined the channel
+[2021-04-25T21:33:07+0200] epony (epony@unaffiliated/epony) left IRC (Read error: Connection reset by peer)
+[2021-04-25T21:34:10+0200] __jrjsmrtn__ (~jrjsmrtn@ip-83-134-170-127.dsl.scarlet.be) left IRC (Ping timeout: 260 seconds)
+[2021-04-25T21:49:13+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) joined the channel
+[2021-04-25T21:53:31+0200] aborazmeh (~aborazmeh@88.246.194.45) joined the channel
+[2021-04-25T21:54:13+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T22:00:41+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) joined the channel
+[2021-04-25T22:01:21+0200] Marcool (~marcool_0@8.225.23.109.rev.sfr.net) left IRC (Quit: leaving)
+[2021-04-25T22:05:32+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T22:30:27+0200] epony (epony@unaffiliated/epony) joined the channel
+[2021-04-25T22:33:05+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) joined the channel
+[2021-04-25T22:36:45+0200] <gfldex> m: class NotNil is Nil {}; class C { method NotNil() { NotNil.new } }; sub s(NotNil()) {}; s(NotNil.new);
+[2021-04-25T22:36:45+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «Impossible coercion from 'Nil' into 'NotNil': method NotNil returned a type object Nil␤  in sub s at <tmp> line 1␤  in block <unit> at <tmp> line 1␤␤»
+[2021-04-25T22:37:05+0200] <gfldex> I'm almost certain that NotNil is not Nil.
+[2021-04-25T22:37:49+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) left IRC (Ping timeout: 252 seconds)
+[2021-04-25T22:45:21+0200] <gfldex> m: class NotNil is Nil {}; class C { method NotNil() { NotNil.new } }; sub s(NotNil()) {}; s(C.new);
+[2021-04-25T22:45:21+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «Impossible coercion from 'C' into 'NotNil': method NotNil returned a type object Nil␤  in sub s at <tmp> line 1␤  in block <unit> at <tmp> line 1␤␤»
+[2021-04-25T22:45:40+0200] <gfldex> And I'm sure NotNil did not return Nil.
+[2021-04-25T22:45:49+0200] <gfldex> C.NotNil that is
+[2021-04-25T22:48:50+0200] <moon-child> m: class NotNil is Nil {}; say NotNil; say NotNil.new
+[2021-04-25T22:48:51+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «Nil␤Nil␤»
+[2021-04-25T22:49:32+0200] <gfldex> m: class NotNil is Nil {}; dd NotNil; dd NotNil.new
+[2021-04-25T22:49:32+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «Nil␤Nil␤»
+[2021-04-25T22:49:37+0200] <gfldex> o.0
+[2021-04-25T22:49:59+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) joined the channel
+[2021-04-25T22:50:41+0200] <gfldex> m: class NotNil is Nil {}; my \nocontainer = NotNil.new; dd nocontainer;
+[2021-04-25T22:50:41+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «Nil␤»
+[2021-04-25T22:56:16+0200] <lizmat> m: m: class NotNil is Nil {}; my \nocontainer = NotNil.new; dd nocontainer =:= Nil
+[2021-04-25T22:56:17+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «Bool::True␤»
+[2021-04-25T22:56:24+0200] <lizmat> interesting
+[2021-04-25T22:56:49+0200] <lizmat> you need to provide your own .new for the NotNil class, as Nil.new =:= Nil
+[2021-04-25T22:56:57+0200] <lizmat> m: dd Nil.new =:= Nil
+[2021-04-25T22:56:58+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «Bool::True␤»
+[2021-04-25T22:57:04+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) left IRC (Ping timeout: 245 seconds)
+[2021-04-25T22:58:04+0200] <gfldex> m: class NotNil is Nil {}; my \nocontainer = NotNil.new; dd nocontainer.WHAT;
+[2021-04-25T22:58:05+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «Nil␤»
+[2021-04-25T22:58:15+0200] <gfldex> m: class NotNil is Nil {}; my \nocontainer = NotNil.new; dd NotNil.WHAT;
+[2021-04-25T22:58:15+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «Nil␤»
+[2021-04-25T22:58:51+0200] <gfldex> m: say Failure.new.WHAT;
+[2021-04-25T22:58:52+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «(Failure)␤»
+[2021-04-25T23:00:40+0200] rindolf (~rindolf@inkscape/contributor/rindolf) left IRC (Quit: Shlomi Fish ("Rindolf") has left the server. “Chuck Norris was challenged to fight the world, and accepted. He bet on himself, won, and collected the bet money.”)
+[2021-04-25T23:03:57+0200] <gfldex> m: class NotNil is Nil { method new { use nqp; nqp::create(self)} }; class C { method NotNil() { NotNil.new } }; sub s(NotNil()) {}; s(C.new);
+[2021-04-25T23:03:58+0200] <camelia> rakudo-moar 94f966d18: ( no output )
+[2021-04-25T23:04:50+0200] <gfldex> m: class NotNil is Nil { method new { self.CREATE }; class C { method NotNil() { NotNil.new } }; sub s(NotNil()) {}; s(C.new);
+[2021-04-25T23:04:50+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «===SORRY!=== Error while compiling <tmp>␤Missing block␤at <tmp>:1␤------> l.new } }; sub s(NotNil()) {}; s(C.new);⏏<EOL>␤»
+[2021-04-25T23:05:02+0200] <gfldex> m: class NotNil is Nil { method new { self.CREATE } }; class C { method NotNil() { NotNil.new } }; sub s(NotNil()) {}; s(C.new);
+[2021-04-25T23:05:02+0200] <camelia> rakudo-moar 94f966d18: ( no output )
+[2021-04-25T23:05:28+0200] <gfldex> We may want to write that down somewhere …
+[2021-04-25T23:08:11+0200] wamba (~wamba@193-194.moravanet.cz) left IRC (Quit: Leaving.)
+[2021-04-25T23:08:50+0200] parabolize (~paraboliz@c-76-25-97-149.hsd1.co.comcast.net) left IRC (Ping timeout: 246 seconds)
+[2021-04-25T23:10:44+0200] parabolize (~paraboliz@c-76-25-97-149.hsd1.co.comcast.net) joined the channel
+[2021-04-25T23:13:57+0200] asymptotically (asymptotic@gateway/vpn/mullvad/asymptotically) left IRC (Quit: Leaving)
+[2021-04-25T23:25:53+0200] natrys (~natrys@116.206.252.68) left IRC (Quit: natrys)
+[2021-04-25T23:26:24+0200] dogbert17 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-25T23:27:03+0200] abraxxa (~abraxxa@2a01:100:2000:2500::22) left IRC (Remote host closed the connection)
+[2021-04-25T23:28:53+0200] dogbert11 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Ping timeout: 240 seconds)
+[2021-04-25T23:32:35+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) joined the channel
+[2021-04-25T23:37:04+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) left IRC (Ping timeout: 245 seconds)
+[2021-04-25T23:39:16+0200] neshpion (~neshpion@gateway/tor-sasl/neshpion) joined the channel
+[2021-04-25T23:39:55+0200] <neshpion> what does Str.fc do? docs say it's for doing caseless comparisons but `$thing.fc.contains("SeArCh")` keeps returning false for me
+[2021-04-25T23:40:06+0200] dogbert11 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-25T23:40:26+0200] <neshpion> m: my $thing = "my STRING!"; say "string? ", $thing.fc.contains("string");
+[2021-04-25T23:40:27+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «string? True␤»
+[2021-04-25T23:40:32+0200] <neshpion> o.o
+[2021-04-25T23:40:54+0200] dogbert12 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-25T23:41:13+0200] <neshpion> actually i'm trying it on a heredoc not a regular string
+[2021-04-25T23:41:13+0200] dogbert12 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Read error: Connection reset by peer)
+[2021-04-25T23:42:10+0200] dogbert12 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-25T23:42:40+0200] <neshpion> m: my $thing = "YEET"; say $thing.fc.contains("yeet");
+[2021-04-25T23:42:41+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «True␤»
+[2021-04-25T23:43:02+0200] <neshpion> m: my $thing = "yeet"; say $thing.fc.contains("YEET");
+[2021-04-25T23:43:03+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «False␤»
+[2021-04-25T23:43:12+0200] <neshpion> that's what my problem is, i'm checking using upper case
+[2021-04-25T23:43:37+0200] <lizmat> m: say "YEET".fc eq "yEeT".fc
+[2021-04-25T23:43:38+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «True␤»
+[2021-04-25T23:43:57+0200] <lizmat> you need to use the .fc on both sides of the eq
+[2021-04-25T23:44:36+0200] <lizmat> .fc is not guaranteed to give you anything you can do a reliable .contains on
+[2021-04-25T23:44:49+0200] dogbert17 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Ping timeout: 268 seconds)
+[2021-04-25T23:44:55+0200] dogbert11 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Ping timeout: 252 seconds)
+[2021-04-25T23:45:42+0200] <neshpion> m: say "yeet".fc.contains("YEET".fc)
+[2021-04-25T23:45:43+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «True␤»
+[2021-04-25T23:45:46+0200] <neshpion> ok
+[2021-04-25T23:46:56+0200] <lizmat> well, even that could cause false positives
+[2021-04-25T23:47:13+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) joined the channel
+[2021-04-25T23:52:04+0200] [Sno] (~sno@xdsl-87-78-155-107.nc.de) left IRC (Ping timeout: 245 seconds)
+[2021-04-25T23:55:29+0200] MasterDuke (5e00bdd3@raku/developer/masterduke) left IRC (Quit: Connection closed)
+[2021-04-25T23:57:49+0200] MasterDuke (5e00bdd3@raku/developer/masterduke) joined the channel

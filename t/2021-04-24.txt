@@ -1,0 +1,806 @@
+[2021-04-24T00:02:32+0200] sno (~sno@p5b25b211.dip0.t-ipconnect.de) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T00:02:33+0200] Kaiepi (~Kaiepi@47.54.252.148) left IRC (Remote host closed the connection)
+[2021-04-24T00:02:55+0200] Kaiepi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T00:03:53+0200] sno (~sno@p5b25b211.dip0.t-ipconnect.de) joined the channel
+[2021-04-24T00:04:13+0200] natrys (~natrys@116.206.252.68) left IRC (Quit: natrys)
+[2021-04-24T00:08:12+0200] sno (~sno@p5b25b211.dip0.t-ipconnect.de) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T00:09:54+0200] sno (~sno@p5b25b211.dip0.t-ipconnect.de) joined the channel
+[2021-04-24T00:13:02+0200] dogbert17 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-24T00:13:47+0200] dogbert12 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-24T00:16:46+0200] dogbert11 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T00:18:06+0200] dogbert17 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Ping timeout: 260 seconds)
+[2021-04-24T00:19:02+0200] mahafyi (2d771c05@45.119.28.5) left IRC (Quit: Connection closed)
+[2021-04-24T00:20:26+0200] Kaiepi (~Kaiepi@47.54.252.148) left IRC (Remote host closed the connection)
+[2021-04-24T00:20:57+0200] Kaiepi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T00:28:26+0200] rindolf (~rindolf@inkscape/contributor/rindolf) left IRC (Quit: Shlomi Fish ("Rindolf") has left the server. “Chuck Norris was challenged to fight the world, and accepted. He bet on himself, won, and collected the bet money.”)
+[2021-04-24T00:42:33+0200] wamba (~wamba@193-194.moravanet.cz) left IRC (Quit: Leaving.)
+[2021-04-24T00:44:02+0200] softmoth_ is now known as softmoth
+[2021-04-24T00:48:55+0200] dogbert17 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-24T00:51:35+0200] dogbert12 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Ping timeout: 268 seconds)
+[2021-04-24T00:52:24+0200] dogbert17 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Read error: Connection reset by peer)
+[2021-04-24T00:52:47+0200] dogbert17 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-24T00:59:41+0200] dogbert11 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-24T01:00:25+0200] dogbert17 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Ping timeout: 265 seconds)
+[2021-04-24T01:32:04+0200] oneeggeach (~oneeggeac@2605:a601:ae7e:800:198c:d49e:9696:2ec8) joined the channel
+[2021-04-24T01:36:17+0200] aborazmeh (~aborazmeh@88.254.3.6) joined the channel
+[2021-04-24T01:38:44+0200] <summerisle> demostanis[m]: if it's any help (it probably isn't) it takes 2 minutes and 12 seconds to compile the rakudo distribution from Gentoo, this is with 56 threads on a 64 thread host.
+[2021-04-24T01:47:49+0200] swaggboi (~swaggboi@slackware.uk/supporter/swaggboi) left IRC (Quit: C-x C-c)
+[2021-04-24T01:52:04+0200] swaggboi (~swaggboi@slackware.uk/supporter/swaggboi) joined the channel
+[2021-04-24T01:52:08+0200] pecastro (~pecastro@95.151.147.236) left IRC (Ping timeout: 246 seconds)
+[2021-04-24T02:02:37+0200] sno (~sno@p5b25b211.dip0.t-ipconnect.de) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T02:03:12+0200] sno (~sno@p5b25b211.dip0.t-ipconnect.de) joined the channel
+[2021-04-24T02:07:33+0200] sno (~sno@p5b25b211.dip0.t-ipconnect.de) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T02:09:18+0200] solitario (~adrian@www3.kiess.onl) joined the channel
+[2021-04-24T02:15:52+0200] aborazmeh (~aborazmeh@88.254.3.6) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T02:36:03+0200] clarjon_1 (~clarjon1@unaffiliated/clarjon1) joined the channel
+[2021-04-24T02:36:35+0200] clarjon1 (~clarjon1@unaffiliated/clarjon1) left IRC (Ping timeout: 246 seconds)
+[2021-04-24T02:45:52+0200] epony (epony@unaffiliated/epony) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T02:58:06+0200] DiffieHellman (~Username@gateway/tor-sasl/diffiehellman) left IRC (Remote host closed the connection)
+[2021-04-24T02:58:40+0200] DiffieHellman (~Username@gateway/tor-sasl/diffiehellman) joined the channel
+[2021-04-24T03:01:33+0200] oneeggeach (~oneeggeac@2605:a601:ae7e:800:198c:d49e:9696:2ec8) left IRC (Quit: Leaving...)
+[2021-04-24T03:03:11+0200] kvw_5_ (~alarm@ppp-88-217-122-84.dynamic.mnet-online.de) joined the channel
+[2021-04-24T03:06:34+0200] kvw_5 (~alarm@ppp-88-217-125-184.dynamic.mnet-online.de) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T03:11:56+0200] epony (epony@unaffiliated/epony) joined the channel
+[2021-04-24T03:58:11+0200] ggoebel (~ggoebel@99-174-93-178.lightspeed.tukrga.sbcglobal.net) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T04:05:42+0200] Name (~clarjon1@unaffiliated/clarjon1) joined the channel
+[2021-04-24T04:09:07+0200] clarjon_1 (~clarjon1@unaffiliated/clarjon1) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T04:12:02+0200] Name (~clarjon1@unaffiliated/clarjon1) left IRC (Quit: Name)
+[2021-04-24T04:27:01+0200] <raydiak> demostanis[m]: I know it's several hours after the fact, but maybe you'll see this in the scrollback. 12m34s on a ryzen 5 2500u laptop (4 smt2 cores @ 2ghz/3.6ghz turbo) running manjaro...but I forgot to pass -j so that's single-threaded :P
+[2021-04-24T04:38:46+0200] <raydiak> actually I don't know how to parallel build rstar where you don't call make yourself, -j is a make thing. summerisle got any tips?
+[2021-04-24T04:39:22+0200] neshpion (~neshpion@gateway/tor-sasl/neshpion) joined the channel
+[2021-04-24T04:45:54+0200] <moon-child> I don't think it's possible.  I usually build the components individually myself
+[2021-04-24T04:46:17+0200] <moon-child> (though nqp and rakudo builds don't seem to be particularly parallel.  Mvm is)
+[2021-04-24T04:46:45+0200] <moon-child> (well, nqp and rakudo probably _could_ be built in parallel, but the makefile isn't set up in such a way that make knows how to do that)
+[2021-04-24T04:49:33+0200] <raydiak> just came across this, gonna try export MAKEFLAGS="-j<whatever number>"
+[2021-04-24T04:50:14+0200] <raydiak> sounds reasonable that the makefile would have to take special care for it to even work in parallel, but idk what summerisle must have meant by "56 threads" if it's not possible
+[2021-04-24T04:55:53+0200] epony (epony@unaffiliated/epony) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T04:55:54+0200] <raydiak> looks like it will run that way for moar, but the bulk of everything else just runs in serial anyway. guess that explains why my 2019 low-mid-range laptop only took 6x as long as some 64-core monster...
+[2021-04-24T05:02:31+0200] <raydiak> and yes I agree, I don't use rstar myself. the question just made me curious. I use rakubrew, unless I'm trying to hack on rakudo (which never happened much and hasn't happened at all in a very long time)
+[2021-04-24T05:04:20+0200] <raydiak> -j8 only dropped me to 10m55s, so around a 10-15% time savings
+[2021-04-24T05:06:37+0200] <raydiak> hard to say anything specific with a laptop anyway, the room is cooling off now that the sun is down, some parts could have still been a bit heat-soaked from the run before it, yada yada
+[2021-04-24T05:06:53+0200] epony (epony@unaffiliated/epony) joined the channel
+[2021-04-24T05:07:17+0200] monkey__ (~user@190.104.116.134) joined the channel
+[2021-04-24T05:27:40+0200] gabiruh (~gabiruh@vps19177.publiccloud.com.br) left IRC (Quit: ZNC 1.7.5 - https://znc.in)
+[2021-04-24T05:27:56+0200] gabiruh (~gabiruh@vps19177.publiccloud.com.br) joined the channel
+[2021-04-24T05:29:30+0200] monkey__ (~user@190.104.116.134) left IRC (Remote host closed the connection)
+[2021-04-24T06:17:26+0200] dotdotdot (~dotdotdot@85-171-78-203.rev.numericable.fr) left IRC (Ping timeout: 260 seconds)
+[2021-04-24T06:24:30+0200] dotdotdot (~dotdotdot@85-171-78-203.rev.numericable.fr) joined the channel
+[2021-04-24T06:38:30+0200] pecastro (~pecastro@95.151.147.236) joined the channel
+[2021-04-24T07:09:34+0200] Sgeo (~Sgeo@ool-18b98aa4.dyn.optonline.net) left IRC (Read error: Connection reset by peer)
+[2021-04-24T07:13:29+0200] Sgeo (~Sgeo@ool-18b98aa4.dyn.optonline.net) joined the channel
+[2021-04-24T07:36:21+0200] wamba (~wamba@193-194.moravanet.cz) joined the channel
+[2021-04-24T07:42:17+0200] gordonfish (~gordonfis@unaffiliated/gordonfish) left IRC (Ping timeout: 268 seconds)
+[2021-04-24T07:43:50+0200] gordonfish (~gordonfis@unaffiliated/gordonfish) joined the channel
+[2021-04-24T07:48:01+0200] softmoth (~softmoth@h184-60-116-235.blrgga.broadband.dynamic.tds.net) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T07:48:35+0200] neshpion (~neshpion@gateway/tor-sasl/neshpion) left IRC (Quit: neshpion)
+[2021-04-24T08:09:03+0200] stoned75 (~seb@pop.92-184-102-206.mobile.abo.orange.fr) joined the channel
+[2021-04-24T08:22:44+0200] parabolize (~paraboliz@c-76-25-97-149.hsd1.co.comcast.net) left IRC (Quit: leaving)
+[2021-04-24T08:45:04+0200] stoned75 (~seb@pop.92-184-102-206.mobile.abo.orange.fr) left IRC (Read error: Connection reset by peer)
+[2021-04-24T08:50:20+0200] kurahaupo_ (~kurahaupo@unaffiliated/kurahaupo) joined the channel
+[2021-04-24T08:51:12+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T08:56:09+0200] jmerelo (~jmerelo@247.red-88-3-95.dynamicip.rima-tde.net) joined the channel
+[2021-04-24T09:03:37+0200] asymptotically (asymptotic@gateway/vpn/mullvad/asymptotically) joined the channel
+[2021-04-24T09:29:44+0200] __jrjsmrtn__ (~jrjsmrtn@ip-83-134-170-127.dsl.scarlet.be) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T09:32:16+0200] __jrjsmrtn__ (~jrjsmrtn@ip-83-134-170-127.dsl.scarlet.be) joined the channel
+[2021-04-24T09:37:30+0200] sftp (~sftp@unaffiliated/sftp) joined the channel
+[2021-04-24T09:57:34+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) joined the channel
+[2021-04-24T09:57:39+0200] linkable6 (~lin-able@2001:41d0:2:5eb5::) left IRC (Remote host closed the connection)
+[2021-04-24T09:58:10+0200] linkable6 (~lin-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T10:00:34+0200] kurahaupo_ (~kurahaupo@unaffiliated/kurahaupo) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T10:02:07+0200] guifa2 (~guifa@static-host-66-18-44-246.epbinternet.com) left IRC (Quit: guifa2)
+[2021-04-24T10:02:34+0200] brtastic (~Thunderbi@185.24.91.138) joined the channel
+[2021-04-24T10:08:19+0200] Geth (~geth@faiwoo.tyil.net) joined the channel
+[2021-04-24T10:26:25+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T10:26:44+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) joined the channel
+[2021-04-24T10:28:46+0200] brtastic (~Thunderbi@185.24.91.138) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T10:34:06+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) left the channel ("Leaving")
+[2021-04-24T10:38:12+0200] ggoebel (~ggoebel@99-174-93-178.lightspeed.tukrga.sbcglobal.net) joined the channel
+[2021-04-24T10:40:56+0200] <demostanis[m]> <summerisle "demostanis: if it's any help (it"> That's so fast... 
+[2021-04-24T10:41:50+0200] <demostanis[m]> Well I made a small Perl script which can do pretty much like Rakudo Star but with support for GPG verification, fetching through git, and parallel installation for modules
+[2021-04-24T10:42:15+0200] <demostanis[m]> I'm sure it's faster than R*
+[2021-04-24T10:44:33+0200] <El_Che> if you want fast, use a pkg :)
+[2021-04-24T10:45:49+0200] <demostanis[m]> Rakudo Star isn't much packaged... it's not even in Arch repos, and in AUR it's a very very very outdated version
+[2021-04-24T10:46:19+0200] <El_Che> If you're compiling stuff I completely miss the use case of star
+[2021-04-24T10:46:25+0200] <El_Che> as you can build modules yourself
+[2021-04-24T10:47:13+0200] <demostanis[m]> The goal is to then package this new version
+[2021-04-24T10:47:33+0200] <El_Che> package rakudo and zef
+[2021-04-24T10:47:47+0200] <El_Che> modules are of of date the day you package them
+[2021-04-24T10:48:03+0200] <demostanis[m]> But my script also installs some modules
+[2021-04-24T10:48:07+0200] <El_Che> so like dist do, I would package modules separately
+[2021-04-24T10:48:08+0200] <demostanis[m]> "of of date"?
+[2021-04-24T10:48:34+0200] <El_Che> yes, r is not release often and modules have new versions in the meanwhile
+[2021-04-24T10:49:18+0200] <El_Che> modules have a different release cycle (whenever they want to release a bug release or feature) than rakudo (monthly) or star (varies, last time I checked yearly)
+[2021-04-24T10:49:46+0200] <demostanis[m]> My script isn't only for speed
+[2021-04-24T10:50:05+0200] <El_Che> go ahead with the script, no problems about it
+[2021-04-24T10:50:29+0200] <El_Che> just saying that assuming the 3 release cycles are related is a common error
+[2021-04-24T10:50:35+0200] <demostanis[m]> But yeah, probably one should package Raku modules for distros
+[2021-04-24T10:51:31+0200] <El_Che> for me at this stage of the ecosystem is a packaged raku + zef the way to go
+[2021-04-24T10:51:51+0200] <El_Che> once it's more mature distros version will be good enough
+[2021-04-24T10:52:34+0200] <demostanis[m]> And R* will become useless?
+[2021-04-24T10:53:18+0200] aluaces (~aluaces@144.178.129.125) left IRC (Excess Flood)
+[2021-04-24T10:53:21+0200] <El_Che> no, there is a use case for many people I think eg windows
+[2021-04-24T10:53:32+0200] <El_Che> there isn't any use case for my usecase
+[2021-04-24T10:53:44+0200] <El_Che> (I use Linux and containers)
+[2021-04-24T10:56:40+0200] <El_Che> I understand "with batteries" as a great stdlib of a language and raku delivers on that
+[2021-04-24T10:59:48+0200] <demostanis[m]> You mean that packaging additional modules like R* does might be useless for most users as Raku already has "batteries included"?
+[2021-04-24T11:00:03+0200] unclechu (unclechuma@gateway/shell/matrix.org/x-ertytzmkazzzhybx) left IRC (Quit: Idle for 30+ days)
+[2021-04-24T11:00:03+0200] <demostanis[m]> packaging in the default install*
+[2021-04-24T11:00:27+0200] <El_Che> no, I mean distribution of the compile with a list of modules
+[2021-04-24T11:00:51+0200] <El_Che> I think the best scenario is like how all languages are packages
+[2021-04-24T11:01:37+0200] <El_Che> a package for the compiler/runtime and separate packages for modules that are updates on their own schedule
+[2021-04-24T11:02:15+0200] <El_Che> that's what most dist already do for raku
+[2021-04-24T11:03:19+0200] <El_Che> however, for my own use case I prefer packaged rakudo + zef and I'll retrieve my own modules. In the future I would love to see these modules in directory of my project, e.g. vendored
+[2021-04-24T11:06:03+0200] <El_Che> (afk)
+[2021-04-24T11:14:02+0200] Sgeo (~Sgeo@ool-18b98aa4.dyn.optonline.net) left IRC (Read error: Connection reset by peer)
+[2021-04-24T11:29:26+0200] brtastic (~Thunderbi@185.24.91.138) joined the channel
+[2021-04-24T11:44:13+0200] aluaces (~aluaces@144.178.129.125) joined the channel
+[2021-04-24T12:00:37+0200] asymptotically (asymptotic@gateway/vpn/mullvad/asymptotically) left IRC (Quit: Leaving)
+[2021-04-24T12:00:58+0200] mahafyi (2d771c05@45.119.28.5) joined the channel
+[2021-04-24T12:02:22+0200] asymptotically (asymptotic@gateway/vpn/mullvad/asymptotically) joined the channel
+[2021-04-24T12:05:55+0200] aborazmeh (~aborazmeh@88.254.3.6) joined the channel
+[2021-04-24T12:06:17+0200] jmerelo (~jmerelo@247.red-88-3-95.dynamicip.rima-tde.net) left IRC (Quit: WeeChat 2.8)
+[2021-04-24T12:08:03+0200] kurahaupo_ (~kurahaupo@unaffiliated/kurahaupo) joined the channel
+[2021-04-24T12:42:51+0200] rindolf (~rindolf@inkscape/contributor/rindolf) joined the channel
+[2021-04-24T12:44:12+0200] Geth (~geth@faiwoo.tyil.net) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T12:44:28+0200] Geth (~geth@faiwoo.tyil.net) joined the channel
+[2021-04-24T12:56:19+0200] Kaiepi (~Kaiepi@47.54.252.148) left IRC (Remote host closed the connection)
+[2021-04-24T12:57:58+0200] Kaiepi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T13:02:05+0200] aborazmeh (~aborazmeh@88.254.3.6) left IRC (Ping timeout: 260 seconds)
+[2021-04-24T13:18:59+0200] Black_Ribbon (~sono@107-209-210-210.lightspeed.sntcca.sbcglobal.net) left IRC (Read error: Connection reset by peer)
+[2021-04-24T13:45:58+0200] <moritz> an approach similar to python's virtualenv would be nice, yes
+[2021-04-24T13:46:01+0200] bmbee (6da58ec8@adsl-165-142-200.teol.net) joined the channel
+[2021-04-24T13:52:15+0200] bmbee (6da58ec8@adsl-165-142-200.teol.net) left IRC (Quit: Connection closed)
+[2021-04-24T13:52:19+0200] <masak> lizmat: on second thought, I think it might very well work if you just say "savoring a nice Chateau 4573562 right now"
+[2021-04-24T13:52:48+0200] Kaiepi (~Kaiepi@47.54.252.148) left IRC (Remote host closed the connection)
+[2021-04-24T13:53:08+0200] Kaiepi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T13:53:12+0200] <lizmat> that would be *very* futuristic
+[2021-04-24T13:53:31+0200] <masak> yes, but when has that ever stopped us
+[2021-04-24T13:53:35+0200] <lizmat> but yeah, give or take a few miliion years from now
+[2021-04-24T13:53:43+0200] <lizmat> true
+[2021-04-24T13:54:14+0200] • masak: .oO( the future is already digitized, we just got to wines much sooner than we expected )
+[2021-04-24T13:54:27+0200] <lizmat> Raku, the programming language for the aeons
+[2021-04-24T13:55:21+0200] <masak> ok, so what I'm hearing is: ditch hierarchical CPAN-style module names, and rename all modules according to the naming scheme "Chateau 4573562"
+[2021-04-24T13:55:34+0200] <masak> I hope I got that right; it's being turned into law as we speak
+[2021-04-24T13:56:55+0200] <lizmat> .oO( good thing we tend to be law breakers )
+[2021-04-24T14:04:00+0200] Kaiepi (~Kaiepi@47.54.252.148) left IRC (Ping timeout: 268 seconds)
+[2021-04-24T14:04:52+0200] epony (epony@unaffiliated/epony) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T14:12:43+0200] kurahaupo_ is now known as kurahaupo__
+[2021-04-24T14:14:26+0200] kurahaupo__ is now known as CurriedHippo
+[2021-04-24T14:15:19+0200] CurriedHippo is now known as CurlyHippo
+[2021-04-24T14:15:31+0200] CurlyHippo (~kurahaupo@unaffiliated/kurahaupo) left IRC (Remote host closed the connection)
+[2021-04-24T14:15:43+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) joined the channel
+[2021-04-24T14:17:17+0200] kurahaupo is now known as kurahaupo_
+[2021-04-24T14:17:22+0200] kurahaupo_ is now known as kurahaupo___
+[2021-04-24T14:17:25+0200] kurahaupo___ is now known as kurahaupo
+[2021-04-24T14:21:38+0200] Kaiepi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T14:30:00+0200] epony (epony@unaffiliated/epony) joined the channel
+[2021-04-24T14:32:52+0200] aborazmeh (~aborazmeh@88.254.3.6) joined the channel
+[2021-04-24T14:47:44+0200] natrys (~natrys@116.206.252.68) joined the channel
+[2021-04-24T14:55:32+0200] epony (epony@unaffiliated/epony) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T15:01:16+0200] aborazmeh (~aborazmeh@88.254.3.6) left IRC (Ping timeout: 260 seconds)
+[2021-04-24T15:09:25+0200] <El_Che> masakm, lizmat: soundtrack for your discussion https://www.youtube.com/watch?v=L397TWLwrUU
+[2021-04-24T15:10:13+0200] Kaiepi (~Kaiepi@47.54.252.148) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T15:10:44+0200] Kaiepi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T15:17:41+0200] defaultxr (~defaultxr@99-138-110-241.lightspeed.cicril.sbcglobal.net) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T15:19:56+0200] domidumont (~dodu@2a01:e0a:3d9:ddd0:10d2:aeb3:aadc:31e3) joined the channel
+[2021-04-24T15:37:24+0200] Kaiepi (~Kaiepi@47.54.252.148) left IRC (Remote host closed the connection)
+[2021-04-24T15:37:42+0200] Kaiepi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T15:41:01+0200] wamba (~wamba@193-194.moravanet.cz) left IRC (Quit: Leaving.)
+[2021-04-24T16:10:43+0200] Kaiepi (~Kaiepi@47.54.252.148) left IRC (Remote host closed the connection)
+[2021-04-24T16:12:54+0200] Kaiepi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T16:13:23+0200] Kaiepi (~Kaiepi@47.54.252.148) left IRC (Remote host closed the connection)
+[2021-04-24T16:13:41+0200] Kaiepi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T16:23:14+0200] xinming (~xinming@115.219.36.154) left IRC (Ping timeout: 260 seconds)
+[2021-04-24T16:25:00+0200] xinming (~xinming@115.219.39.247) joined the channel
+[2021-04-24T16:28:47+0200] aborazmeh (~aborazmeh@88.254.3.6) joined the channel
+[2021-04-24T16:29:39+0200] aborazmeh (~aborazmeh@88.254.3.6) left IRC (Client Quit)
+[2021-04-24T16:31:50+0200] aborazmeh (~aborazmeh@88.254.3.6) joined the channel
+[2021-04-24T16:41:49+0200] epony (epony@unaffiliated/epony) joined the channel
+[2021-04-24T16:43:29+0200] b2gills (~brad@subscriber-dhcp-cgn-64-191-7-0.wcufiber.net) left IRC (Quit: Leaving.)
+[2021-04-24T16:44:05+0200] b2gills (~brad@subscriber-dhcp-cgn-64-191-7-0.wcufiber.net) joined the channel
+[2021-04-24T16:49:06+0200] stoned75 (~seb@pop.92-184-102-206.mobile.abo.orange.fr) joined the channel
+[2021-04-24T17:00:34+0200] parabolize (~paraboliz@c-76-25-97-149.hsd1.co.comcast.net) joined the channel
+[2021-04-24T17:07:31+0200] titsuki (~titsuki@softbank126051115209.bbtec.net) joined the channel
+[2021-04-24T17:13:12+0200] epony (epony@unaffiliated/epony) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T17:16:16+0200] stoned75 (~seb@pop.92-184-102-206.mobile.abo.orange.fr) left IRC (Ping timeout: 265 seconds)
+[2021-04-24T17:17:56+0200] stoned75 (~seb@pop.92-184-102-67.mobile.abo.orange.fr) joined the channel
+[2021-04-24T17:29:15+0200] mahafyi (2d771c05@45.119.28.5) left IRC (Quit: Connection closed)
+[2021-04-24T17:33:13+0200] aborazmeh (~aborazmeh@88.254.3.6) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T17:35:29+0200] titsuki (~titsuki@softbank126051115209.bbtec.net) left IRC (Quit: Leaving)
+[2021-04-24T17:36:52+0200] titsuki (~AdminUser@softbank126051115209.bbtec.net) joined the channel
+[2021-04-24T17:57:24+0200] epony (epony@unaffiliated/epony) joined the channel
+[2021-04-24T17:57:58+0200] abraxxa (~abraxxa@2a01:100:2000:2500::22) joined the channel
+[2021-04-24T18:03:54+0200] e (e@freenode/staff/spy.edk) left IRC (Quit: edk)
+[2021-04-24T18:11:39+0200] pwr22 (pwr22short@gateway/shell/matrix.org/x-wfroxyleinusrdjw) left IRC (Ping timeout: 245 seconds)
+[2021-04-24T18:11:39+0200] kiti_nomad[m] (hellonomad@gateway/shell/matrix.org/x-fmocqphxhizojejp) left IRC (Ping timeout: 245 seconds)
+[2021-04-24T18:13:07+0200] domidumont (~dodu@2a01:e0a:3d9:ddd0:10d2:aeb3:aadc:31e3) left IRC (Quit: Leaving.)
+[2021-04-24T18:16:07+0200] kiti_nomad[m] (hellonomad@gateway/shell/matrix.org/x-uttdaunnnbapunqr) joined the channel
+[2021-04-24T18:18:15+0200] domidumont (~dodu@2a01:e0a:3d9:ddd0:10d2:aeb3:aadc:31e3) joined the channel
+[2021-04-24T18:20:29+0200] pwr22 (pwr22short@gateway/shell/matrix.org/x-lnslazwvmgoxxbkr) joined the channel
+[2021-04-24T18:30:51+0200] aborazmeh (~aborazmeh@88.254.3.6) joined the channel
+[2021-04-24T18:33:43+0200] brtastic (~Thunderbi@185.24.91.138) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T18:38:00+0200] defaultxr (~defaultxr@99-138-110-241.lightspeed.cicril.sbcglobal.net) joined the channel
+[2021-04-24T18:43:47+0200] <Geth> ¦ doc: a26ad28489 | (Stoned Elipot)++ | doc/Type/Range.pod6
+[2021-04-24T18:43:47+0200] <Geth> ¦ doc: Correct wording
+[2021-04-24T18:43:47+0200] <Geth> ¦ doc: review: https://github.com/Raku/doc/commit/a26ad28489
+[2021-04-24T18:43:47+0200] <Geth> ¦ doc: 0c478083eb | (Stoned Elipot)++ | doc/Type/Range.pod6
+[2021-04-24T18:43:47+0200] <Geth> ¦ doc: Refer to List.fmt for Range.fmt
+[2021-04-24T18:43:47+0200] <Geth> ¦ doc: review: https://github.com/Raku/doc/commit/0c478083eb
+[2021-04-24T18:43:50+0200] <linkable6> Link: https://docs.raku.org/type/Range
+[2021-04-24T18:45:30+0200] <Geth> ¦ doc/range-cmp: c02da92dc7 | (Stoned Elipot)++ | doc/Type/Range.pod6
+[2021-04-24T18:45:30+0200] <Geth> ¦ doc/range-cmp: Rewording and completion for Range infix:<cmp>
+[2021-04-24T18:45:30+0200] <Geth> ¦ doc/range-cmp: review: https://github.com/Raku/doc/commit/c02da92dc7
+[2021-04-24T18:45:47+0200] <Geth> ¦ doc: stoned++ created pull request #3873: Rewording and completion for Range infix:<cmp>
+[2021-04-24T18:45:47+0200] <Geth> ¦ doc: review: https://github.com/Raku/doc/pull/3873
+[2021-04-24T18:46:19+0200] <raydiak> m: use MONKEY-SEE-NO-EVAL; my @a; @a[1] = 1; say @a.raku; say @a[0]:exists; my @b := EVAL @a.raku; say @b.raku; say @b[0]:exists;
+[2021-04-24T18:46:19+0200] <camelia> rakudo-moar ea102883d: OUTPUT: «[Any, 1]␤False␤[Any, 1]␤True␤»
+[2021-04-24T18:54:25+0200] <raydiak> not only does .raku throw away sparse array information, I don't think we even have a syntax which could properly represent it as an expression without a do block. list assignment to a slice could work to construct it, but as an expression it would return the list of values on the right of the assignment instead of the sparse array, so you'd still have to wrap it in a do block so you can name the array and
+[2021-04-24T18:54:26+0200] <raydiak> return it without exposing the temporary name to the surrounding context
+[2021-04-24T18:54:47+0200] bloatable6 (~blo-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T19:03:05+0200] Sgeo (~Sgeo@ool-18b9875e.dyn.optonline.net) joined the channel
+[2021-04-24T19:03:12+0200] aborazmeh (~aborazmeh@88.254.3.6) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T19:23:36+0200] notable6 (~not-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T19:25:23+0200] natrys (~natrys@116.206.252.68) left IRC (Quit: natrys)
+[2021-04-24T19:31:24+0200] Xliff (~Cliff@pool-71-255-227-73.washdc.east.verizon.net) joined the channel
+[2021-04-24T19:34:35+0200] aborazmeh (~aborazmeh@88.254.3.6) joined the channel
+[2021-04-24T19:44:59+0200] domidumont (~dodu@2a01:e0a:3d9:ddd0:10d2:aeb3:aadc:31e3) left IRC (Quit: Leaving.)
+[2021-04-24T19:55:50+0200] wamba (~wamba@193-194.moravanet.cz) joined the channel
+[2021-04-24T20:00:48+0200] Kaiepi (~Kaiepi@47.54.252.148) left IRC (Read error: Connection reset by peer)
+[2021-04-24T20:01:06+0200] Kaiepi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T20:02:52+0200] Geth (~geth@faiwoo.tyil.net) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T20:08:59+0200] kiti_nomad[m] (hellonomad@gateway/shell/matrix.org/x-uttdaunnnbapunqr) left IRC (Ping timeout: 250 seconds)
+[2021-04-24T20:10:10+0200] <xinming> releasable6: status
+[2021-04-24T20:10:11+0200] <releasable6> xinming, Next release will happen when it's ready. 2 blockers. 191 out of 191 commits logged
+[2021-04-24T20:10:12+0200] <releasable6> xinming, Details: https://gist.github.com/bc1759028b69acb4922db2a92e0fbb06
+[2021-04-24T20:10:12+0200] epony (epony@unaffiliated/epony) left IRC (Ping timeout: 240 seconds)
+[2021-04-24T20:15:08+0200] kiti_nomad[m] (hellonomad@gateway/shell/matrix.org/x-mtibumgkojnysnqk) joined the channel
+[2021-04-24T20:16:01+0200] aborazmeh (~aborazmeh@88.254.3.6) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T20:17:08+0200] MasterDuke (5e00bdd3@raku/developer/masterduke) left IRC (Quit: Connection closed)
+[2021-04-24T20:19:11+0200] Kaiepi (~Kaiepi@47.54.252.148) left IRC (Ping timeout: 246 seconds)
+[2021-04-24T20:25:57+0200] MasterDuke (5e00bdd3@raku/developer/masterduke) joined the channel
+[2021-04-24T20:30:19+0200] Kaiepi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T20:34:17+0200] Kaeipi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T20:35:15+0200] Kaiepi (~Kaiepi@47.54.252.148) left IRC (Remote host closed the connection)
+[2021-04-24T20:40:48+0200] <lizmat> raydiak: [,1] *could* be such a thing I guess
+[2021-04-24T20:41:35+0200] <lizmat> m: dd "use nqp; [nqp::null,44]".EVAL.raku   # alas, not the same
+[2021-04-24T20:41:35+0200] <camelia> rakudo-moar ea102883d: OUTPUT: «"[Mu, 44]"␤»
+[2021-04-24T20:46:16+0200] sno (~sno@p4fe9342b.dip0.t-ipconnect.de) joined the channel
+[2021-04-24T20:48:15+0200] <lizmat> raydiak: care to create a problem-solving issue for that ?
+[2021-04-24T20:49:55+0200] aborazmeh (~aborazmeh@88.254.3.6) joined the channel
+[2021-04-24T20:52:54+0200] stoned75 (~seb@pop.92-184-102-67.mobile.abo.orange.fr) left IRC (Read error: Connection reset by peer)
+[2021-04-24T20:55:45+0200] <raydiak> lizmat: sure thing
+[2021-04-24T20:56:01+0200] <lizmat> I guess we need some special value of Mu to indicate a hole
+[2021-04-24T20:56:15+0200] <lizmat> similar to IterationEnd
+[2021-04-24T20:56:48+0200] Kaeipi (~Kaiepi@47.54.252.148) left IRC (Remote host closed the connection)
+[2021-04-24T20:57:01+0200] Kaeipi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T20:57:11+0200] <Tirifto[m]> Hello! If I have a mutable object I’d like to make immutable while the program runs, should I just coerce it to a similar immutable type (e.g. Array → List), or is there a nicer mechanism to arrive at something similar?
+[2021-04-24T21:05:03+0200] stoned75 (~seb@pop.92-184-102-67.mobile.abo.orange.fr) joined the channel
+[2021-04-24T21:05:40+0200] <lizmat> Array.List *won't* make the entries immutable
+[2021-04-24T21:05:58+0200] <raydiak> lizmat: that was the first thing I thought, but now I'm not sure an actual value is necessary. we already have :exists for logical tests, and your ",1" proposal gives us a syntax to indicate where something shouldn't :exist
+[2021-04-24T21:06:01+0200] <lizmat> Tirifto[m] but why do you want to do that?  To make it a value type ?
+[2021-04-24T21:06:39+0200] <lizmat> raydiak: I'm pretty sure there have been huge discussions about ,, in lists
+[2021-04-24T21:06:55+0200] <lizmat> and I think the consensus was that they *should* be a syntax error
+[2021-04-24T21:07:10+0200] <lizmat> as there is ambiguity
+[2021-04-24T21:07:40+0200] <raydiak> do you recall what sort of ambiguity?
+[2021-04-24T21:07:50+0200] <lizmat> and lack of clarity, e.g. when the first comma is on the end of a line, and the next line starts with whitespace and a comma
+[2021-04-24T21:08:01+0200] <lizmat> that's an easy mistake to make
+[2021-04-24T21:09:55+0200] aborazmeh (~aborazmeh@88.254.3.6) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T21:10:11+0200] <raydiak> I suppose I could see that, fair enough. I still like ,, more than another value/type/thing, but I'm certainly no language designer
+[2021-04-24T21:12:34+0200] <lizmat> it's one of the lessons learned from Perl, like not wanting sigil variance
+[2021-04-24T21:12:54+0200] <lizmat> in Perl ,, is just the same as , if I recall correctly
+[2021-04-24T21:14:30+0200] <lizmat> otoh, the result of such a discussion could be that existedness of an Array element is just not roundtrippable
+[2021-04-24T21:15:14+0200] <lizmat> as supporting a special value would definitely affect parsing performance
+[2021-04-24T21:15:32+0200] <lizmat> afk for half an hour or so
+[2021-04-24T21:17:31+0200] <raydiak> I definitely agree that ,, shouldn't just collapse to ,
+[2021-04-24T21:19:24+0200] <raydiak> but I wonder if sparse arrays were considered in the previous discussions. I think using ,, to skip an element is totally reasonable (and probably does exactly that in some other languages, though I can't cite them off the top of my head)
+[2021-04-24T21:23:09+0200] <raydiak> as far as just saying "sparse arrays can't round-trip"...I don't like that at all. afaik, .raku is definitely intended to be an EVALable thing to produce an identical data structure, and existence is definitely part of the data structure. otherwise we're basically conceding "Raku doesn't support sparse arrays. Use a hash instead."
+[2021-04-24T21:30:17+0200] <Tirifto[m]> lizmat: If ‘value type’ means what I think it does, then probably. I just thought that immutability might make the intention behind the code clearer and improve performance, although I don’t really know if the latter’s true. :P
+[2021-04-24T21:39:20+0200] <raydiak> lizmat: https://github.com/Raku/problem-solving/issues/279
+[2021-04-24T21:49:05+0200] Xliff (~Cliff@pool-71-255-227-73.washdc.east.verizon.net) left IRC (Remote host closed the connection)
+[2021-04-24T21:51:56+0200] <raydiak> Tirifto[m]: I just tested, and it appears that coercing an Array to a List actually does make the entries immutable (at some point in the past, that wasn't the case)
+[2021-04-24T21:52:14+0200] <raydiak> though I'm uncertain of the performance impact, and personally I doubt that sprinkling coercions around in your code will actually make it clearer from a readability standpoint, though I do understand what you're saying about conveying the semantic intention
+[2021-04-24T21:54:28+0200] brtastic (~Thunderbi@185.24.91.138) joined the channel
+[2021-04-24T21:57:40+0200] neshpion (~neshpion@gateway/tor-sasl/neshpion) joined the channel
+[2021-04-24T22:07:08+0200] asymptotically (asymptotic@gateway/vpn/mullvad/asymptotically) left IRC (Quit: Leaving)
+[2021-04-24T22:13:24+0200] <Tirifto[m]> raydiak: Thanks for testing! It might very well be the case that it won’t be much help. I also didn’t think about it too deeply, but I might give it a try and see how it goes. :-)
+[2021-04-24T22:16:40+0200] aborazmeh (~aborazmeh@88.254.3.6) joined the channel
+[2021-04-24T22:17:27+0200] Kaeipi (~Kaiepi@47.54.252.148) left IRC (Remote host closed the connection)
+[2021-04-24T22:29:29+0200] <lizmat> raydiak: interesting...   but it doesn't make the List a ValueType  :-(
+[2021-04-24T22:29:44+0200] <raydiak> Tirifto[m]: happy to help! TIMTOWTDI, definitely. if you like it and it does what you want, go for it. the only other thought I have is premature optimization. if this isn't in a hot path, the argument could be made that your time and the verbosity of the code would be better allocated elsewhere. and if it is in a hot path, also keep in mind that the coercion itself probably has some runtime cost
+[2021-04-24T22:31:13+0200] <raydiak> lizmat: are Lists usually value types? I never really thought about trying to compare lists by identity...
+[2021-04-24T22:31:41+0200] <lizmat> no, because Lists *can* contain mutable elements
+[2021-04-24T22:32:18+0200] <lizmat> m: my $a = 42; my $b = 666; ($a,$b) = ($b,$a); dd $a, $b
+[2021-04-24T22:32:18+0200] <camelia> rakudo-moar ea102883d: OUTPUT: «Int $a = 666␤Int $b = 42␤»
+[2021-04-24T22:32:34+0200] <lizmat> ^^ examples of lists with mutable elements
+[2021-04-24T22:34:25+0200] <raydiak> huh
+[2021-04-24T22:34:34+0200] <raydiak> m: my ($a, $b, $c) = ^3; my @a = $a, $b, $c; @a := @a.List; say @a; @a[0] = 1;
+[2021-04-24T22:34:34+0200] <camelia> rakudo-moar ea102883d: OUTPUT: «(0 1 2)␤Cannot modify an immutable List ((0 1 2))␤  in block <unit> at <tmp> line 1␤␤»
+[2021-04-24T22:37:14+0200] <raydiak> coercion from an Array to a List seems to be special-cased to unbox all the elements. if there's no intermediate array, it's mutable:
+[2021-04-24T22:37:19+0200] <raydiak> m: my ($a, $b, $c) = ^3; my @a := ($a, $b, $c); say @a; @a[0] = 1; say @a;
+[2021-04-24T22:37:19+0200] <camelia> rakudo-moar ea102883d: OUTPUT: «(0 1 2)␤(1 1 2)␤»
+[2021-04-24T22:37:28+0200] <lizmat> well, as you said, coercing an array to a List apparently deconts
+[2021-04-24T22:41:41+0200] <sena_kun> .weekly https://twitter.com/koto_san_kana/status/1386057691617976324
+[2021-04-24T22:41:44+0200] <sena_kun> .note https://twitter.com/koto_san_kana/status/1386057691617976324
+[2021-04-24T22:41:47+0200] <sena_kun> weekly https://twitter.com/koto_san_kana/status/1386057691617976324
+[2021-04-24T22:42:21+0200] <sena_kun> haha, pathetic
+[2021-04-24T22:42:30+0200] • sena_kun: off
+[2021-04-24T22:45:16+0200] <raydiak> sena_kun++ thank you!
+[2021-04-24T22:45:25+0200] <lizmat> sena_kun++   # retwat
+[2021-04-24T22:45:56+0200] ggoebel (~ggoebel@99-174-93-178.lightspeed.tukrga.sbcglobal.net) left IRC (Quit: Leaving)
+[2021-04-24T22:47:45+0200] <lizmat> notable6: weekly https://twitter.com/koto_san_kana/status/1386057691617976324
+[2021-04-24T22:47:45+0200] <notable6> lizmat, Noted! (weekly)
+[2021-04-24T22:47:49+0200] <lizmat> ^^ sena_kun 
+[2021-04-24T22:47:52+0200] Kaiepi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T22:48:46+0200] <raydiak> lizmat: do we have a deeply immutable compound/"listy" value type?
+[2021-04-24T22:48:57+0200] <lizmat> not in core
+[2021-04-24T22:49:19+0200] <lizmat> https://modules.raku.org/dist/Tuple:cpan:ELIZABETH
+[2021-04-24T22:50:24+0200] <raydiak> ah...how many datatype modules do you have? that's the third of yours I've encountered today :)
+[2021-04-24T22:50:47+0200] <lizmat> Let's just say I'm more a backend than a frontend person :-)
+[2021-04-24T22:51:20+0200] <raydiak> that sounds dirty...
+[2021-04-24T22:51:23+0200] stoned75 (~seb@pop.92-184-102-67.mobile.abo.orange.fr) left IRC (Read error: Connection reset by peer)
+[2021-04-24T22:51:33+0200] <lizmat> meh
+[2021-04-24T22:51:41+0200] <lizmat> I guess a dirty mind is a joy forever :-)
+[2021-04-24T22:52:04+0200] <raydiak> haha good point
+[2021-04-24T22:57:26+0200] <raydiak> could Tuple implement type constraints or is default()? or would that mess up its usability/performance for core purposes?
+[2021-04-24T23:00:49+0200] <raydiak> I'm not even sure if those are things implemented by the class itself, or if that happens elsewhere. maybe it just works as is?
+[2021-04-24T23:02:29+0200] <lizmat> interesting idea...  hmmm
+[2021-04-24T23:03:54+0200] <lizmat> it was developed to be as fast as possible given the situation... hence it is directly using VMArrays under the hood
+[2021-04-24T23:04:07+0200] <lizmat> and those don't know about types
+[2021-04-24T23:06:09+0200] <lizmat> raydiak: please create an issue for that... to prevent this notion from falling through the cracks
+[2021-04-24T23:06:18+0200] <lizmat> in the Tuple repo please :-)
+[2021-04-24T23:06:30+0200] <raydiak> okay :)
+[2021-04-24T23:09:12+0200] <raydiak> done
+[2021-04-24T23:09:49+0200] aborazmeh (~aborazmeh@88.254.3.6) left IRC (Ping timeout: 252 seconds)
+[2021-04-24T23:10:50+0200] <lizmat> thanks!
+[2021-04-24T23:10:56+0200] epony (epony@unaffiliated/epony) joined the channel
+[2021-04-24T23:11:25+0200] <raydiak> of course, happy to help
+[2021-04-24T23:12:15+0200] <raydiak> basically makes it a Blob for higher level non-native value types
+[2021-04-24T23:15:27+0200] <lizmat> Hmm... maybe it should therefore be incorporate this into the Blob role
+[2021-04-24T23:15:29+0200] <lizmat> m: Blob[Any] = "foo", 21
+[2021-04-24T23:15:29+0200] <camelia> rakudo-moar 94f966d18: OUTPUT: «Could not instantiate role 'Blob':␤Can only parameterize with native int types, not 'Any'.␤  in any protect at gen/moar/stage2/NQPCORE.setting line 1216␤  in block <unit> at <tmp> line 1␤␤»
+[2021-04-24T23:16:09+0200] __jrjsmrtn__ (~jrjsmrtn@ip-83-134-170-127.dsl.scarlet.be) left IRC (*.net *.split)
+[2021-04-24T23:16:09+0200] pecastro (~pecastro@95.151.147.236) left IRC (*.net *.split)
+[2021-04-24T23:16:09+0200] agentzh (~agentzh@nginx/adept/agentzh) left IRC (*.net *.split)
+[2021-04-24T23:16:09+0200] maggotbrain (~maggotbra@c-73-254-248-250.hsd1.wa.comcast.net) left IRC (*.net *.split)
+[2021-04-24T23:16:09+0200] a6502 (~wieger@stofzuiger.a6502.net) left IRC (*.net *.split)
+[2021-04-24T23:16:09+0200] timlegge (~quassel@mctnnbsa70w-142-68-90-86.dhcp-dynamic.fibreop.nb.bellaliant.net) left IRC (*.net *.split)
+[2021-04-24T23:16:09+0200] jast (jast@zoidberg.org) left IRC (*.net *.split)
+[2021-04-24T23:16:09+0200] mniip (mniip@freenode/staff/mniip) left IRC (*.net *.split)
+[2021-04-24T23:16:09+0200] masak (~masak@137.ip-51-178-44.eu) left IRC (*.net *.split)
+[2021-04-24T23:16:09+0200] hobbs (~hobbs@p3m/member/hobbs) left IRC (*.net *.split)
+[2021-04-24T23:16:09+0200] nine (nine@ns1.niner.name) left IRC (*.net *.split)
+[2021-04-24T23:16:09+0200] CIAvash (ciavashmat@gateway/shell/matrix.org/x-nqsiiqhlotzopaon) left IRC (*.net *.split)
+[2021-04-24T23:16:09+0200] kini (~kini@unaffiliated/kini) left IRC (*.net *.split)
+[2021-04-24T23:16:09+0200] MitarashiDango[m (mdangomatr@gateway/shell/matrix.org/x-xeldfrzoudjxdjzj) left IRC (*.net *.split)
+[2021-04-24T23:16:10+0200] demostanis[m] (demostanis@gateway/shell/matrix.org/x-dkfocmvuegezjpaf) left IRC (*.net *.split)
+[2021-04-24T23:16:10+0200] tyil (~root@scriptkitties/tyil) left IRC (*.net *.split)
+[2021-04-24T23:16:10+0200] moon-child (~moon-chil@cardinal.elronnd.net) left IRC (*.net *.split)
+[2021-04-24T23:16:10+0200] mojca (~mojca@mittelab/members/mojca) left IRC (*.net *.split)
+[2021-04-24T23:16:10+0200] pnu__ (sid13214@gateway/web/irccloud.com/x-flwvnbydyrydeibz) left IRC (*.net *.split)
+[2021-04-24T23:16:10+0200] charsbar (~charsbar@153.126.151.115.v6.sakura.ne.jp) left IRC (*.net *.split)
+[2021-04-24T23:16:10+0200] codesections (~user@2600:1700:1650:1faf:53de:cb31:6de3:44cf) left IRC (*.net *.split)
+[2021-04-24T23:16:10+0200] Grinnz (sid183254@mojo/order-of-assassins/grinnz) left IRC (*.net *.split)
+[2021-04-24T23:16:10+0200] mtj (quasselcor@2400:8902::f03c:91ff:fe93:b7f1) left IRC (*.net *.split)
+[2021-04-24T23:16:10+0200] summerisle (~eof@tty3.dev) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] mrsolo (sid27905@gateway/web/irccloud.com/x-rkpxagtbizbnrrns) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] jcallen (quassel@unaffiliated/jcallen) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] a3f (~a3f@chimeria.ext.pengutronix.de) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] aluaces (~aluaces@144.178.129.125) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] HobGoblin (~jaa@yatima.uukgoblin.net) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] db48x (~user@96-86-171-70-static.hfc.comcastbusiness.net) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] bdju (~bard@63.228.59.248) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] stux|RC-only (stux@endurance.xzibition.com) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] ambs (1000@eremita.di.uminho.pt) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] marcusr (~marcusr@mojo/viking/marcusr) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] Sir_Ragna (~quassel@zerofox.xyz) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] nicholatian (not.sure@arqadium/founder/alexander.nicholi) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] buffet (~buffet@buffet.sh) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] jjatria (~jjatria@68.183.32.235) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] wamba (~wamba@193-194.moravanet.cz) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] notable6 (~not-able@2001:41d0:2:5eb5::) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] bloatable6 (~blo-able@2001:41d0:2:5eb5::) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] timeless (sid4015@firefox/developer/timeless) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] DarthGandalf (user@znc/developer/DarthGandalf) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] linkable6 (~lin-able@2001:41d0:2:5eb5::) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] swaggboi (~swaggboi@slackware.uk/supporter/swaggboi) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] skaji_ (sid178483@gateway/web/irccloud.com/x-iiknxwmkgrquzngj) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] nativecallable6 (~nat-able@2001:41d0:2:5eb5::) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] leont (sid489095@gateway/web/irccloud.com/x-qedwuvpnwxmejpmv) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] committable6 (~com-able@2001:41d0:2:5eb5::) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] quotable6 (~quo-able@2001:41d0:2:5eb5::) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] statisfiable6 (~sta-able@2001:41d0:2:5eb5::) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] benchable6 (~ben-able@2001:41d0:2:5eb5::) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] releasable6 (~rel-able@2001:41d0:2:5eb5::) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] bisectable6 (~bis-able@2001:41d0:2:5eb5::) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] spycrab0 (sid271832@gateway/web/irccloud.com/x-xgfyankikbgnwzch) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] bonz060 (~quassel@2001:bc8:47a4:a23::1) left IRC (*.net *.split)
+[2021-04-24T23:16:11+0200] Altreus (~altreus@unaffiliated/altreus) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] ugexe (ugexe@p6.nu) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] riatre (~quassel@2001:310:6000:f::5198:1) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] perry (~perry@wikipedia/perryprog) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] Grauwolf (~grauwolf@unaffiliated/grauwolf) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] tbrowder (sid168924@gateway/web/irccloud.com/x-kdrimxunywvwcljb) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] daxim (~daxim@2a02:b18:c13b:28:42b0:76ff:fe7b:7663) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] SmokeMachine (sid19088@gateway/web/irccloud.com/x-kubzemrbfkaeypog) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] b2gills (~brad@subscriber-dhcp-cgn-64-191-7-0.wcufiber.net) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] dogbert11 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] LizBot (~RakuIRC@ipv4-wenzperl.connected.by.freedominter.net) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] sena_kun (~sena_kun@94.142.239.45) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] eseyman (~eseyman@lfbn-idf1-1-2267-180.w92-151.abo.wanadoo.fr) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] d_t_b (~dtb@ip68-3-207-115.ph.ph.cox.net) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] renormalist (~ss5@renormalist.net) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] mightypork (~mightypor@static.240.29.69.159.clients.your-server.de) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] benaiah (~benaiah@104.131.128.41) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] raydiak (~raydiak@cyberuniverses.com) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] tadzik (~tadzik@137.ip-51-178-44.eu) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] synthmeat (~synthmeat@unaffiliated/synthmeat) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] Mithaldu (~mithaldu@cat.eatsmou.se) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] _________ (~aukkras@unaffiliated/aukkras) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] robinsmidsrod (robin@public.smidsrod.no) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] KotH (~attila@erica.kinali.ch) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] avar (avar@wikipedia/avar) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] kst (~user@cpe-70-95-182-43.san.res.rr.com) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] doconthe2ocks (~animeshs@129-241-228-245-gw.cgn.ntnu.no) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] pierrot (~pi@unaffiliated/pierrot) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] shadowpaste (~shadowpas@kitty.scsys.co.uk) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] gugod (gugod@li7-202.members.linode.com) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] samebchase (~samebchas@51.15.68.182) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] dustinm` (~dustinm@static.38.6.217.95.clients.your-server.de) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] literal (hinrik@vm.nix.is) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] torbjorn (~torbjorn@88.81-166-205.customer.lyse.net) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] neshpion (~neshpion@gateway/tor-sasl/neshpion) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] DiffieHellman (~Username@gateway/tor-sasl/diffiehellman) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] tejr (~tejr@fsf/member/tyrmored) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] xelxebar (~xelxebar@gateway/tor-sasl/xelxebar) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] MasterDuke (5e00bdd3@raku/developer/masterduke) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] pwr22 (pwr22short@gateway/shell/matrix.org/x-lnslazwvmgoxxbkr) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] <lizmat> m: my Blob[Any] $foo = "foo", 21
+[2021-04-24T23:16:12+0200] simcop2387 (~simcop238@p3m/member/simcop2387) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] greppable6 (~gre-able@2001:41d0:2:5eb5::) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] tellable6 (~tel-able@2001:41d0:2:5eb5::) left IRC (*.net *.split)
+[2021-04-24T23:16:12+0200] jhill (sid1055@gateway/web/irccloud.com/x-mkumnrexkumnbzrs) left IRC (*.net *.split)
+[2021-04-24T23:16:13+0200] Garland_g[m] (garlandgma@gateway/shell/matrix.org/x-swfnxczchrbafbft) left IRC (*.net *.split)
+[2021-04-24T23:16:13+0200] Nasrudin (davematr1@gateway/shell/matrix.org/x-mcryjvkqexryniho) left IRC (*.net *.split)
+[2021-04-24T23:16:13+0200] Tirifto[m] (tiriftoted@gateway/shell/matrix.org/x-cederiieerxzvtvd) left IRC (*.net *.split)
+[2021-04-24T23:16:13+0200] ThaEwat (thaewraptm@gateway/shell/matrix.org/x-utrkwzmbsriqzljj) left IRC (*.net *.split)
+[2021-04-24T23:16:13+0200] a3r0 (~aero@61.100.184.210) left IRC (*.net *.split)
+[2021-04-24T23:16:13+0200] xi- (~quassel@nilio.ca) left IRC (*.net *.split)
+[2021-04-24T23:16:13+0200] Bucciarati (buccia@vm.nix.is) left IRC (*.net *.split)
+[2021-04-24T23:16:13+0200] unicodable6 (~uni-able@2001:41d0:2:5eb5::) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] roguelazer (~roguelaze@2605:2700:0:2:a800:ff:fe0d:5f19) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] jdv79 (~jdv79@jdv.devuyst.com) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] bartolin_ (~christian@mail.aglaz.de) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] abraxxa (~abraxxa@2a01:100:2000:2500::22) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] sftp (~sftp@unaffiliated/sftp) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] PotatoGim (sid99505@gateway/web/irccloud.com/x-qrihjhvmnnmtnggm) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] rba (~rba@2a01:4f8:c2c:7a41::1) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] zostay (sid170293@gateway/web/irccloud.com/x-ughbyorjqmxkubad) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] kawaii (sid345572@raku/releasemangler/kawaii) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] peteretep (sid143467@gateway/web/irccloud.com/x-mwdvhleznaxgwmdi) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] BuildTheRobots (sid42622@gateway/web/irccloud.com/x-suczkfoutsfhjhsn) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] elcaro (~anonymous@45.32.191.75) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] karupanerura (~karupaner@karupas.org) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] vaskozl (~vaskozl@host86-133-111-55.range86-133.btcentralplus.com) left IRC (*.net *.split)
+[2021-04-24T23:16:14+0200] spacekookie (~kookie@qaul.net/dev/spacekookie) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] camelia (~p6eval@camelia.detonation.org) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] epony (epony@unaffiliated/epony) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] rindolf (~rindolf@inkscape/contributor/rindolf) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] gabiruh (~gabiruh@vps19177.publiccloud.com.br) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] tinita (~irssi@astra.perl-community.de) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] finsternis (~Y@23.226.237.192) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] HarmtH (~harmth@82-74-153-222.cable.dynamic.v4.ziggo.nl) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] kybr (~kybr@ip184-189-221-182.sb.sd.cox.net) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] stux|RC (stux2@grid9.quadspeedi.net) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] telex (teletype@freeshell.de) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] Woodi (~Woodi@n8236h162.sprintdatacenter.net) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] gfldex (~dex@ip5f5ab722.dynamic.kabel-deutschland.de) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] APic (apic@apic.name) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] andinus (andinus@tilde.institute) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] sno (~sno@p4fe9342b.dip0.t-ipconnect.de) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] defaultxr (~defaultxr@99-138-110-241.lightspeed.cicril.sbcglobal.net) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] kvw_5_ (~alarm@ppp-88-217-122-84.dynamic.mnet-online.de) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] solitario (~adrian@www3.kiess.onl) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] grumble (~Thunderbi@freenode/staff/grumble) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] ComputerTech (ComputerTe@unaffiliated/computertech) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] cosimo (~cosimo@3.37-191-145.fiber.lynet.no) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] Maylay (~gren@108-198-59-230.lightspeed.miamfl.sbcglobal.net) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] xkr47 (xkr47@91-150-26-39.customer.karistelefon.fi) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] brown121407 (~brown1214@fsf/member/brown121407) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] moony (moony@hellomouse/dev/moony) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] lnx (~irssi@167.71.7.27) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] ingy (~ingy@104.236.228.44) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] kiti_nomad[m] (hellonomad@gateway/shell/matrix.org/x-mtibumgkojnysnqk) left IRC (*.net *.split)
+[2021-04-24T23:16:15+0200] juanfra__ (juanframat@gateway/shell/matrix.org/x-elspvbkoylqeucqh) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] patrickbkr[m] (patrickbkr@gateway/shell/matrix.org/x-qvmotpaxfuhyhbon) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] rjeli (sid289321@gateway/web/irccloud.com/x-xtudadjfoctblaea) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] albino (~albino@unaffiliated/albino/x-684385) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] rypervenche (~rypervenc@unaffiliated/rypervenche) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] mendel (mendel@lucky.nix.hu) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] m_athias (~m_athias@pandora.loop0.org) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] spacebat2 (spacebat@spot.ubermonkey.net) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] Grrrr (~tobez@ocho.tobez.org) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] fvox_ (~fvox@104.131.207.121) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] wmoxam_ (~wmoxam@li130-207.members.linode.com) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] moritz (~moritz@tina.perlgeek.de) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] perlmaros (~perlmaros@master.k-1.com) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] Kaiepi (~Kaiepi@47.54.252.148) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] gordonfish (~gordonfis@unaffiliated/gordonfish) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] dotdotdot (~dotdotdot@85-171-78-203.rev.numericable.fr) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] wingfold (~wingfold@c-73-113-168-2.hsd1.tn.comcast.net) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] webstrand (~webstrand@23.94.99.90) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] perigrin (~perigrin@173.208.253.58) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] japhb (~geoff@mugs/japhb) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] rjbs (~rjbs@brillig.manxome.org) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] cgfbee (~bot@oc1.itim-cj.ro) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] brass (~brass@51.15.113.79) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] Util (~bruce@047-013-182-182.res.spectrum.com) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] eater (~eater@monika.eoc.io) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] tonyo (~tonyo@ec2-54-190-144-97.us-west-2.compute.amazonaws.com) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] cooper (~mitchell@unaffiliated/cooper) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] krunen (~krunen@62.122.255.42) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] m6locks (saarit2@gateway/shell/tkk.fi/x-amevteupfktnzafv) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] sjn (sjn@sprocket.nvg.ntnu.no) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] leah2 (~leah@vuxu.org) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] draco100[m] (draco100ma@gateway/shell/matrix.org/x-dwtpudfadwyqhhgz) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] uzl[m] (uzluisfmat@gateway/shell/matrix.org/x-ahppvzwkddqzsnzd) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] AlexDaniel` (alexdaniel@gateway/shell/matrix.org/x-jewoajqiwhfltnpi) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] tusooa (tusooatuso@gateway/shell/matrix.org/x-rsrwoiyariduyggr) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] takside (~rob@2a03:b0c0:1:d0::567:1001) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] Juerd (juerd@computervrede.nl) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] dylanwh (sid228277@gateway/web/irccloud.com/x-hhallkcbyvhhxweu) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] ssm (ssm@shambler.fnord.no) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] esh (~quassel@minnesota.heebs.ch) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] Ekho (~Ekho@unaffiliated/ekho) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] Ulti_ (~matt@ec2-35-178-236-167.eu-west-2.compute.amazonaws.com) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] samcv (~samcv@raku/developer/samcv) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] klapperl (~k@p5b015aa4.dip0.t-ipconnect.de) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] oftl (~oftl@zack.rockandroll.at) left IRC (*.net *.split)
+[2021-04-24T23:16:16+0200] samebchase- (~samebchas@51.15.68.182) left IRC (*.net *.split)
+[2021-04-24T23:16:17+0200] pat_js (~pat_js@mail.patricks.tech) left IRC (*.net *.split)
+[2021-04-24T23:16:17+0200] cxreg (~count@63.228.111.44) left IRC (*.net *.split)
+[2021-04-24T23:16:17+0200] nebuchadnezzar (~dad@82-65-17-178.subs.proxad.net) left IRC (*.net *.split)
+[2021-04-24T23:16:17+0200] tomaw (tom@freenode/staff/tomaw) left IRC (*.net *.split)
+[2021-04-24T23:16:52+0200] sno (~sno@p4fe9342b.dip0.t-ipconnect.de) joined the channel
+[2021-04-24T23:16:52+0200] defaultxr (~defaultxr@99-138-110-241.lightspeed.cicril.sbcglobal.net) joined the channel
+[2021-04-24T23:16:52+0200] kvw_5_ (~alarm@ppp-88-217-122-84.dynamic.mnet-online.de) joined the channel
+[2021-04-24T23:16:52+0200] solitario (~adrian@www3.kiess.onl) joined the channel
+[2021-04-24T23:16:52+0200] grumble (~Thunderbi@freenode/staff/grumble) joined the channel
+[2021-04-24T23:16:52+0200] ComputerTech (ComputerTe@unaffiliated/computertech) joined the channel
+[2021-04-24T23:16:52+0200] cosimo (~cosimo@3.37-191-145.fiber.lynet.no) joined the channel
+[2021-04-24T23:16:52+0200] Maylay (~gren@108-198-59-230.lightspeed.miamfl.sbcglobal.net) joined the channel
+[2021-04-24T23:16:52+0200] xkr47 (xkr47@91-150-26-39.customer.karistelefon.fi) joined the channel
+[2021-04-24T23:16:52+0200] brown121407 (~brown1214@fsf/member/brown121407) joined the channel
+[2021-04-24T23:16:52+0200] moony (moony@hellomouse/dev/moony) joined the channel
+[2021-04-24T23:16:52+0200] lnx (~irssi@167.71.7.27) joined the channel
+[2021-04-24T23:16:52+0200] ingy (~ingy@104.236.228.44) joined the channel
+[2021-04-24T23:17:31+0200] wamba (~wamba@193-194.moravanet.cz) joined the channel
+[2021-04-24T23:17:31+0200] notable6 (~not-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T23:17:31+0200] bloatable6 (~blo-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T23:17:31+0200] b2gills (~brad@subscriber-dhcp-cgn-64-191-7-0.wcufiber.net) joined the channel
+[2021-04-24T23:17:31+0200] kurahaupo (~kurahaupo@unaffiliated/kurahaupo) joined the channel
+[2021-04-24T23:17:31+0200] aluaces (~aluaces@144.178.129.125) joined the channel
+[2021-04-24T23:17:31+0200] linkable6 (~lin-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T23:17:31+0200] __jrjsmrtn__ (~jrjsmrtn@ip-83-134-170-127.dsl.scarlet.be) joined the channel
+[2021-04-24T23:17:31+0200] pecastro (~pecastro@95.151.147.236) joined the channel
+[2021-04-24T23:17:31+0200] swaggboi (~swaggboi@slackware.uk/supporter/swaggboi) joined the channel
+[2021-04-24T23:17:31+0200] dogbert11 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-24T23:17:31+0200] LizBot (~RakuIRC@ipv4-wenzperl.connected.by.freedominter.net) joined the channel
+[2021-04-24T23:17:31+0200] skaji_ (sid178483@gateway/web/irccloud.com/x-iiknxwmkgrquzngj) joined the channel
+[2021-04-24T23:17:31+0200] sena_kun (~sena_kun@94.142.239.45) joined the channel
+[2021-04-24T23:17:31+0200] nativecallable6 (~nat-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T23:17:31+0200] kst (~user@cpe-70-95-182-43.san.res.rr.com) joined the channel
+[2021-04-24T23:17:31+0200] leont (sid489095@gateway/web/irccloud.com/x-qedwuvpnwxmejpmv) joined the channel
+[2021-04-24T23:17:31+0200] committable6 (~com-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T23:17:31+0200] quotable6 (~quo-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T23:17:31+0200] statisfiable6 (~sta-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T23:17:31+0200] benchable6 (~ben-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T23:17:31+0200] releasable6 (~rel-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T23:17:31+0200] bisectable6 (~bis-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T23:17:31+0200] agentzh (~agentzh@nginx/adept/agentzh) joined the channel
+[2021-04-24T23:17:31+0200] HobGoblin (~jaa@yatima.uukgoblin.net) joined the channel
+[2021-04-24T23:17:32+0200] CIAvash (ciavashmat@gateway/shell/matrix.org/x-nqsiiqhlotzopaon) joined the channel
+[2021-04-24T23:17:32+0200] kini (~kini@unaffiliated/kini) joined the channel
+[2021-04-24T23:17:32+0200] db48x (~user@96-86-171-70-static.hfc.comcastbusiness.net) joined the channel
+[2021-04-24T23:17:32+0200] codesections (~user@2600:1700:1650:1faf:53de:cb31:6de3:44cf) joined the channel
+[2021-04-24T23:17:32+0200] bdju (~bard@63.228.59.248) joined the channel
+[2021-04-24T23:17:32+0200] stux|RC-only (stux@endurance.xzibition.com) joined the channel
+[2021-04-24T23:17:32+0200] doconthe2ocks (~animeshs@129-241-228-245-gw.cgn.ntnu.no) joined the channel
+[2021-04-24T23:17:32+0200] eseyman (~eseyman@lfbn-idf1-1-2267-180.w92-151.abo.wanadoo.fr) joined the channel
+[2021-04-24T23:17:32+0200] maggotbrain (~maggotbra@c-73-254-248-250.hsd1.wa.comcast.net) joined the channel
+[2021-04-24T23:17:32+0200] spycrab0 (sid271832@gateway/web/irccloud.com/x-xgfyankikbgnwzch) joined the channel
+[2021-04-24T23:17:32+0200] Grinnz (sid183254@mojo/order-of-assassins/grinnz) joined the channel
+[2021-04-24T23:17:32+0200] pierrot (~pi@unaffiliated/pierrot) joined the channel
+[2021-04-24T23:17:32+0200] MitarashiDango[m (mdangomatr@gateway/shell/matrix.org/x-xeldfrzoudjxdjzj) joined the channel
+[2021-04-24T23:17:32+0200] mtj (quasselcor@2400:8902::f03c:91ff:fe93:b7f1) joined the channel
+[2021-04-24T23:17:32+0200] summerisle (~eof@tty3.dev) joined the channel
+[2021-04-24T23:17:32+0200] d_t_b (~dtb@ip68-3-207-115.ph.ph.cox.net) joined the channel
+[2021-04-24T23:17:32+0200] demostanis[m] (demostanis@gateway/shell/matrix.org/x-dkfocmvuegezjpaf) joined the channel
+[2021-04-24T23:17:32+0200] shadowpaste (~shadowpas@kitty.scsys.co.uk) joined the channel
+[2021-04-24T23:17:32+0200] timeless (sid4015@firefox/developer/timeless) joined the channel
+[2021-04-24T23:17:32+0200] gugod (gugod@li7-202.members.linode.com) joined the channel
+[2021-04-24T23:17:32+0200] tyil (~root@scriptkitties/tyil) joined the channel
+[2021-04-24T23:17:32+0200] a6502 (~wieger@stofzuiger.a6502.net) joined the channel
+[2021-04-24T23:17:32+0200] nine (nine@ns1.niner.name) joined the channel
+[2021-04-24T23:17:32+0200] hobbs (~hobbs@p3m/member/hobbs) joined the channel
+[2021-04-24T23:17:32+0200] masak (~masak@137.ip-51-178-44.eu) joined the channel
+[2021-04-24T23:17:32+0200] mniip (mniip@freenode/staff/mniip) joined the channel
+[2021-04-24T23:17:32+0200] jast (jast@zoidberg.org) joined the channel
+[2021-04-24T23:17:32+0200] timlegge (~quassel@mctnnbsa70w-142-68-90-86.dhcp-dynamic.fibreop.nb.bellaliant.net) joined the channel
+[2021-04-24T23:17:32+0200] charsbar (~charsbar@153.126.151.115.v6.sakura.ne.jp) joined the channel
+[2021-04-24T23:17:32+0200] pnu__ (sid13214@gateway/web/irccloud.com/x-flwvnbydyrydeibz) joined the channel
+[2021-04-24T23:17:32+0200] mojca (~mojca@mittelab/members/mojca) joined the channel
+[2021-04-24T23:17:32+0200] moon-child (~moon-chil@cardinal.elronnd.net) joined the channel
+[2021-04-24T23:17:32+0200] a3f (~a3f@chimeria.ext.pengutronix.de) joined the channel
+[2021-04-24T23:17:32+0200] jcallen (quassel@unaffiliated/jcallen) joined the channel
+[2021-04-24T23:17:32+0200] mrsolo (sid27905@gateway/web/irccloud.com/x-rkpxagtbizbnrrns) joined the channel
+[2021-04-24T23:17:32+0200] jjatria (~jjatria@68.183.32.235) joined the channel
+[2021-04-24T23:17:32+0200] buffet (~buffet@buffet.sh) joined the channel
+[2021-04-24T23:17:32+0200] nicholatian (not.sure@arqadium/founder/alexander.nicholi) joined the channel
+[2021-04-24T23:17:32+0200] Sir_Ragna (~quassel@zerofox.xyz) joined the channel
+[2021-04-24T23:17:32+0200] marcusr (~marcusr@mojo/viking/marcusr) joined the channel
+[2021-04-24T23:17:32+0200] ambs (1000@eremita.di.uminho.pt) joined the channel
+[2021-04-24T23:17:32+0200] DarthGandalf (user@znc/developer/DarthGandalf) joined the channel
+[2021-04-24T23:17:32+0200] SmokeMachine (sid19088@gateway/web/irccloud.com/x-kubzemrbfkaeypog) joined the channel
+[2021-04-24T23:17:32+0200] daxim (~daxim@2a02:b18:c13b:28:42b0:76ff:fe7b:7663) joined the channel
+[2021-04-24T23:17:32+0200] Grauwolf (~grauwolf@unaffiliated/grauwolf) joined the channel
+[2021-04-24T23:17:32+0200] tbrowder (sid168924@gateway/web/irccloud.com/x-kdrimxunywvwcljb) joined the channel
+[2021-04-24T23:17:32+0200] riatre (~quassel@2001:310:6000:f::5198:1) joined the channel
+[2021-04-24T23:17:32+0200] perry (~perry@wikipedia/perryprog) joined the channel
+[2021-04-24T23:17:32+0200] ugexe (ugexe@p6.nu) joined the channel
+[2021-04-24T23:17:32+0200] Altreus (~altreus@unaffiliated/altreus) joined the channel
+[2021-04-24T23:17:32+0200] bonz060 (~quassel@2001:bc8:47a4:a23::1) joined the channel
+[2021-04-24T23:17:32+0200] KotH (~attila@erica.kinali.ch) joined the channel
+[2021-04-24T23:17:32+0200] avar (avar@wikipedia/avar) joined the channel
+[2021-04-24T23:17:32+0200] robinsmidsrod (robin@public.smidsrod.no) joined the channel
+[2021-04-24T23:17:32+0200] _________ (~aukkras@unaffiliated/aukkras) joined the channel
+[2021-04-24T23:17:32+0200] Mithaldu (~mithaldu@cat.eatsmou.se) joined the channel
+[2021-04-24T23:17:32+0200] synthmeat (~synthmeat@unaffiliated/synthmeat) joined the channel
+[2021-04-24T23:17:32+0200] tadzik (~tadzik@137.ip-51-178-44.eu) joined the channel
+[2021-04-24T23:17:32+0200] raydiak (~raydiak@cyberuniverses.com) joined the channel
+[2021-04-24T23:17:32+0200] benaiah (~benaiah@104.131.128.41) joined the channel
+[2021-04-24T23:17:32+0200] mightypork (~mightypor@static.240.29.69.159.clients.your-server.de) joined the channel
+[2021-04-24T23:17:32+0200] renormalist (~ss5@renormalist.net) joined the channel
+[2021-04-24T23:17:32+0200] torbjorn (~torbjorn@88.81-166-205.customer.lyse.net) joined the channel
+[2021-04-24T23:17:32+0200] literal (hinrik@vm.nix.is) joined the channel
+[2021-04-24T23:17:32+0200] dustinm` (~dustinm@static.38.6.217.95.clients.your-server.de) joined the channel
+[2021-04-24T23:17:32+0200] samebchase (~samebchas@51.15.68.182) joined the channel
+[2021-04-24T23:17:33+0200] jmcgnh (~jmcgnh@wikipedia/jmcgnh) left IRC (Max SendQ exceeded)
+[2021-04-24T23:17:36+0200] MasterDuke (5e00bdd3@raku/developer/masterduke) joined the channel
+[2021-04-24T23:17:56+0200] neshpion (~neshpion@gateway/tor-sasl/neshpion) joined the channel
+[2021-04-24T23:17:56+0200] tejr (~tejr@fsf/member/tyrmored) joined the channel
+[2021-04-24T23:17:56+0200] xelxebar (~xelxebar@gateway/tor-sasl/xelxebar) joined the channel
+[2021-04-24T23:18:02+0200] xelxebar (~xelxebar@gateway/tor-sasl/xelxebar) left IRC (Max SendQ exceeded)
+[2021-04-24T23:18:17+0200] kiti_nomad[m] (hellonomad@gateway/shell/matrix.org/x-mtibumgkojnysnqk) joined the channel
+[2021-04-24T23:18:17+0200] juanfra__ (juanframat@gateway/shell/matrix.org/x-elspvbkoylqeucqh) joined the channel
+[2021-04-24T23:18:17+0200] patrickbkr[m] (patrickbkr@gateway/shell/matrix.org/x-qvmotpaxfuhyhbon) joined the channel
+[2021-04-24T23:18:17+0200] rjeli (sid289321@gateway/web/irccloud.com/x-xtudadjfoctblaea) joined the channel
+[2021-04-24T23:18:17+0200] albino (~albino@unaffiliated/albino/x-684385) joined the channel
+[2021-04-24T23:18:17+0200] rypervenche (~rypervenc@unaffiliated/rypervenche) joined the channel
+[2021-04-24T23:18:17+0200] mendel (mendel@lucky.nix.hu) joined the channel
+[2021-04-24T23:18:17+0200] m_athias (~m_athias@pandora.loop0.org) joined the channel
+[2021-04-24T23:18:17+0200] perlmaros (~perlmaros@master.k-1.com) joined the channel
+[2021-04-24T23:18:17+0200] fvox_ (~fvox@104.131.207.121) joined the channel
+[2021-04-24T23:18:17+0200] spacebat2 (spacebat@spot.ubermonkey.net) joined the channel
+[2021-04-24T23:18:17+0200] Grrrr (~tobez@ocho.tobez.org) joined the channel
+[2021-04-24T23:18:17+0200] wmoxam_ (~wmoxam@li130-207.members.linode.com) joined the channel
+[2021-04-24T23:18:17+0200] moritz (~moritz@tina.perlgeek.de) joined the channel
+[2021-04-24T23:18:29+0200] oftl (~oftl@zack.rockandroll.at) joined the channel
+[2021-04-24T23:18:29+0200] samebchase- (~samebchas@51.15.68.182) joined the channel
+[2021-04-24T23:18:29+0200] pat_js (~pat_js@mail.patricks.tech) joined the channel
+[2021-04-24T23:18:29+0200] cxreg (~count@63.228.111.44) joined the channel
+[2021-04-24T23:18:29+0200] nebuchadnezzar (~dad@82-65-17-178.subs.proxad.net) joined the channel
+[2021-04-24T23:18:29+0200] tomaw (tom@freenode/staff/tomaw) joined the channel
+[2021-04-24T23:18:59+0200] leah2 (~leah@vuxu.org) joined the channel
+[2021-04-24T23:18:59+0200] Juerd (juerd@computervrede.nl) joined the channel
+[2021-04-24T23:18:59+0200] uzl[m] (uzluisfmat@gateway/shell/matrix.org/x-ahppvzwkddqzsnzd) joined the channel
+[2021-04-24T23:18:59+0200] draco100[m] (draco100ma@gateway/shell/matrix.org/x-dwtpudfadwyqhhgz) joined the channel
+[2021-04-24T23:18:59+0200] AlexDaniel` (alexdaniel@gateway/shell/matrix.org/x-jewoajqiwhfltnpi) joined the channel
+[2021-04-24T23:18:59+0200] tusooa (tusooatuso@gateway/shell/matrix.org/x-rsrwoiyariduyggr) joined the channel
+[2021-04-24T23:18:59+0200] takside (~rob@2a03:b0c0:1:d0::567:1001) joined the channel
+[2021-04-24T23:18:59+0200] dylanwh (sid228277@gateway/web/irccloud.com/x-hhallkcbyvhhxweu) joined the channel
+[2021-04-24T23:18:59+0200] ssm (ssm@shambler.fnord.no) joined the channel
+[2021-04-24T23:18:59+0200] esh (~quassel@minnesota.heebs.ch) joined the channel
+[2021-04-24T23:18:59+0200] Ekho (~Ekho@unaffiliated/ekho) joined the channel
+[2021-04-24T23:18:59+0200] Ulti_ (~matt@ec2-35-178-236-167.eu-west-2.compute.amazonaws.com) joined the channel
+[2021-04-24T23:18:59+0200] samcv (~samcv@raku/developer/samcv) joined the channel
+[2021-04-24T23:18:59+0200] klapperl (~k@p5b015aa4.dip0.t-ipconnect.de) joined the channel
+[2021-04-24T23:19:05+0200] Kaiepi (~Kaiepi@47.54.252.148) joined the channel
+[2021-04-24T23:19:05+0200] gordonfish (~gordonfis@unaffiliated/gordonfish) joined the channel
+[2021-04-24T23:19:05+0200] wingfold (~wingfold@c-73-113-168-2.hsd1.tn.comcast.net) joined the channel
+[2021-04-24T23:19:05+0200] webstrand (~webstrand@23.94.99.90) joined the channel
+[2021-04-24T23:19:05+0200] perigrin (~perigrin@173.208.253.58) joined the channel
+[2021-04-24T23:19:05+0200] japhb (~geoff@mugs/japhb) joined the channel
+[2021-04-24T23:19:05+0200] rjbs (~rjbs@brillig.manxome.org) joined the channel
+[2021-04-24T23:19:05+0200] cgfbee (~bot@oc1.itim-cj.ro) joined the channel
+[2021-04-24T23:19:05+0200] brass (~brass@51.15.113.79) joined the channel
+[2021-04-24T23:19:05+0200] Util (~bruce@047-013-182-182.res.spectrum.com) joined the channel
+[2021-04-24T23:19:05+0200] eater (~eater@monika.eoc.io) joined the channel
+[2021-04-24T23:19:05+0200] tonyo (~tonyo@ec2-54-190-144-97.us-west-2.compute.amazonaws.com) joined the channel
+[2021-04-24T23:19:05+0200] cooper (~mitchell@unaffiliated/cooper) joined the channel
+[2021-04-24T23:19:05+0200] krunen (~krunen@62.122.255.42) joined the channel
+[2021-04-24T23:19:05+0200] sjn (sjn@sprocket.nvg.ntnu.no) joined the channel
+[2021-04-24T23:19:05+0200] m6locks (saarit2@gateway/shell/tkk.fi/x-amevteupfktnzafv) joined the channel
+[2021-04-24T23:19:06+0200] demostanis[m] (demostanis@gateway/shell/matrix.org/x-dkfocmvuegezjpaf) left IRC (Ping timeout: 258 seconds)
+[2021-04-24T23:19:15+0200] pwr22 (pwr22short@gateway/shell/matrix.org/x-lnslazwvmgoxxbkr) joined the channel
+[2021-04-24T23:19:15+0200] simcop2387 (~simcop238@p3m/member/simcop2387) joined the channel
+[2021-04-24T23:19:15+0200] greppable6 (~gre-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T23:19:15+0200] tellable6 (~tel-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T23:19:15+0200] jhill (sid1055@gateway/web/irccloud.com/x-mkumnrexkumnbzrs) joined the channel
+[2021-04-24T23:19:15+0200] Nasrudin (davematr1@gateway/shell/matrix.org/x-mcryjvkqexryniho) joined the channel
+[2021-04-24T23:19:15+0200] Garland_g[m] (garlandgma@gateway/shell/matrix.org/x-swfnxczchrbafbft) joined the channel
+[2021-04-24T23:19:15+0200] Tirifto[m] (tiriftoted@gateway/shell/matrix.org/x-cederiieerxzvtvd) joined the channel
+[2021-04-24T23:19:15+0200] xi- (~quassel@nilio.ca) joined the channel
+[2021-04-24T23:19:15+0200] a3r0 (~aero@61.100.184.210) joined the channel
+[2021-04-24T23:19:15+0200] Bucciarati (buccia@vm.nix.is) joined the channel
+[2021-04-24T23:19:23+0200] unicodable6 (~uni-able@2001:41d0:2:5eb5::) joined the channel
+[2021-04-24T23:19:23+0200] roguelazer (~roguelaze@2605:2700:0:2:a800:ff:fe0d:5f19) joined the channel
+[2021-04-24T23:19:23+0200] jdv79 (~jdv79@jdv.devuyst.com) joined the channel
+[2021-04-24T23:19:23+0200] bartolin_ (~christian@mail.aglaz.de) joined the channel
+[2021-04-24T23:19:43+0200] pwr22 (pwr22short@gateway/shell/matrix.org/x-lnslazwvmgoxxbkr) left IRC (Ping timeout: 276 seconds)
+[2021-04-24T23:19:44+0200] Tirifto[m] (tiriftoted@gateway/shell/matrix.org/x-cederiieerxzvtvd) left IRC (Ping timeout: 276 seconds)
+[2021-04-24T23:19:45+0200] Ekho (~Ekho@unaffiliated/ekho) left IRC (Max SendQ exceeded)
+[2021-04-24T23:19:45+0200] cgfbee (~bot@oc1.itim-cj.ro) left IRC (Max SendQ exceeded)
+[2021-04-24T23:19:45+0200] gordonfish (~gordonfis@unaffiliated/gordonfish) left IRC (Max SendQ exceeded)
+[2021-04-24T23:19:47+0200] kiti_nomad[m] (hellonomad@gateway/shell/matrix.org/x-mtibumgkojnysnqk) left IRC (Ping timeout: 248 seconds)
+[2021-04-24T23:19:48+0200] juanfra__ (juanframat@gateway/shell/matrix.org/x-elspvbkoylqeucqh) left IRC (Ping timeout: 248 seconds)
+[2021-04-24T23:19:49+0200] draco100[m] (draco100ma@gateway/shell/matrix.org/x-dwtpudfadwyqhhgz) left IRC (Ping timeout: 267 seconds)
+[2021-04-24T23:19:50+0200] uzl[m] (uzluisfmat@gateway/shell/matrix.org/x-ahppvzwkddqzsnzd) left IRC (Ping timeout: 246 seconds)
+[2021-04-24T23:19:50+0200] tusooa (tusooatuso@gateway/shell/matrix.org/x-rsrwoiyariduyggr) left IRC (Ping timeout: 246 seconds)
+[2021-04-24T23:19:52+0200] CIAvash (ciavashmat@gateway/shell/matrix.org/x-nqsiiqhlotzopaon) left IRC (Ping timeout: 258 seconds)
+[2021-04-24T23:19:53+0200] MitarashiDango[m (mdangomatr@gateway/shell/matrix.org/x-xeldfrzoudjxdjzj) left IRC (Ping timeout: 258 seconds)
+[2021-04-24T23:20:07+0200] AlexDaniel` (alexdaniel@gateway/shell/matrix.org/x-jewoajqiwhfltnpi) left IRC (Ping timeout: 246 seconds)
+[2021-04-24T23:20:21+0200] abraxxa (~abraxxa@2a01:100:2000:2500::22) joined the channel
+[2021-04-24T23:20:21+0200] sftp (~sftp@unaffiliated/sftp) joined the channel
+[2021-04-24T23:20:21+0200] rba (~rba@2a01:4f8:c2c:7a41::1) joined the channel
+[2021-04-24T23:20:21+0200] zostay (sid170293@gateway/web/irccloud.com/x-ughbyorjqmxkubad) joined the channel
+[2021-04-24T23:20:21+0200] kawaii (sid345572@raku/releasemangler/kawaii) joined the channel
+[2021-04-24T23:20:21+0200] peteretep (sid143467@gateway/web/irccloud.com/x-mwdvhleznaxgwmdi) joined the channel
+[2021-04-24T23:20:21+0200] elcaro (~anonymous@45.32.191.75) joined the channel
+[2021-04-24T23:20:21+0200] karupanerura (~karupaner@karupas.org) joined the channel
+[2021-04-24T23:20:21+0200] vaskozl (~vaskozl@host86-133-111-55.range86-133.btcentralplus.com) joined the channel
+[2021-04-24T23:20:21+0200] spacekookie (~kookie@qaul.net/dev/spacekookie) joined the channel
+[2021-04-24T23:20:21+0200] camelia (~p6eval@camelia.detonation.org) joined the channel
+[2021-04-24T23:20:23+0200] Nasrudin (davematr1@gateway/shell/matrix.org/x-mcryjvkqexryniho) left IRC (Ping timeout: 276 seconds)
+[2021-04-24T23:20:23+0200] kawaii (sid345572@raku/releasemangler/kawaii) left IRC (Ping timeout: 255 seconds)
+[2021-04-24T23:21:12+0200] stux|RC (stux2@grid9.quadspeedi.net) joined the channel
+[2021-04-24T23:22:01+0200] gabiruh (~gabiruh@vps19177.publiccloud.com.br) joined the channel
+[2021-04-24T23:22:01+0200] tinita (~irssi@astra.perl-community.de) joined the channel
+[2021-04-24T23:22:01+0200] finsternis (~Y@23.226.237.192) joined the channel
+[2021-04-24T23:22:01+0200] HarmtH (~harmth@82-74-153-222.cable.dynamic.v4.ziggo.nl) joined the channel
+[2021-04-24T23:22:01+0200] kybr (~kybr@ip184-189-221-182.sb.sd.cox.net) joined the channel
+[2021-04-24T23:22:01+0200] telex (teletype@freeshell.de) joined the channel
+[2021-04-24T23:22:01+0200] Woodi (~Woodi@n8236h162.sprintdatacenter.net) joined the channel
+[2021-04-24T23:22:01+0200] gfldex (~dex@ip5f5ab722.dynamic.kabel-deutschland.de) joined the channel
+[2021-04-24T23:22:01+0200] APic (apic@apic.name) joined the channel
+[2021-04-24T23:22:01+0200] andinus (andinus@tilde.institute) joined the channel
+[2021-04-24T23:22:02+0200] <raydiak> that was a pretty big split
+[2021-04-24T23:22:31+0200] finstern1s (~Y@23.226.237.192) joined the channel
+[2021-04-24T23:22:38+0200] finsternis (~Y@23.226.237.192) left IRC (Excess Flood)
+[2021-04-24T23:22:59+0200] patrickbkr[m] (patrickbkr@gateway/shell/matrix.org/x-qvmotpaxfuhyhbon) left IRC (Ping timeout: 248 seconds)
+[2021-04-24T23:23:30+0200] dotdotdot (~dotdotdot@85-171-78-203.rev.numericable.fr) joined the channel
+[2021-04-24T23:23:34+0200] kawaii (sid345572@gateway/web/irccloud.com/x-rmmeqcubuyoibgml) joined the channel
+[2021-04-24T23:24:16+0200] Garland_g[m] (garlandgma@gateway/shell/matrix.org/x-swfnxczchrbafbft) left IRC (Ping timeout: 276 seconds)
+[2021-04-24T23:24:53+0200] PotatoGim (sid99505@gateway/web/irccloud.com/x-stkdlziizvdtczpk) joined the channel
+[2021-04-24T23:24:55+0200] jhill (sid1055@gateway/web/irccloud.com/x-mkumnrexkumnbzrs) left IRC (Ping timeout: 276 seconds)
+[2021-04-24T23:26:35+0200] <lizmat> yeah...  :-)
+[2021-04-24T23:26:37+0200] <raydiak> not sure about making it a Blob formally. Blob is pretty binary-focused. it has methods like .bytes, .decode, .unpack, all that stuff
+[2021-04-24T23:27:09+0200] <lizmat> true...  but it *is* immutable, contrary to Buf
+[2021-04-24T23:27:24+0200] BuildTheRobots (sid42622@gateway/web/irccloud.com/x-mecmdukndjpnupzs) joined the channel
+[2021-04-24T23:27:28+0200] <lizmat> but yeah... maybe not
+[2021-04-24T23:27:51+0200] cgfbee (~bot@oc1.itim-cj.ro) joined the channel
+[2021-04-24T23:29:13+0200] brtastic (~Thunderbi@185.24.91.138) left IRC (Remote host closed the connection)
+[2021-04-24T23:29:31+0200] <raydiak> my vote would be Tuple does Positional, and is more of a sibling of Blob
+[2021-04-24T23:29:56+0200] jhill (sid1055@gateway/web/irccloud.com/x-mhjxackjebwlbjzw) joined the channel
+[2021-04-24T23:29:56+0200] <lizmat> well, Tuple does already do Positional  :-)
+[2021-04-24T23:31:05+0200] <raydiak> heh I assumed. I was just looking at the type graph for Blob and thinking in those terms
+[2021-04-24T23:33:35+0200] <japhb> FWIW, CBOR::Simple will treat basic Positional as generic "holds anything, every item may be different".  Blob is already special cased (making it quite fast indeed), as will the other native typed arrays once I implement the appropriate extension that allows avoiding endian swaps.
+[2021-04-24T23:36:48+0200] <raydiak> oh japhb, I was meaning to ask...can you add your benchmark script to the CBOR::Simple repo? like in a tools subdir or something?
+[2021-04-24T23:38:57+0200] Manifest0 (~Manifest0@1-nat1-1.centrio.cz) left IRC (Quit: WeeChat 3.1)
+[2021-04-24T23:38:59+0200] <raydiak> I had some thoughts about performance improvements, and even if nothing I try ends up working out it'd be an interesting/educational real-life test case anyway
+[2021-04-24T23:45:54+0200] <MasterDuke> japhb: wouldn't it make sense to handle Iterable same as Positional?
+[2021-04-24T23:48:52+0200] dogbert11 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) left IRC (Read error: Connection reset by peer)
+[2021-04-24T23:49:47+0200] dogbert11 (~dogbert@c-fd2de055.036-1-64736c11.bbcust.telenor.se) joined the channel
+[2021-04-24T23:51:09+0200] demostanis[m] (demostanis@gateway/shell/matrix.org/x-qfxgbphpkiwojdlf) joined the channel
+[2021-04-24T23:52:48+0200] aborazmeh (~aborazmeh@88.254.3.6) joined the channel
+[2021-04-24T23:59:11+0200] sno (~sno@p4fe9342b.dip0.t-ipconnect.de) left IRC (Ping timeout: 240 seconds)
