@@ -1,8 +1,176 @@
 use Test;
 use IRC::Log::Textual;
 
-pass "replace me";
+my $filename = '2021-04-22';
+my $date     = $filename.Date;
+my $pos      = -1;
 
-done-testing;
+my $path     = $?FILE.IO.sibling: "$filename.txt";
+my $log      = IRC::Log::Textual.new: $path;
+my @entries    = $log.entries.List;
+my $nr-entries = +@entries;
+
+sub test-common(
+  $entry, $class, $hour, $minute, $ordinal, $nick, $control, $conversation,
+  $comment,
+) {
+    subtest $comment => {
+        plan 15;
+
+        isa-ok $entry, IRC::Log::{$class};
+        is $entry.date,     $date,    "is .date correct: $date";
+        is $entry.hour,     $hour,    "is .hour correct: $hour";
+        is $entry.minute,   $minute,  "is .minute correct: $minute";
+        is $entry.ordinal,  $ordinal, "is .ordinal correct: $ordinal";
+        is $entry.nick,     $nick,    "is .nick correct: $nick";
+        is $entry.pos,      ++$pos,   "is .pos correct: $pos";
+
+        is-deeply $entry.control, $control,
+          "is .control ok: $control";
+        is-deeply $entry.conversation, $conversation,
+          "is .conversation ok: $conversation";
+        is-deeply $entry.prefix eq '*** ', $entry.control,
+          "is the prefix as expected: $entry.prefix()";
+        is-deeply
+          $entry.sender,
+          $entry ~~ IRC::Log::Message ?? $entry.nick !! '',
+          "is the sender as expected: $entry.sender()";
+
+        is +$entry.entries.elems, $nr-entries,
+          'is nr-entries correct';
+        is $entry.hhmm, sprintf('%02d%02d',$hour,$minute),
+          'is .hhmm correct';
+        is $entry.hh-mm, sprintf('%02d:%02d',$hour,$minute),
+          'is .hh-mm correct';
+        is $entry.target, (
+          $ordinal
+            ?? sprintf($date ~ 'Z%02s:%02d-%04d', $hour, $minute, $ordinal)
+            !! sprintf($date ~ 'Z%02s:%02d',      $hour, $minute)
+        ), 'is .target correct';
+    }
+}
+
+plan 38 + @entries;
+
+is-deeply IRC::Log::Textual.IO2Date($path), $date,
+  'was the date elided correctly';
+is @entries.map(*.gist).join("\n"),
+  $?FILE.IO.sibling("$filename.gist").slurp.chomp,
+  'does .gist generate the raw log again';
+
+isa-ok $log, IRC::Log::Textual;
+is-deeply $log.date, $date, 'is the date correct';
+is +$log.problems, 0, 'did we see any problems';
+is $log.nr-control-entries,      5, 'is nr control entries correct';
+is $log.nr-conversation-entries, 3, 'is nr conversation entries correct';
+
+is $log.first-target, "2021-04-22Z05:36", 'is first target ok';
+is $log.last-target,  "2021-04-22Z23:50", 'is last target ok';
+
+my $picked = @entries.roll;
+is-deeply $log.this-target($picked.target), $picked,
+  'can we find a randomly picked entry by target';
+
+my $entry = @entries.shift;
+test-common $entry, 'Joined', 5, 36, 0, 'MasterDuke', True, False,
+  'test joining';
+
+$entry = @entries.shift;
+test-common $entry, 'Message', 8, 1, 0, 'MasterDuke', False, True,
+  'test message';
+is $entry.text, 'any objections to merging ?',
+  'is text ok in the message';
+
+$entry = @entries.shift;
+test-common $entry, 'Self-Reference', 8, 1, 1, 'sena_kun', False, True,
+  'test message';
+is $entry.text, 'still awaits the release blocker',
+  'is text ok in the self-reference';
+
+$entry = @entries.shift;
+test-common $entry, 'Nick', 9, 35, 0, 'lizmmat_', True, False,
+  'test nick change';
+is $entry.new-nick, 'lizmat',
+  'is new nick ok';
+
+$entry = @entries.shift;
+test-common $entry, 'Left', 11, 31, 0, 'nine', True, False,
+  'test leaving';
+
+$entry = @entries.shift;
+test-common $entry, 'Mode', 22, 47, 0, 'ChanServ', True, False,
+  'test mode';
+is $entry.flags, '+o',
+  'are the flags ok';
+is-deeply $entry.nicks, Array[Str].new('tyil'),
+  'are the nicks ok';
+
+$entry = @entries.shift;
+test-common $entry, 'Topic', 23, 48, 0, 'lizmat', True, True,
+  'test topic';
+is $entry.text, 'Perl Sucks!',
+  'is the text ok';
+
+$entry = @entries.shift;
+test-common $entry, 'Kick', 23, 50, 0, 'tyil', True, False,
+  'test kick';
+is $entry.kickee, 'lizmat',
+  'is the kickee ok';
+is-deeply $entry.spec, '(lizmat)',
+  'is the spec ok';
+
+is +@entries, 0, 'did we see all the entries';
+
+my %nicks := $log.nicks;
+is %nicks.elems, 7, 'did we see 7 nicks';
+subtest 'test all known nicks' => {
+    plan 7;
+    for <ChanServ lizmat lizmmat_ nine sena_kun tyil> -> $nick {
+        is %nicks{$nick}.elems, 1, "did we see $nick once";
+    }
+    is %nicks<MasterDuke>.elems, 2, "did we see MasterDuke twice";
+}
+
+my $raw = $path.slurp;
+my $slurped = IRC::Log::Textual.new: $raw, $date;
+isa-ok $slurped, IRC::Log::Textual;
+is $slurped.raw, $raw, 'does the raw log match';
+is $slurped.entries.elems, $nr-entries, 'did we get correct number of entries';
+is-deeply $slurped.date, $date, 'is the date correct again';
+is +$slurped.problems, 0, 'did we see any problems';
+is $slurped.nr-control-entries,      5, 'is nr control entries correct';
+is $slurped.nr-conversation-entries, 3, 'is nr conversation entries correct';
+
+is $log.update($?FILE.IO.sibling: "$filename.txt").elems, 0,
+  'Did the update without changes indicate 0 entries were added?';
+
+is $log.update($?FILE.IO.sibling: $filename ~ '-with-additions.txt').elems, 2,
+  'Did the update indicate 2 entries were added?';
+is $log.entries.elems, $nr-entries + 2, 'did we really get 2 extra entries';
+is $log.nr-control-entries,      6, 'is nr control entries correct';
+is $log.nr-conversation-entries, 4, 'is nr conversation entries correct';
+@entries = $log.entries.Seq.skip($nr-entries);
+$nr-entries += 2;
+
+$entry = @entries.shift;
+test-common $entry, 'Joined', 23, 53, 0, 'lizmat', True, False,
+  'test joining extra entry';
+
+$entry = @entries.shift;
+test-common $entry, 'Message', 23, 53, 1, 'lizmat', False, True,
+  'test message extra entry';
+is $entry.text, 'Thank you, I needed that :-)',
+  'is text ok in the message of extra entry';
+
+%nicks := $log.nicks;
+is %nicks.elems, 7, 'did we see 7 nicks again';
+subtest 'test all known nicks' => {
+    plan 7;
+    for <ChanServ lizmmat_ nine sena_kun tyil> -> $nick {
+        is %nicks{$nick}.elems, 1, "did we see $nick once again";
+    }
+    is %nicks<MasterDuke>.elems, 2, "did we see MasterDuke twice again";
+    is %nicks<lizmat>.elems, 3, "did we see lizmat thrice";
+}
 
 # vim: expandtab shiftwidth=4

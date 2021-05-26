@@ -31,7 +31,7 @@ class IRC::Log::Textual:ver<0.0.1>:auth<cpan:ELIZABETH> does IRC::Log {
         $!date = $Date;
 
         # assume spurious event without change that caused update
-        return Nil if $!raw && $!raw eq $slurped;
+        return Empty if $!raw && $!raw eq $slurped;
 
         my $to-parse;
         my int $last-hour;
@@ -105,6 +105,7 @@ class IRC::Log::Textual:ver<0.0.1>:auth<cpan:ELIZABETH> does IRC::Log {
                   || $text.starts-with('Mode is ')
                   || $text.starts-with('Topic is ')
                   || $text.starts-with('Set by ');
+                  || $text.starts-with("You're now known as ");
 
                 my int $hour   = $utc.hour;
                 my int $minute = $utc.minute;
@@ -137,11 +138,11 @@ class IRC::Log::Textual:ver<0.0.1>:auth<cpan:ELIZABETH> does IRC::Log {
                     }
                 }
                 elsif $text.starts-with('• ') {
-                    with $text.index(' ',2) -> $index {
+                    with $text.index(': ',2) -> $index {
                         self!accept: IRC::Log::Self-Reference.new:
                           :log(self), :$hour, :$minute, :$ordinal, :$pos,
                           :nick($text.substr(2,$index - 2)),
-                          :text($text.substr($index + 1));
+                          :text($text.substr($index + 2));
                         ++$!nr-conversation-entries;
                     }
                     else {
