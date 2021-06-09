@@ -50,7 +50,7 @@ sub test-common(
     }
 }
 
-plan 38 + @entries;
+plan 42 + @entries;
 
 is-deeply IRC::Log::Textual.IO2Date($path), $date,
   'was the date elided correctly';
@@ -70,6 +70,11 @@ is $log.last-target,  "2021-04-22Z23:50", 'is last target ok';
 my $picked = @entries.roll;
 is-deeply $log.this-target($picked.target), $picked,
   'can we find a randomly picked entry by target';
+
+nok @entries.head.prev, 'No previous entry before first';
+nok @entries.tail.next, 'No next entry after last';
+is-deeply @entries[3].prev, @entries[2], 'Previous entry check';
+is-deeply @entries[3].next, @entries[4], 'Next entry check';
 
 my $entry = @entries.shift;
 test-common $entry, 'Joined', 5, 36, 0, 'MasterDuke', True, False,

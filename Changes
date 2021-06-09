@@ -2,5 +2,9 @@ Revision history for IRC-Log-Textual
 
 {{$NEXT}}
 
+0.0.2  2021-06-09T22:39:52+02:00
+    - Up dependency on IRC::Log to get support for .next / .prev
+    - Add tests for .next / .prev
+
 0.0.1  2021-05-26T21:19:22+02:00
     - Initial version

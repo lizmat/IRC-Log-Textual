@@ -1,8 +1,8 @@
 use v6.*;
 
-use IRC::Log:ver<0.0.6>:auth<cpan:ELIZABETH>;
+use IRC::Log:ver<0.0.7>:auth<cpan:ELIZABETH>;
 
-class IRC::Log::Textual:ver<0.0.1>:auth<cpan:ELIZABETH> does IRC::Log {
+class IRC::Log::Textual:ver<0.0.2>:auth<cpan:ELIZABETH> does IRC::Log {
 
     multi method new(IRC::Log::Textual:U:
       IO:D $path,
