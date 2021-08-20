@@ -6,7 +6,7 @@
   "build-depends": [
   ],
   "depends": [
-    "IRC::Log:ver<0.0.7>:auth<cpan:ELIZABETH>"
+    "IRC::Log:ver<0.0.9>:auth<cpan:ELIZABETH>"
   ],
   "description": "interface to IRC logs from Textual",
   "license": "Artistic-2.0",
@@ -22,5 +22,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.0.2"
+  "version": "0.0.3"
 }
