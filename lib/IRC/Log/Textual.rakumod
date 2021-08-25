@@ -2,7 +2,7 @@ use v6.*;
 
 use IRC::Log:ver<0.0.9>:auth<cpan:ELIZABETH>;
 
-class IRC::Log::Textual:ver<0.0.3>:auth<cpan:ELIZABETH> does IRC::Log {
+class IRC::Log::Textual:ver<0.0.4>:auth<cpan:ELIZABETH> does IRC::Log {
 
     multi method new(IRC::Log::Textual:U:
       IO:D $path,
@@ -193,11 +193,12 @@ class IRC::Log::Textual:ver<0.0.3>:auth<cpan:ELIZABETH> does IRC::Log {
                         ++$!nr-control-entries;
                     }
                     orwith $text.index(' changed the topic to ') -> $index {
-                        self!accept:
-                          $!last-topic-change = IRC::Log::Topic.new:
-                            :log(self), :$hour, :$minute, :$ordinal, :$pos,
-                            :nick($text.substr(0,$index)),
-                            :text($text.substr($index + 22));
+                        my $topic := IRC::Log::Topic.new:
+                          :log(self), :$hour, :$minute, :$ordinal, :$pos,
+                          :nick($text.substr(0,$index)),
+                          :text($text.substr($index + 22));
+                        self!accept: $topic;
+                        $!last-topic-change = $topic;
                         ++$!nr-conversation-entries;
                     }
                     orwith $text.index(' kicked ') -> $index {
