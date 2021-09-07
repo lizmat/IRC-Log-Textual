@@ -2,6 +2,9 @@ Revision history for IRC-Log-Textual
 
 {{$NEXT}}
 
+0.0.6  2021-09-08T00:36:44+02:00
+    - Argh, forgot to update the dependency in the class statement
+
 0.0.5  2021-09-07T22:24:22+02:00
     - Migrate to zef ecosystem, update dependency
     - Update email address

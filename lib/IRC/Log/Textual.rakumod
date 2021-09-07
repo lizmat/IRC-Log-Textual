@@ -2,7 +2,7 @@ use v6.*;
 
 use IRC::Log:ver<0.0.10>:auth<zef:lizmat>;
 
-class IRC::Log::Textual:ver<0.0.5>:auth<cpan:ELIZABETH> does IRC::Log {
+class IRC::Log::Textual:ver<0.0.6>:auth<zef:lizmat> does IRC::Log {
 
     multi method new(IRC::Log::Textual:U:
       IO:D $path,
