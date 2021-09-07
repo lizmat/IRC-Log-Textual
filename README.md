@@ -29,7 +29,7 @@ Since Textual stores its daily file in the local time zone, specifying a path wi
 AUTHOR
 ======
 
-Elizabeth Mattijsen <liz@wenzperl.nl>
+Elizabeth Mattijsen <liz@raku.rocks>
 
 Source can be located at: https://github.com/lizmat/IRC-Log-Textual . Comments and Pull Requests are welcome.
 

@@ -1,8 +1,8 @@
 use v6.*;
 
-use IRC::Log:ver<0.0.9>:auth<cpan:ELIZABETH>;
+use IRC::Log:ver<0.0.10>:auth<zef:lizmat>;
 
-class IRC::Log::Textual:ver<0.0.4>:auth<cpan:ELIZABETH> does IRC::Log {
+class IRC::Log::Textual:ver<0.0.5>:auth<cpan:ELIZABETH> does IRC::Log {
 
     multi method new(IRC::Log::Textual:U:
       IO:D $path,
@@ -279,7 +279,7 @@ in UTC are captured.
 
 =head1 AUTHOR
 
-Elizabeth Mattijsen <liz@wenzperl.nl>
+Elizabeth Mattijsen <liz@raku.rocks>
 
 Source can be located at: https://github.com/lizmat/IRC-Log-Textual .
 Comments and Pull Requests are welcome.
