@@ -2,6 +2,9 @@ Revision history for IRC-Log-Textual
 
 {{$NEXT}}
 
+0.0.7  2021-10-23T14:29:28+02:00
+    - Up dependency
+
 0.0.6  2021-09-08T00:36:44+02:00
     - Argh, forgot to update the dependency in the class statement
 

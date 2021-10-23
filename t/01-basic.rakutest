@@ -50,7 +50,7 @@ sub test-common(
     }
 }
 
-plan 43 + @entries;
+plan 45 + @entries;
 
 is-deeply IRC::Log::Textual.IO2Date($path), $date,
   'was the date elided correctly';
@@ -64,6 +64,8 @@ is +$log.problems, 0, 'did we see any problems';
 is $log.nr-control-entries,      5, 'is nr control entries correct';
 is $log.nr-conversation-entries, 3, 'is nr conversation entries correct';
 
+is $log.first-entry.target, "2021-04-22Z05:36", 'is first entry ok';
+is $log.last-entry.target,  "2021-04-22Z23:50", 'is last entry ok';
 is $log.first-target, "2021-04-22Z05:36", 'is first target ok';
 is $log.last-target,  "2021-04-22Z23:50", 'is last target ok';
 is $log.last-topic-change.text, "Perl Sucks!", 'is last topic change ok';
