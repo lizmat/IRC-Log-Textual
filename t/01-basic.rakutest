@@ -7,6 +7,7 @@ my $pos      = -1;
 
 my $path     = $?FILE.IO.sibling: "$filename.txt";
 my $log      = IRC::Log::Textual.new: $path;
+
 my @entries    = $log.entries.List;
 my $nr-entries = +@entries;
 
@@ -50,7 +51,7 @@ sub test-common(
     }
 }
 
-plan 45 + @entries;
+plan 51 + @entries;
 
 is-deeply IRC::Log::Textual.IO2Date($path), $date,
   'was the date elided correctly';
@@ -64,8 +65,18 @@ is +$log.problems, 0, 'did we see any problems';
 is $log.nr-control-entries,      5, 'is nr control entries correct';
 is $log.nr-conversation-entries, 3, 'is nr conversation entries correct';
 
-is $log.first-entry.target, "2021-04-22Z05:36", 'is first entry ok';
-is $log.last-entry.target,  "2021-04-22Z23:50", 'is last entry ok';
+my $first-entry = $log.first-entry;
+is $first-entry.target, "2021-04-22Z05:36", 'is first entry ok';
+is $first-entry.pos, 0, 'is first entry position ok';
+is-deeply $first-entry.prev, Nil, 'do we get Nil on out of bounds on .prev';
+is $first-entry.next.pos, 1, 'is second entry position ok';
+
+my $last-entry = $log.last-entry;
+is $last-entry.target,  "2021-04-22Z23:50", 'is last entry ok';
+is $last-entry.pos,  7, 'is last entry position ok';
+is-deeply $last-entry.next, Nil, 'do we get Nil on out of bounds on .next';
+is $last-entry.prev.pos, 6, 'is penultimate position ok';
+
 is $log.first-target, "2021-04-22Z05:36", 'is first target ok';
 is $log.last-target,  "2021-04-22Z23:50", 'is last target ok';
 is $log.last-topic-change.text, "Perl Sucks!", 'is last topic change ok';
