@@ -1,8 +1,8 @@
 use v6.*;
 
-use IRC::Log:ver<0.0.13>:auth<zef:lizmat>;
+use IRC::Log:ver<0.0.14>:auth<zef:lizmat>;
 
-class IRC::Log::Textual:ver<0.0.8>:auth<zef:lizmat> does IRC::Log {
+class IRC::Log::Textual:ver<0.0.9>:auth<zef:lizmat> does IRC::Log {
 
     # Custom .new to handle fact that Textual stores files per date
     # in **LOCAL** time rather than in UTC.
