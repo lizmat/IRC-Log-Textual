@@ -12,8 +12,8 @@ my @entries    = $log.entries.List;
 my $nr-entries = +@entries;
 
 sub test-common(
-  $entry, $class, $hour, $minute, $ordinal, $nick, $control, $conversation,
-  $comment,
+  $entry, $class, $hour, $minute, $ordinal, $nick-index, $nick,
+  $control, $conversation, $comment,
 ) {
     subtest $comment => {
         plan 15;
@@ -62,7 +62,7 @@ is @entries.map(*.gist).join("\n"),
 isa-ok $log, IRC::Log::Textual;
 is-deeply $log.date, $date, 'is the date correct';
 is +$log.problems, 0, 'did we see any problems';
-is $log.nr-control-entries,      5, 'is nr control entries correct';
+is $log.nr-control-entries,      6, 'is nr control entries correct';
 is $log.nr-conversation-entries, 3, 'is nr conversation entries correct';
 
 my $first-entry = $log.first-entry;
@@ -91,33 +91,33 @@ is-deeply @entries[3].prev, @entries[2], 'Previous entry check';
 is-deeply @entries[3].next, @entries[4], 'Next entry check';
 
 my $entry = @entries.shift;
-test-common $entry, 'Joined', 5, 36, 0, 'MasterDuke', True, False,
+test-common $entry, 'Joined', 5, 36, 0, 1, 'MasterDuke', True, False,
   'test joining';
 
 $entry = @entries.shift;
-test-common $entry, 'Message', 8, 1, 0, 'MasterDuke', False, True,
+test-common $entry, 'Message', 8, 1, 0, 1, 'MasterDuke', False, True,
   'test message';
 is $entry.text, 'any objections to merging ?',
   'is text ok in the message';
 
 $entry = @entries.shift;
-test-common $entry, 'Self-Reference', 8, 1, 1, 'sena_kun', False, True,
+test-common $entry, 'Self-Reference', 8, 1, 1, 2, 'sena_kun', False, True,
   'test message';
 is $entry.text, 'still awaits the release blocker',
   'is text ok in the self-reference';
 
 $entry = @entries.shift;
-test-common $entry, 'Nick', 9, 35, 0, 'lizmmat_', True, False,
+test-common $entry, 'Nick', 9, 35, 0, 3, 'lizmmat_', True, False,
   'test nick change';
 is $entry.new-nick, 'lizmat',
   'is new nick ok';
 
 $entry = @entries.shift;
-test-common $entry, 'Left', 11, 31, 0, 'nine', True, False,
+test-common $entry, 'Left', 11, 31, 0, 4, 'nine', True, False,
   'test leaving';
 
 $entry = @entries.shift;
-test-common $entry, 'Mode', 22, 47, 0, 'ChanServ', True, False,
+test-common $entry, 'Mode', 22, 47, 0, 5, 'ChanServ', True, False,
   'test mode';
 is $entry.flags, '+o',
   'are the flags ok';
@@ -125,13 +125,13 @@ is-deeply $entry.nicks, Array[Str].new('tyil'),
   'are the nicks ok';
 
 $entry = @entries.shift;
-test-common $entry, 'Topic', 23, 48, 0, 'lizmat', True, True,
+test-common $entry, 'Topic', 23, 48, 0, 6, 'lizmat', True, True,
   'test topic';
 is $entry.text, 'Perl Sucks!',
   'is the text ok';
 
 $entry = @entries.shift;
-test-common $entry, 'Kick', 23, 50, 0, 'tyil', True, False,
+test-common $entry, 'Kick', 23, 50, 0, 7, 'tyil', True, False,
   'test kick';
 is $entry.kickee, 'lizmat',
   'is the kickee ok';
@@ -140,14 +140,13 @@ is-deeply $entry.spec, '(lizmat)',
 
 is +@entries, 0, 'did we see all the entries';
 
-my %nicks := $log.nicks;
-is %nicks.elems, 7, 'did we see 7 nicks';
+is $log.nick-names.elems, 8, 'did we see 1 + 7 nicks';
 subtest 'test all known nicks' => {
     plan 7;
     for <ChanServ lizmat lizmmat_ nine sena_kun tyil> -> $nick {
-        is %nicks{$nick}.elems, 1, "did we see $nick once";
+        is $log.entries-of-nick($nick).elems, 1, "did we see $nick once";
     }
-    is %nicks<MasterDuke>.elems, 2, "did we see MasterDuke twice";
+    is $log.entries-of-nick('MasterDuke').elems, 2, "saw MasterDuke twice";
 }
 
 my $raw = $path.slurp;
@@ -157,7 +156,7 @@ is $slurped.raw, $raw, 'does the raw log match';
 is $slurped.entries.elems, $nr-entries, 'did we get correct number of entries';
 is-deeply $slurped.date, $date, 'is the date correct again';
 is +$slurped.problems, 0, 'did we see any problems';
-is $slurped.nr-control-entries,      5, 'is nr control entries correct';
+is $slurped.nr-control-entries,      6, 'is nr control entries correct';
 is $slurped.nr-conversation-entries, 3, 'is nr conversation entries correct';
 
 is $log.update($?FILE.IO.sibling: "$filename.txt").elems, 0,
@@ -166,30 +165,29 @@ is $log.update($?FILE.IO.sibling: "$filename.txt").elems, 0,
 is $log.update($?FILE.IO.sibling: $filename ~ '-with-additions.txt').elems, 2,
   'Did the update indicate 2 entries were added?';
 is $log.entries.elems, $nr-entries + 2, 'did we really get 2 extra entries';
-is $log.nr-control-entries,      6, 'is nr control entries correct';
+is $log.nr-control-entries,      7, 'is nr control entries correct';
 is $log.nr-conversation-entries, 4, 'is nr conversation entries correct';
 @entries = $log.entries.Seq.skip($nr-entries);
 $nr-entries += 2;
 
 $entry = @entries.shift;
-test-common $entry, 'Joined', 23, 53, 0, 'lizmat', True, False,
+test-common $entry, 'Joined', 23, 53, 0, 6, 'lizmat', True, False,
   'test joining extra entry';
 
 $entry = @entries.shift;
-test-common $entry, 'Message', 23, 53, 1, 'lizmat', False, True,
+test-common $entry, 'Message', 23, 53, 1, 6, 'lizmat', False, True,
   'test message extra entry';
 is $entry.text, 'Thank you, I needed that :-)',
   'is text ok in the message of extra entry';
 
-%nicks := $log.nicks;
-is %nicks.elems, 7, 'did we see 7 nicks again';
+is $log.nick-names.elems, 8, 'did we see 1 + 7 nicks again';
 subtest 'test all known nicks' => {
     plan 7;
     for <ChanServ lizmmat_ nine sena_kun tyil> -> $nick {
-        is %nicks{$nick}.elems, 1, "did we see $nick once again";
+        is $log.entries-of-nick($nick).elems, 1, "did we see $nick once again";
     }
-    is %nicks<MasterDuke>.elems, 2, "did we see MasterDuke twice again";
-    is %nicks<lizmat>.elems, 3, "did we see lizmat thrice";
+    is $log.entries-of-nick('MasterDuke').elems, 2, "saw MasterDuke twice";
+    is $log.entries-of-nick('lizmat').elems, 3, "did we see lizmat thrice";
 }
 
 # vim: expandtab shiftwidth=4

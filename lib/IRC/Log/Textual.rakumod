@@ -1,8 +1,6 @@
-use v6.*;
+use IRC::Log:ver<0.0.15>:auth<zef:lizmat>;
 
-use IRC::Log:ver<0.0.14>:auth<zef:lizmat>;
-
-class IRC::Log::Textual:ver<0.0.9>:auth<zef:lizmat> does IRC::Log {
+class IRC::Log::Textual:ver<0.0.10>:auth<zef:lizmat> does IRC::Log {
 
     # Custom .new to handle fact that Textual stores files per date
     # in **LOCAL** time rather than in UTC.
@@ -26,19 +24,8 @@ class IRC::Log::Textual:ver<0.0.9>:auth<zef:lizmat> does IRC::Log {
         self.new($slurped, $Date)
     }
 
-    # accept an entry
-    method !accept(\entry --> Nil) {
-        with %!nicks{entry.nick} -> $entries-by-nick {
-            $entries-by-nick.push($!entries.push(entry));
-        }
-        else {
-            (%!nicks{entry.nick} := IterationBuffer.CREATE)
-              .push($!entries.push(entry));
-        }
-    }
-
     method !problem(Str:D $line, Int:D $linenr, Str:D $reason --> Nil) {
-        @!problems[@!problems.elems] := "Line $linenr: $reason" => $line;
+        $!problems.push: "Line $linenr: $reason" => $line;
     }
 
     method parse(IRC::Log::Textual:D:
@@ -55,7 +42,6 @@ class IRC::Log::Textual:ver<0.0.9>:auth<zef:lizmat> does IRC::Log {
         my int $last-minute;
         my int $ordinal;
         my int $linenr;
-        my int $pos;
 
         # done a parse before for this object
         if %!state -> %state {
@@ -66,15 +52,12 @@ class IRC::Log::Textual:ver<0.0.9>:auth<zef:lizmat> does IRC::Log {
                 $last-minute = %state<last-minute>;
                 $ordinal     = %state<ordinal>;
                 $linenr      = %state<linenr>;
-                $pos         = $!entries.elems;
                 $to-parse   := $slurped.substr($!raw.chars);
             }
 
             # log appears to be altered, run it from scratch!
             else {
-                $!entries.clear;
-                %!nicks = @!problems = ();
-                $!nr-control-entries = $!nr-conversation-entries = 0;
+                self.clear;
                 $last-hour = $last-minute = $linenr = -1;
                 $to-parse  = $slurped;
             }
@@ -121,20 +104,16 @@ class IRC::Log::Textual:ver<0.0.9>:auth<zef:lizmat> does IRC::Log {
 
                 if $text.starts-with('<') {
                     with $text.index('> ') -> $index {
-                        self!accept: IRC::Log::Message.new:
-                          :log(self), :$hour, :$minute, :$ordinal, :$pos,
+                        IRC::Log::Message.new:
+                          :log(self), :$hour, :$minute, :$ordinal,
                           :nick($text.substr(1,$index - 1)),
                           :text($text.substr($index + 2));
-                        ++$!nr-conversation-entries;
-                        ++$pos;
                     }
                     orwith $text.index('> ', :ignoremark) -> $index {
-                        self!accept: IRC::Log::Message.new:
-                          :log(self), :$hour, :$minute, :$ordinal, :$pos,
+                        IRC::Log::Message.new:
+                          :log(self), :$hour, :$minute, :$ordinal,
                           :nick($text.substr(1,$index - 1)),
                           :text($text.substr($index + 2));
-                        ++$!nr-conversation-entries;
-                        ++$pos;
                     }
                     else {
                         self!problem($line, $linenr,
@@ -143,12 +122,10 @@ class IRC::Log::Textual:ver<0.0.9>:auth<zef:lizmat> does IRC::Log {
                 }
                 elsif $text.starts-with('• ') {
                     with $text.index(': ',2) -> $index {
-                        self!accept: IRC::Log::Self-Reference.new:
-                          :log(self), :$hour, :$minute, :$ordinal, :$pos,
+                        IRC::Log::Self-Reference.new:
+                          :log(self), :$hour, :$minute, :$ordinal,
                           :nick($text.substr(2,$index - 2)),
                           :text($text.substr($index + 2));
-                        ++$!nr-conversation-entries;
-                        ++$pos;
                     }
                     else {
                         self!problem($line, $linenr,
@@ -163,18 +140,14 @@ class IRC::Log::Textual:ver<0.0.9>:auth<zef:lizmat> does IRC::Log {
                         with $text.index(') ',$par-open) -> $par-close {
                             my $message := $text.substr($par-close + 2);
                             if $message.starts-with('joined ') {
-                                self!accept: IRC::Log::Joined.new:
+                                IRC::Log::Joined.new:
                                   :log(self), :$hour, :$minute, :$ordinal,
-                                  :$pos, :$nick;
-                                ++$!nr-control-entries;
-                                ++$pos;
+                                  :$nick;
                             }
                             elsif $message.starts-with('left ') {
-                                self!accept: IRC::Log::Left.new:
+                                IRC::Log::Left.new:
                                   :log(self), :$hour, :$minute, :$ordinal,
-                                  :$pos, :$nick;
-                                ++$!nr-control-entries;
-                                ++$pos;
+                                  :$nick;
                             }
                             else {
                                 self!problem($line, $linenr,
@@ -186,46 +159,36 @@ class IRC::Log::Textual:ver<0.0.9>:auth<zef:lizmat> does IRC::Log {
 
                     # not a verbose control message
                     with $text.index(' is now known as ') -> $index {
-                        self!accept: IRC::Log::Nick-Change.new:
-                          :log(self), :$hour, :$minute, :$ordinal, :$pos,
+                        IRC::Log::Nick-Change.new:
+                          :log(self), :$hour, :$minute, :$ordinal,
                           :nick($text.substr(0,$index)),
                           :new-nick($text.substr($index + 17));
-                        ++$!nr-control-entries;
-                        ++$pos;
                     }
                     orwith $text.index(' sets mode ') -> $index {
                         my @nicks  = $text.substr($index + 11).words;
                         my $flags := @nicks.shift;
-                        self!accept: IRC::Log::Mode.new:
-                          :log(self), :$hour, :$minute, :$ordinal, :$pos,
+                        IRC::Log::Mode.new:
+                          :log(self), :$hour, :$minute, :$ordinal,
                           :nick($text.substr(0,$index)),
                           :$flags, :@nicks;
-                        ++$!nr-control-entries;
-                        ++$pos;
                     }
                     orwith $text.index(' changed the topic to ') -> $index {
-                        my $topic := IRC::Log::Topic.new:
-                          :log(self), :$hour, :$minute, :$ordinal, :$pos,
+                        self.last-topic-change = IRC::Log::Topic.new:
+                          :log(self), :$hour, :$minute, :$ordinal,
                           :nick($text.substr(0,$index)),
                           :text($text.substr($index + 22));
-                        self!accept: $topic;
-                        $!last-topic-change = $topic;
-                        ++$!nr-conversation-entries;
-                        ++$pos;
                     }
                     orwith $text.index(' kicked ') -> $index {
                         with $text.index(
                           ' from the channel ', $index
                         ) -> $spec {
-                            self!accept: IRC::Log::Kick.new:
+                            IRC::Log::Kick.new:
                               :log(self), :$hour, :$minute, :$ordinal,
-                              :$pos, :nick($text.substr(0,$index)),
+                              :nick($text.substr(0,$index)),
                               :kickee($text.substr(
                                 $index + 8, $spec - $index - 8
                               )),
                               :spec($text.substr($spec + 18));
-                            ++$!nr-control-entries;
-                            ++$pos;
                         }
                         else {
                             self!problem($line, $linenr,
