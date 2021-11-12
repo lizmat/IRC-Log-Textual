@@ -2,7 +2,7 @@ use Test;
 use IRC::Log::Textual;
 
 my $filename = '2021-04-22';
-my $date     = $filename.Date;
+my $date     = $filename;
 my $pos      = -1;
 
 my $path     = $?FILE.IO.sibling: "$filename.txt";
@@ -51,9 +51,9 @@ sub test-common(
     }
 }
 
-plan 51 + @entries;
+plan 63 + @entries;
 
-is-deeply IRC::Log::Textual.IO2Date($path), $date,
+is-deeply IRC::Log::Textual.IO2Date($path), $date.Date,
   'was the date elided correctly';
 is @entries.map(*.gist).join("\n"),
   $?FILE.IO.sibling("$filename.gist").slurp.chomp,
@@ -61,7 +61,7 @@ is @entries.map(*.gist).join("\n"),
 
 isa-ok $log, IRC::Log::Textual;
 is-deeply $log.date, $date, 'is the date correct';
-is +$log.problems, 0, 'did we see any problems';
+is $log.problems.elems, 0, 'did we see any problems';
 is $log.nr-control-entries,      6, 'is nr control entries correct';
 is $log.nr-conversation-entries, 3, 'is nr conversation entries correct';
 
@@ -82,8 +82,41 @@ is $log.last-target,  "2021-04-22Z23:50", 'is last target ok';
 is $log.last-topic-change.text, "Perl Sucks!", 'is last topic change ok';
 
 my $picked = @entries.roll;
-is-deeply $log.this-target($picked.target), $picked,
+is-deeply $log.target-entry($picked.target), $picked,
   'can we find a randomly picked entry by target';
+
+given "2021-04-22Z09:35" -> $target {
+    is $log.target-index($target), 3, 'is the target index correct';
+    is-deeply $log.entries-lt-target($target), @entries[0..2],
+      'did we get entries before target';
+    is-deeply $log.entries-le-target($target), @entries[0..3],
+      'did we get entries until target';
+    is-deeply $log.entries-ge-target($target), @entries[3..7],
+      'did we get entries from target';
+    is-deeply $log.entries-gt-target($target), @entries[4..7],
+      'did we get entries after target';
+}
+
+given "2021-04-22Z05:36" -> $target {
+    is-deeply $log.entries-lt-target($target), Empty,
+      'did we get no entries before first target';
+    is-deeply $log.entries-le-target($target), (@entries[0],),
+      'did we get entry of first target';
+}
+
+given "2021-04-22Z23:50" -> $target {
+    is-deeply $log.entries-ge-target($target), (@entries[7],),
+      'did we get entry of last target';
+    is-deeply $log.entries-gt-target($target), Empty,
+      'did we get no entries after last target';
+}
+
+is-deeply $log.entries-of-nicks(<lizmat lizmmat_>),
+  @entries[3,6], 'did we see all lizmats entries';
+is-deeply $log.entries-of-nicks(<lizmat woolfy>),
+  (@entries[6],), 'did we see all lizmats entries';
+is-deeply $log.entries-of-nicks(<snoopy charlie>),
+  Empty, 'did we see not see any snoopy and charlie entries';
 
 nok @entries.head.prev, 'No previous entry before first';
 nok @entries.tail.next, 'No next entry after last';
@@ -155,7 +188,7 @@ isa-ok $slurped, IRC::Log::Textual;
 is $slurped.raw, $raw, 'does the raw log match';
 is $slurped.entries.elems, $nr-entries, 'did we get correct number of entries';
 is-deeply $slurped.date, $date, 'is the date correct again';
-is +$slurped.problems, 0, 'did we see any problems';
+is $slurped.problems.elems, 0, 'did we see any problems';
 is $slurped.nr-control-entries,      6, 'is nr control entries correct';
 is $slurped.nr-conversation-entries, 3, 'is nr conversation entries correct';
 

@@ -2,6 +2,12 @@ Revision history for IRC-Log-Textual
 
 {{$NEXT}}
 
+0.0.11  2021-11-12T18:29:37+01:00
+    - Upped dependency on IRC::Log
+    - Added tests for .target-index, .target-entry, .entries-lt-target,
+      .entries-le-target, .entries-ge-target, .entries-gt-target
+    - Follow API-changes to .parse
+
 0.0.10  2021-11-10T10:07:12+01:00
     - Upped dependency on IRC::Log and the consequent refactor in
       the parse logic (largely a simplification, fortunately).

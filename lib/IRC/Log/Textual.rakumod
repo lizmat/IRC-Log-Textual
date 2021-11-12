@@ -1,6 +1,6 @@
-use IRC::Log:ver<0.0.15>:auth<zef:lizmat>;
+use IRC::Log:ver<0.0.16>:auth<zef:lizmat>;
 
-class IRC::Log::Textual:ver<0.0.10>:auth<zef:lizmat> does IRC::Log {
+class IRC::Log::Textual:ver<0.0.11>:auth<zef:lizmat> does IRC::Log {
 
     # Custom .new to handle fact that Textual stores files per date
     # in **LOCAL** time rather than in UTC.
@@ -28,57 +28,20 @@ class IRC::Log::Textual:ver<0.0.10>:auth<zef:lizmat> does IRC::Log {
         $!problems.push: "Line $linenr: $reason" => $line;
     }
 
-    method parse(IRC::Log::Textual:D:
-      Str:D $slurped,
-      Date:D $Date
-    ) is implementation-detail {
-        $!date = $Date;
+    method parse-log(IRC::Log::Textual:D:
+      str $text,
+          $last-hour   is raw,
+          $last-minute is raw,
+          $ordinal     is raw,
+          $linenr      is raw,
+    --> Nil) is implementation-detail {
 
-        # assume spurious event without change that caused update
-        return Empty if $!raw && $!raw eq $slurped;
-
-        my $to-parse;
-        my int $last-hour;
-        my int $last-minute;
-        my int $ordinal;
-        my int $linenr;
-
-        # done a parse before for this object
-        if %!state -> %state {
-
-            # adding new lines on log
-            if $slurped.starts-with($!raw) {
-                $last-hour   = %state<last-hour>;
-                $last-minute = %state<last-minute>;
-                $ordinal     = %state<ordinal>;
-                $linenr      = %state<linenr>;
-                $to-parse   := $slurped.substr($!raw.chars);
-            }
-
-            # log appears to be altered, run it from scratch!
-            else {
-                self.clear;
-                $last-hour = $last-minute = $linenr = -1;
-                $to-parse  = $slurped;
-            }
-        }
-
-        # first parse
-        else {
-            $last-hour = $last-minute = $linenr = -1;
-            $to-parse = $slurped;
-        }
-
-        # we need a "push" that does not containerize
-        my int $initial-nr-entries = $!entries.elems;
-        my int $accepted = $initial-nr-entries - 1;
-
-        for $to-parse.split("\n").grep({ ++$linenr; .chars }) -> $line {
+        for $text.split("\n").grep({ ++$linenr; .chars }) -> $line {
 
             if $line.starts-with('[') && $line.substr-eq('] ',25)
               && $line.substr(1,24).DateTime -> $DateTime {
                 my $utc := $DateTime.utc;
-                next if $utc.Date ne $Date;
+                next if $utc.Date ne $!date;
 
                 # Textual session markers
                 my $text := $line.substr(27);
@@ -206,13 +169,6 @@ class IRC::Log::Textual:ver<0.0.10>:auth<zef:lizmat> does IRC::Log {
                   "no timestamp found");
             }
         }
-
-        # save current state in case of updates
-        $!raw   = $slurped;
-        %!state = :parsed($slurped.chars),
-          :$last-hour, :$last-minute, :$ordinal, :$linenr;
-
-        $!entries.Seq.skip($initial-nr-entries)
     }
 }
 
