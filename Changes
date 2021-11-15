@@ -2,6 +2,10 @@ Revision history for IRC-Log-Textual
 
 {{$NEXT}}
 
+0.0.12  2021-11-15T12:41:03+01:00
+    - Upped dependency on IRC::Log
+    - Added tests for .search functionality
+
 0.0.11  2021-11-12T18:29:37+01:00
     - Upped dependency on IRC::Log
     - Added tests for .target-index, .target-entry, .entries-lt-target,

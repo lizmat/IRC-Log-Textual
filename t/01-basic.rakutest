@@ -51,7 +51,7 @@ sub test-common(
     }
 }
 
-plan 63 + @entries;
+plan 64 + @entries;
 
 is-deeply IRC::Log::Textual.IO2Date($path), $date.Date,
   'was the date elided correctly';
@@ -60,7 +60,8 @@ is @entries.map(*.gist).join("\n"),
   'does .gist generate the raw log again';
 
 isa-ok $log, IRC::Log::Textual;
-is-deeply $log.date, $date, 'is the date correct';
+is-deeply $log.date, $date,      'is the date correct';
+is-deeply $log.Date, $date.Date, 'is the Date correct';
 is $log.problems.elems, 0, 'did we see any problems';
 is $log.nr-control-entries,      6, 'is nr control entries correct';
 is $log.nr-conversation-entries, 3, 'is nr conversation entries correct';

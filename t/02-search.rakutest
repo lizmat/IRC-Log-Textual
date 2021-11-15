@@ -1,0 +1,88 @@
+use Test;
+use IRC::Log::Textual;
+
+my $filename = '2021-04-22-with-additions.txt';
+my $Date     = $filename.substr(0,10).Date;
+my $path     = $?FILE.IO.sibling: $filename;
+my $log      = IRC::Log::Textual.new: $path, $Date;
+my @targets  = $log.entries.List.map: *.target;
+my @all      = ^@targets;
+
+sub search(@indices, |capture) is test-assertion {
+    subtest "Checking '{capture.raku}'" => {
+        plan 2;
+
+        is-deeply
+          $log.search(|capture).map(*.target),
+          @targets[@indices],
+          'forward';
+
+        is-deeply
+          $log.search(:reverse, |capture).map(*.target),
+          @targets[@indices.reverse],
+          'reverse';
+    }
+}
+
+plan 46;
+
+search @all;
+search @all, :lt-target<2021-04-23Z00:42>;
+search @all, :le-target<2021-04-23Z00:42>;
+search @all, :ge-target<2021-04-21Z23:48>;
+search @all, :gt-target<2021-04-21Z23:48>;
+
+search (1,2,6,9),       :conversation;
+search (0,3,4,5,6,7,8), :control;
+
+search (),   :lt-target<2021-04-22Z05:36>;
+search (0,), :le-target<2021-04-22Z05:36>;
+search (9,), :ge-target<2021-04-22Z23:53-0001>;
+search (),   :gt-target<2021-04-22Z23:53-0001>;
+
+search (0,1),       :lt-target<2021-04-22Z08:01-0001>;
+search (0,1,2),     :le-target<2021-04-22Z08:01-0001>;
+search (5,6,7,8,9), :ge-target<2021-04-22Z22:47>;
+search (  6,7,8,9), :gt-target<2021-04-22Z22:47>;
+
+search (1,2,3,4), :ge-target<2021-04-22Z08:01>, :lt-target<2021-04-22Z22:47>;
+search (),        :le-target<2021-04-22Z08:01>, :gt-target<2021-04-22Z22:47>;
+
+search (6,8,9),   :nicks<lizmat>;
+search (6,8,9),   :nicks<lizmat japhb>;
+search (3,6,8,9), :nicks<lizmat lizmmat_>;
+search (),        :nicks<lizmad japhc>;
+
+search (6,), :contains<Sucks>;
+search (),   :contains<sucks>;
+search (6,), :contains<sucks>, :ignorecase;
+search (6,), :contains<Sucks>, :ignorecase;
+
+search (9,), :contains<I you>, :all;
+
+search (1,2,6,9), :contains<a>;
+search (1,2),     :contains<b>;
+search (1,2,6,9), :contains<t>;
+search (9,),      :contains<T>;
+
+search (2,9), :contains<till eeded>;
+search (2,9), :contains<TILL EEDED>, :ignorecase;
+
+search (9,),  :starts-with<Thank>;
+search (9,),  :starts-with<thank>, :ignorecase;
+search (),    :starts-with<foo>;
+search (1,9), :starts-with<Thank Any>, :ignorecase;
+
+search (9,),  :words<needed>;
+search (9,),  :words<needed>, :ignorecase;
+search (),    :words<Needed>;
+search (9,),  :words<Needed>, :ignorecase;
+search (),    :words<need>;
+search (2,9), :words<STILL NEEDED>, :ignorecase;
+
+search (),    :matches(/ foo /);
+search (2,),  :matches(/ awaits /);
+search (1,2), :matches(/ << a \w+ /);
+search (2,9), :matches(/ << th [ e | at ] >> /);
+
+# vim: expandtab shiftwidth=4
