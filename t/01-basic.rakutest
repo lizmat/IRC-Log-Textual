@@ -112,11 +112,11 @@ given "2021-04-22Z23:50" -> $target {
       'did we get no entries after last target';
 }
 
-is-deeply $log.entries-of-nicks(<lizmat lizmmat_>),
+is-deeply $log.entries-of-nick-names(<lizmat lizmmat_>),
   @entries[3,6], 'did we see all lizmats entries';
-is-deeply $log.entries-of-nicks(<lizmat woolfy>),
+is-deeply $log.entries-of-nick-names(<lizmat woolfy>),
   (@entries[6],), 'did we see all lizmats entries';
-is-deeply $log.entries-of-nicks(<snoopy charlie>),
+is-deeply $log.entries-of-nick-names(<snoopy charlie>),
   Empty, 'did we see not see any snoopy and charlie entries';
 
 nok @entries.head.prev, 'No previous entry before first';
@@ -155,7 +155,7 @@ test-common $entry, 'Mode', 22, 47, 0, 5, 'ChanServ', True, False,
   'test mode';
 is $entry.flags, '+o',
   'are the flags ok';
-is-deeply $entry.nicks, Array[Str].new('tyil'),
+is-deeply $entry.nick-names, Array[Str].new('tyil'),
   'are the nicks ok';
 
 $entry = @entries.shift;

@@ -48,10 +48,10 @@ search (  6,7,8,9), :gt-target<2021-04-22Z22:47>;
 search (1,2,3,4), :ge-target<2021-04-22Z08:01>, :lt-target<2021-04-22Z22:47>;
 search (),        :le-target<2021-04-22Z08:01>, :gt-target<2021-04-22Z22:47>;
 
-search (6,8,9),   :nicks<lizmat>;
-search (6,8,9),   :nicks<lizmat japhb>;
-search (3,6,8,9), :nicks<lizmat lizmmat_>;
-search (),        :nicks<lizmad japhc>;
+search (6,8,9),   :nick-names<lizmat>;
+search (6,8,9),   :nick-names<lizmat japhb>;
+search (3,6,8,9), :nick-names<lizmat lizmmat_>;
+search (),        :nick-names<lizmad japhc>;
 
 search (6,), :contains<Sucks>;
 search (),   :contains<sucks>;

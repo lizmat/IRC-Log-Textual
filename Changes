@@ -2,6 +2,10 @@ Revision history for IRC-Log-Textual
 
 {{$NEXT}}
 
+0.0.13  2021-11-16T21:41:34+01:00
+    - Upped dependency on IRC::Log
+    - Adapt to new .parse-log interface
+
 0.0.12  2021-11-15T12:41:03+01:00
     - Upped dependency on IRC::Log
     - Added tests for .search functionality

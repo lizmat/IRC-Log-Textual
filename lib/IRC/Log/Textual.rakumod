@@ -1,6 +1,6 @@
-use IRC::Log:ver<0.0.17>:auth<zef:lizmat>;
+use IRC::Log:ver<0.0.18>:auth<zef:lizmat>;
 
-class IRC::Log::Textual:ver<0.0.12>:auth<zef:lizmat> does IRC::Log {
+class IRC::Log::Textual:ver<0.0.13>:auth<zef:lizmat> does IRC::Log {
 
     # Custom .new to handle fact that Textual stores files per date
     # in **LOCAL** time rather than in UTC.
@@ -20,7 +20,7 @@ class IRC::Log::Textual:ver<0.0.12>:auth<zef:lizmat> does IRC::Log {
           ($before.slurp   if $before.e)
           ~ ($path.slurp   if $path.e)
           ~ ($after.slurp  if $after.e);
-        
+
         self.new($slurped, $Date)
     }
 
@@ -30,10 +30,12 @@ class IRC::Log::Textual:ver<0.0.12>:auth<zef:lizmat> does IRC::Log {
 
     method parse-log(IRC::Log::Textual:D:
       str $text,
-          $last-hour   is raw,
-          $last-minute is raw,
-          $ordinal     is raw,
-          $linenr      is raw,
+          $last-hour               is raw,
+          $last-minute             is raw,
+          $ordinal                 is raw,
+          $linenr                  is raw,
+          $nr-control-entries      is raw,
+          $nr-conversation-entries is raw,
     --> Nil) is implementation-detail {
 
         for $text.split("\n").grep({ ++$linenr; .chars }) -> $line {
@@ -71,12 +73,14 @@ class IRC::Log::Textual:ver<0.0.12>:auth<zef:lizmat> does IRC::Log {
                           :log(self), :$hour, :$minute, :$ordinal,
                           :nick($text.substr(1,$index - 1)),
                           :text($text.substr($index + 2));
+                        ++$nr-conversation-entries;
                     }
                     orwith $text.index('> ', :ignoremark) -> $index {
                         IRC::Log::Message.new:
                           :log(self), :$hour, :$minute, :$ordinal,
                           :nick($text.substr(1,$index - 1)),
                           :text($text.substr($index + 2));
+                        ++$nr-conversation-entries;
                     }
                     else {
                         self!problem($line, $linenr,
@@ -89,6 +93,7 @@ class IRC::Log::Textual:ver<0.0.12>:auth<zef:lizmat> does IRC::Log {
                           :log(self), :$hour, :$minute, :$ordinal,
                           :nick($text.substr(2,$index - 2)),
                           :text($text.substr($index + 2));
+                        ++$nr-conversation-entries;
                     }
                     else {
                         self!problem($line, $linenr,
@@ -106,11 +111,13 @@ class IRC::Log::Textual:ver<0.0.12>:auth<zef:lizmat> does IRC::Log {
                                 IRC::Log::Joined.new:
                                   :log(self), :$hour, :$minute, :$ordinal,
                                   :$nick;
+                                ++$nr-control-entries;
                             }
                             elsif $message.starts-with('left ') {
                                 IRC::Log::Left.new:
                                   :log(self), :$hour, :$minute, :$ordinal,
                                   :$nick;
+                                ++$nr-control-entries;
                             }
                             else {
                                 self!problem($line, $linenr,
@@ -126,20 +133,24 @@ class IRC::Log::Textual:ver<0.0.12>:auth<zef:lizmat> does IRC::Log {
                           :log(self), :$hour, :$minute, :$ordinal,
                           :nick($text.substr(0,$index)),
                           :new-nick($text.substr($index + 17));
+                        ++$nr-control-entries;
                     }
                     orwith $text.index(' sets mode ') -> $index {
-                        my @nicks  = $text.substr($index + 11).words;
-                        my $flags := @nicks.shift;
+                        my @nick-names = $text.substr($index + 11).words;
+                        my $flags     := @nick-names.shift;
                         IRC::Log::Mode.new:
                           :log(self), :$hour, :$minute, :$ordinal,
                           :nick($text.substr(0,$index)),
-                          :$flags, :@nicks;
+                          :$flags, :@nick-names;
+                        ++$nr-control-entries;
                     }
                     orwith $text.index(' changed the topic to ') -> $index {
                         self.last-topic-change = IRC::Log::Topic.new:
                           :log(self), :$hour, :$minute, :$ordinal,
                           :nick($text.substr(0,$index)),
                           :text($text.substr($index + 22));
+                        ++$nr-control-entries;
+                        ++$nr-conversation-entries;
                     }
                     orwith $text.index(' kicked ') -> $index {
                         with $text.index(
@@ -152,6 +163,7 @@ class IRC::Log::Textual:ver<0.0.12>:auth<zef:lizmat> does IRC::Log {
                                 $index + 8, $spec - $index - 8
                               )),
                               :spec($text.substr($spec + 18));
+                            ++$nr-control-entries;
                         }
                         else {
                             self!problem($line, $linenr,
