@@ -51,7 +51,7 @@ sub test-common(
     }
 }
 
-plan 64 + @entries;
+plan 65 + @entries;
 
 is-deeply IRC::Log::Textual.IO2Date($path), $date.Date,
   'was the date elided correctly';
@@ -223,5 +223,8 @@ subtest 'test all known nicks' => {
     is $log.entries-of-nick('MasterDuke').elems, 2, "saw MasterDuke twice";
     is $log.entries-of-nick('lizmat').elems, 3, "did we see lizmat thrice";
 }
+
+$log = IRC::Log::Textual.new: "", Date.today;
+is $log.entries.elems, 0, 'did we get a proper empty log';
 
 # vim: expandtab shiftwidth=4

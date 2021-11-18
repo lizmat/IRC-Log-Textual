@@ -6,7 +6,7 @@
   "build-depends": [
   ],
   "depends": [
-    "IRC::Log:ver<0.0.19>:auth<zef:lizmat>"
+    "IRC::Log:ver<0.0.20>:auth<zef:lizmat>"
   ],
   "description": "interface to IRC logs from Textual",
   "license": "Artistic-2.0",
@@ -22,5 +22,5 @@
   ],
   "test-depends": [
   ],
-  "version": "0.0.14"
+  "version": "0.0.15"
 }
