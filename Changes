@@ -1,6 +1,8 @@
 Revision history for IRC-Log-Textual
 
 {{$NEXT}}
+
+0.0.17  2025-01-16T14:05:26+01:00
     - Up dependency on IRC::Log
     - Add CI badge for each OS
     - Add sponsor button and link
