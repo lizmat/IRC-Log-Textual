@@ -1,3 +1,4 @@
 .precomp/
 /IRC-Log-Textual-*
 /releases/
+*.rakucov

@@ -6,7 +6,8 @@
   "build-depends": [
   ],
   "depends": [
-    "IRC::Log:ver<0.0.21>:auth<zef:lizmat>"
+    "IRC::Log:ver<0.0.25+>:auth<zef:lizmat>",
+    "META::verauthapi:ver<0.0.1>:auth<zef:lizmat>"
   ],
   "description": "interface to IRC logs from Textual",
   "license": "Artistic-2.0",
@@ -19,6 +20,9 @@
   ],
   "source-url": "https://github.com/lizmat/IRC-Log-Textual.git",
   "tags": [
+    "IRC",
+    "LOG",
+    "TEXTUAL"
   ],
   "test-depends": [
   ],

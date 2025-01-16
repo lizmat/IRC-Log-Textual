@@ -8,17 +8,17 @@ my $log      = IRC::Log::Textual.new: $path, $Date;
 my @targets  = $log.entries.List.map: *.target;
 my @all      = ^@targets;
 
-sub search(@indices, |capture) is test-assertion {
+sub search(@indices is raw, |capture) is test-assertion {
     subtest "Checking '{capture.raku}'" => {
         plan 2;
 
         is-deeply
-          $log.search(|capture).map(*.target),
+          $log.search(|capture).map(*.target).Seq,
           @targets[@indices],
           'forward';
 
         is-deeply
-          $log.search(:reverse, |capture).map(*.target),
+          $log.search(:reverse, |capture).map(*.target).Seq,
           @targets[@indices.reverse],
           'reverse';
     }

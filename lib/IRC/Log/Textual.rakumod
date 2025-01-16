@@ -1,4 +1,4 @@
-use IRC::Log:ver<0.0.21>:auth<zef:lizmat>;
+use IRC::Log:ver<0.0.25+>:auth<zef:lizmat>;
 
 class IRC::Log::Textual:ver<0.0.16>:auth<zef:lizmat> does IRC::Log {
 
@@ -62,7 +62,7 @@ class IRC::Log::Textual:ver<0.0.16>:auth<zef:lizmat> does IRC::Log {
                     ++$ordinal;
                 }
                 else {
-                    $last-hour   = $hour;
+                    $last-hour   = $hour;  # UNCOVERABLE
                     $last-minute = $minute;
                     $ordinal     = 0;
                 }
@@ -113,7 +113,7 @@ class IRC::Log::Textual:ver<0.0.16>:auth<zef:lizmat> does IRC::Log {
                                   :$nick;
                                 ++$nr-control-entries;
                             }
-                            elsif $message.starts-with('left ') {
+                            elsif $message.starts-with('left ') {  # UNCOVERABLE
                                 IRC::Log::Left.new:
                                   :log(self), :$hour, :$minute, :$ordinal,
                                   :$nick;
@@ -123,7 +123,7 @@ class IRC::Log::Textual:ver<0.0.16>:auth<zef:lizmat> does IRC::Log {
                                 self!problem($line, $linenr,
                                   'unclear control message');
                             }
-                            next;
+                            next;  # UNCOVERABLE
                         }
                     }
 
